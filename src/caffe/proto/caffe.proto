@@ -1,0 +1,47 @@
+syntax = "proto3";    //语法
+
+package caffe;        //命名空间
+
+//message就是类 里面的每个字段都是一个类成员 1-15的标识符占1个字节 16-2047占2个字节
+message TensorShape {
+    repeated int64 dim = 1;  //proto3的repeated 默认使用packed
+}
+
+//Tensor的proto对象
+message TensorProto {
+    //tensor 4d dims
+    int32 num = 1;
+    int32 channels = 2;
+    int32 height = 3;
+    int32 width = 4;
+
+    //输入/输出 和梯度
+    repeated float data = 5;
+    repeated float diff = 6;
+    repeated double double_data = 8;
+    repeated double double_diff = 9;
+    TensorShape shape = 7;
+}
+
+//多个tensor proto对象
+message TensorProtoList {
+    repeated TensorProto tensor = 1;
+}
+
+//fill的参数
+message FillerParameter {
+    string type = 1;  //随机数初始化类型
+    float value = 2;  //常数初始化的值
+    float min = 3;    //均匀分布的下界
+    float max = 4;    //均匀分布的上界
+    float mean = 5;   //正态分布的均值
+    float stddev = 6; //正态分布的标准差
+    int32 sparse = 7; //稀疏化 正态分布
+    //Xavier初始化 3/n的开方范围的均匀分布 这个枚举是取n的选项
+    enum VarianceNorm {
+        FAN_IN = 0;
+        FAN_OUT= 1;
+        AVERAGE = 2;
+    }
+    VarianceNorm variance_norm = 8;
+}
