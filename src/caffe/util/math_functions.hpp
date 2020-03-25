@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/21.
 //
-#ifndef CAFFE_MATH_FUNCTIONS_HPP_
-#define CAFFE_MATH_FUNCTIONS_HPP_
+#ifndef SIMPLE_CAFFE_MATH_FUNCTIONS_HPP_
+#define SIMPLE_CAFFE_MATH_FUNCTIONS_HPP_
 
 #include <glog/logging.h>
 
@@ -256,4 +256,4 @@ void caffe_gpu_##name<double>(const int n, const double* x, double* y) { \
 #endif //!CPU_ONLY
 }      //namespace caffe
 
-#endif //CAFFE_MATH_FUNCTIONS_HPP_
+#endif //SIMPLE_CAFFE_MATH_FUNCTIONS_HPP_

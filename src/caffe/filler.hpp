@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/23.
 //
-#ifndef CAFFE_FILL_HPP_
-#define CAFFE_FILL_HPP_
+#ifndef SIMPLE_CAFFE_FILL_HPP_
+#define SIMPLE_CAFFE_FILL_HPP_
 
 #include <string>
 
@@ -127,4 +127,4 @@ FillerInterface<Dtype>* GetFiller(const FillerParameter& param) {
 
 }      //namespace caffe
 
-#endif //CAFFE_FILL_HPP_
+#endif //SIMPLE_CAFFE_FILL_HPP_

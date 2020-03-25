@@ -40,6 +40,11 @@ class FillerParameterDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<FillerParameter>
       _instance;
 } _FillerParameter_default_instance_;
+class LayerParameterDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<LayerParameter>
+      _instance;
+} _LayerParameter_default_instance_;
 }  // namespace caffe
 namespace protobuf_caffe_2eproto {
 void InitDefaultsTensorShapeImpl() {
@@ -128,8 +133,30 @@ void InitDefaultsFillerParameter() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFillerParameterImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[4];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
+void InitDefaultsLayerParameterImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  protobuf_caffe_2eproto::InitDefaultsTensorProto();
+  {
+    void* ptr = &::caffe::_LayerParameter_default_instance_;
+    new (ptr) ::caffe::LayerParameter();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::caffe::LayerParameter::InitAsDefaultInstance();
+}
+
+void InitDefaultsLayerParameter() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsLayerParameterImpl);
+}
+
+::google::protobuf::Metadata file_level_metadata[5];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[2];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -157,7 +184,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::TensorProtoList, tensor_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::TensorProtoList, tensor_list_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FillerParameter, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -171,12 +198,26 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FillerParameter, stddev_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FillerParameter, sparse_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FillerParameter, variance_norm_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, bottom_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, top_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, loss_weight_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, tensor_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, back_propagate_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, phase_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::caffe::TensorShape)},
   { 6, -1, sizeof(::caffe::TensorProto)},
   { 20, -1, sizeof(::caffe::TensorProtoList)},
   { 26, -1, sizeof(::caffe::FillerParameter)},
+  { 39, -1, sizeof(::caffe::LayerParameter)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -184,6 +225,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_TensorProto_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_TensorProtoList_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_FillerParameter_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_LayerParameter_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -202,7 +244,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 5);
 }
 
 void AddDescriptorsImpl() {
@@ -213,18 +255,23 @@ void AddDescriptorsImpl() {
       "\010channels\030\002 \001(\005\022\016\n\006height\030\003 \001(\005\022\r\n\005width"
       "\030\004 \001(\005\022\014\n\004data\030\005 \003(\002\022\014\n\004diff\030\006 \003(\002\022\023\n\013do"
       "uble_data\030\010 \003(\001\022\023\n\013double_diff\030\t \003(\001\022!\n\005"
-      "shape\030\007 \001(\0132\022.caffe.TensorShape\"5\n\017Tenso"
-      "rProtoList\022\"\n\006tensor\030\001 \003(\0132\022.caffe.Tenso"
-      "rProto\"\350\001\n\017FillerParameter\022\014\n\004type\030\001 \001(\t"
-      "\022\r\n\005value\030\002 \001(\002\022\013\n\003min\030\003 \001(\002\022\013\n\003max\030\004 \001("
-      "\002\022\014\n\004mean\030\005 \001(\002\022\016\n\006stddev\030\006 \001(\002\022\016\n\006spars"
-      "e\030\007 \001(\005\022:\n\rvariance_norm\030\010 \001(\0162#.caffe.F"
-      "illerParameter.VarianceNorm\"4\n\014VarianceN"
-      "orm\022\n\n\006FAN_IN\020\000\022\013\n\007FAN_OUT\020\001\022\013\n\007AVERAGE\020"
-      "\002b\006proto3"
+      "shape\030\007 \001(\0132\022.caffe.TensorShape\":\n\017Tenso"
+      "rProtoList\022\'\n\013tensor_list\030\001 \003(\0132\022.caffe."
+      "TensorProto\"\350\001\n\017FillerParameter\022\014\n\004type\030"
+      "\001 \001(\t\022\r\n\005value\030\002 \001(\002\022\013\n\003min\030\003 \001(\002\022\013\n\003max"
+      "\030\004 \001(\002\022\014\n\004mean\030\005 \001(\002\022\016\n\006stddev\030\006 \001(\002\022\016\n\006"
+      "sparse\030\007 \001(\005\022:\n\rvariance_norm\030\010 \001(\0162#.ca"
+      "ffe.FillerParameter.VarianceNorm\"4\n\014Vari"
+      "anceNorm\022\n\n\006FAN_IN\020\000\022\013\n\007FAN_OUT\020\001\022\013\n\007AVE"
+      "RAGE\020\002\"\274\001\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022"
+      "\014\n\004type\030\002 \001(\t\022\016\n\006bottom\030\003 \001(\t\022\013\n\003top\030\004 \001"
+      "(\t\022\023\n\013loss_weight\030\005 \003(\002\022\'\n\013tensor_list\030\006"
+      " \003(\0132\022.caffe.TensorProto\022\026\n\016back_propaga"
+      "te\030\007 \003(\010\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase*\034\n"
+      "\005Phase\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 529);
+      descriptor, 755);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "caffe.proto", &protobuf_RegisterTypes);
 }
@@ -264,6 +311,20 @@ const FillerParameter_VarianceNorm FillerParameter::VarianceNorm_MIN;
 const FillerParameter_VarianceNorm FillerParameter::VarianceNorm_MAX;
 const int FillerParameter::VarianceNorm_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* Phase_descriptor() {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[1];
+}
+bool Phase_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -1182,7 +1243,7 @@ void TensorProto::InternalSwap(TensorProto* other) {
 void TensorProtoList::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TensorProtoList::kTensorFieldNumber;
+const int TensorProtoList::kTensorListFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 TensorProtoList::TensorProtoList()
@@ -1196,7 +1257,7 @@ TensorProtoList::TensorProtoList()
 TensorProtoList::TensorProtoList(const TensorProtoList& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      tensor_(from.tensor_),
+      tensor_list_(from.tensor_list_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:caffe.TensorProtoList)
@@ -1243,7 +1304,7 @@ void TensorProtoList::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  tensor_.Clear();
+  tensor_list_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -1257,11 +1318,11 @@ bool TensorProtoList::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .caffe.TensorProto tensor = 1;
+      // repeated .caffe.TensorProto tensor_list = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tensor()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tensor_list()));
         } else {
           goto handle_unusual;
         }
@@ -1294,11 +1355,11 @@ void TensorProtoList::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .caffe.TensorProto tensor = 1;
+  // repeated .caffe.TensorProto tensor_list = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tensor_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->tensor_list_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->tensor(static_cast<int>(i)), output);
+      1, this->tensor_list(static_cast<int>(i)), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1315,12 +1376,12 @@ void TensorProtoList::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .caffe.TensorProto tensor = 1;
+  // repeated .caffe.TensorProto tensor_list = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tensor_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->tensor_list_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->tensor(static_cast<int>(i)), deterministic, target);
+        1, this->tensor_list(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1340,14 +1401,14 @@ size_t TensorProtoList::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated .caffe.TensorProto tensor = 1;
+  // repeated .caffe.TensorProto tensor_list = 1;
   {
-    unsigned int count = static_cast<unsigned int>(this->tensor_size());
+    unsigned int count = static_cast<unsigned int>(this->tensor_list_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->tensor(static_cast<int>(i)));
+          this->tensor_list(static_cast<int>(i)));
     }
   }
 
@@ -1380,7 +1441,7 @@ void TensorProtoList::MergeFrom(const TensorProtoList& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  tensor_.MergeFrom(from.tensor_);
+  tensor_list_.MergeFrom(from.tensor_list_);
 }
 
 void TensorProtoList::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1407,7 +1468,7 @@ void TensorProtoList::Swap(TensorProtoList* other) {
 }
 void TensorProtoList::InternalSwap(TensorProtoList* other) {
   using std::swap;
-  tensor_.InternalSwap(&other->tensor_);
+  tensor_list_.InternalSwap(&other->tensor_list_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -1922,6 +1983,640 @@ void FillerParameter::InternalSwap(FillerParameter* other) {
 }
 
 ::google::protobuf::Metadata FillerParameter::GetMetadata() const {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void LayerParameter::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int LayerParameter::kNameFieldNumber;
+const int LayerParameter::kTypeFieldNumber;
+const int LayerParameter::kBottomFieldNumber;
+const int LayerParameter::kTopFieldNumber;
+const int LayerParameter::kLossWeightFieldNumber;
+const int LayerParameter::kTensorListFieldNumber;
+const int LayerParameter::kBackPropagateFieldNumber;
+const int LayerParameter::kPhaseFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+LayerParameter::LayerParameter()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_caffe_2eproto::InitDefaultsLayerParameter();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.LayerParameter)
+}
+LayerParameter::LayerParameter(const LayerParameter& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      loss_weight_(from.loss_weight_),
+      tensor_list_(from.tensor_list_),
+      back_propagate_(from.back_propagate_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.type().size() > 0) {
+    type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.type_);
+  }
+  bottom_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.bottom().size() > 0) {
+    bottom_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_);
+  }
+  top_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.top().size() > 0) {
+    top_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.top_);
+  }
+  phase_ = from.phase_;
+  // @@protoc_insertion_point(copy_constructor:caffe.LayerParameter)
+}
+
+void LayerParameter::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  bottom_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  top_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  phase_ = 0;
+  _cached_size_ = 0;
+}
+
+LayerParameter::~LayerParameter() {
+  // @@protoc_insertion_point(destructor:caffe.LayerParameter)
+  SharedDtor();
+}
+
+void LayerParameter::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  bottom_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  top_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void LayerParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* LayerParameter::descriptor() {
+  ::protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const LayerParameter& LayerParameter::default_instance() {
+  ::protobuf_caffe_2eproto::InitDefaultsLayerParameter();
+  return *internal_default_instance();
+}
+
+LayerParameter* LayerParameter::New(::google::protobuf::Arena* arena) const {
+  LayerParameter* n = new LayerParameter;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void LayerParameter::Clear() {
+// @@protoc_insertion_point(message_clear_start:caffe.LayerParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  loss_weight_.Clear();
+  tensor_list_.Clear();
+  back_propagate_.Clear();
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  bottom_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  top_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  phase_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool LayerParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.LayerParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.LayerParameter.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string type = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_type()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->type().data(), static_cast<int>(this->type().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.LayerParameter.type"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string bottom = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_bottom()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->bottom().data(), static_cast<int>(this->bottom().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.LayerParameter.bottom"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string top = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_top()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->top().data(), static_cast<int>(this->top().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.LayerParameter.top"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated float loss_weight = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_loss_weight())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(45u /* 45 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 1, 42u, input, this->mutable_loss_weight())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .caffe.TensorProto tensor_list = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tensor_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated bool back_propagate = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, this->mutable_back_propagate())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 1, 58u, input, this->mutable_back_propagate())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.Phase phase = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_phase(static_cast< ::caffe::Phase >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.LayerParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.LayerParameter)
+  return false;
+#undef DO_
+}
+
+void LayerParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.LayerParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // string type = 2;
+  if (this->type().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->type().data(), static_cast<int>(this->type().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.type");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->type(), output);
+  }
+
+  // string bottom = 3;
+  if (this->bottom().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->bottom().data(), static_cast<int>(this->bottom().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.bottom");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->bottom(), output);
+  }
+
+  // string top = 4;
+  if (this->top().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->top().data(), static_cast<int>(this->top().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.top");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->top(), output);
+  }
+
+  // repeated float loss_weight = 5;
+  if (this->loss_weight_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(5, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _loss_weight_cached_byte_size_));
+    ::google::protobuf::internal::WireFormatLite::WriteFloatArray(
+      this->loss_weight().data(), this->loss_weight_size(), output);
+  }
+
+  // repeated .caffe.TensorProto tensor_list = 6;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->tensor_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->tensor_list(static_cast<int>(i)), output);
+  }
+
+  // repeated bool back_propagate = 7;
+  if (this->back_propagate_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(7, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _back_propagate_cached_byte_size_));
+    ::google::protobuf::internal::WireFormatLite::WriteBoolArray(
+      this->back_propagate().data(), this->back_propagate_size(), output);
+  }
+
+  // .caffe.Phase phase = 10;
+  if (this->phase() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      10, this->phase(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.LayerParameter)
+}
+
+::google::protobuf::uint8* LayerParameter::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.LayerParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // string type = 2;
+  if (this->type().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->type().data(), static_cast<int>(this->type().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.type");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->type(), target);
+  }
+
+  // string bottom = 3;
+  if (this->bottom().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->bottom().data(), static_cast<int>(this->bottom().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.bottom");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->bottom(), target);
+  }
+
+  // string top = 4;
+  if (this->top().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->top().data(), static_cast<int>(this->top().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.LayerParameter.top");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->top(), target);
+  }
+
+  // repeated float loss_weight = 5;
+  if (this->loss_weight_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      5,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::int32>(
+            _loss_weight_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFloatNoTagToArray(this->loss_weight_, target);
+  }
+
+  // repeated .caffe.TensorProto tensor_list = 6;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->tensor_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        6, this->tensor_list(static_cast<int>(i)), deterministic, target);
+  }
+
+  // repeated bool back_propagate = 7;
+  if (this->back_propagate_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      7,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::int32>(
+            _back_propagate_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteBoolNoTagToArray(this->back_propagate_, target);
+  }
+
+  // .caffe.Phase phase = 10;
+  if (this->phase() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      10, this->phase(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.LayerParameter)
+  return target;
+}
+
+size_t LayerParameter::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:caffe.LayerParameter)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated float loss_weight = 5;
+  {
+    unsigned int count = static_cast<unsigned int>(this->loss_weight_size());
+    size_t data_size = 4UL * count;
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _loss_weight_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated .caffe.TensorProto tensor_list = 6;
+  {
+    unsigned int count = static_cast<unsigned int>(this->tensor_list_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->tensor_list(static_cast<int>(i)));
+    }
+  }
+
+  // repeated bool back_propagate = 7;
+  {
+    unsigned int count = static_cast<unsigned int>(this->back_propagate_size());
+    size_t data_size = 1UL * count;
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _back_propagate_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  // string type = 2;
+  if (this->type().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->type());
+  }
+
+  // string bottom = 3;
+  if (this->bottom().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->bottom());
+  }
+
+  // string top = 4;
+  if (this->top().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->top());
+  }
+
+  // .caffe.Phase phase = 10;
+  if (this->phase() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->phase());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LayerParameter::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:caffe.LayerParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  const LayerParameter* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const LayerParameter>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:caffe.LayerParameter)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:caffe.LayerParameter)
+    MergeFrom(*source);
+  }
+}
+
+void LayerParameter::MergeFrom(const LayerParameter& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:caffe.LayerParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  loss_weight_.MergeFrom(from.loss_weight_);
+  tensor_list_.MergeFrom(from.tensor_list_);
+  back_propagate_.MergeFrom(from.back_propagate_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.type().size() > 0) {
+
+    type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.type_);
+  }
+  if (from.bottom().size() > 0) {
+
+    bottom_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_);
+  }
+  if (from.top().size() > 0) {
+
+    top_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.top_);
+  }
+  if (from.phase() != 0) {
+    set_phase(from.phase());
+  }
+}
+
+void LayerParameter::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:caffe.LayerParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LayerParameter::CopyFrom(const LayerParameter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:caffe.LayerParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LayerParameter::IsInitialized() const {
+  return true;
+}
+
+void LayerParameter::Swap(LayerParameter* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void LayerParameter::InternalSwap(LayerParameter* other) {
+  using std::swap;
+  loss_weight_.InternalSwap(&other->loss_weight_);
+  tensor_list_.InternalSwap(&other->tensor_list_);
+  back_propagate_.InternalSwap(&other->back_propagate_);
+  name_.Swap(&other->name_);
+  type_.Swap(&other->type_);
+  bottom_.Swap(&other->bottom_);
+  top_.Swap(&other->top_);
+  swap(phase_, other->phase_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata LayerParameter::GetMetadata() const {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
 }

@@ -49,6 +49,7 @@ TEST_F(CommonTest, TestRandomSeedCPU) {
 }
 
 TEST_F(CommonTest, TestRandomSeedGPU) {
+#ifndef CPU_ONLY
 	SyncedMemory a(10 * sizeof(unsigned int));
 	SyncedMemory b(10 * sizeof(unsigned int));
 //	设置一样的seed 看看生成的随机值是否一样
@@ -64,6 +65,7 @@ TEST_F(CommonTest, TestRandomSeedGPU) {
 		EXPECT_EQ(static_cast<const int*>(a.cpu_data())[i],
 		          static_cast<const int*>(b.cpu_data())[i]);
 	}
+#endif
 }
 
 }       //namespace caffe

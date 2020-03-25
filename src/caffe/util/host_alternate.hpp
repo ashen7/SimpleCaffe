@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/21.
 //
-#ifndef CAFFE_HOST_ALTERNATE_HPP_
-#define CAFFE_HOST_ALTERNATE_HPP_
+#ifndef SIMPLE_CAFFE_HOST_ALTERNATE_HPP_
+#define SIMPLE_CAFFE_HOST_ALTERNATE_HPP_
 
 #include <cmath>
 
@@ -72,4 +72,4 @@ DEFINE_BINARY_FUNC(Div, c[i] = a[i] / b[i])
 
 
 
-#endif //CAFFE_HOST_ALTERNATE_HPP_
+#endif //SIMPLE_CAFFE_HOST_ALTERNATE_HPP_

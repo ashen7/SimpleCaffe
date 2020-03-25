@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/23.
 //
-#ifndef CAFFE_TEST_CAFFE_MAIN_HPP_
-#define CAFFE_TEST_CAFFE_MAIN_HPP_
+#ifndef SIMPLE_CAFFE_TEST_CAFFE_MAIN_HPP_
+#define SIMPLE_CAFFE_TEST_CAFFE_MAIN_HPP_
 
 #include <gtest/gtest.h>
 #include <glog/logging.h>
@@ -41,6 +41,7 @@ class CPUDeviceTest : public MultiDeviceTest<CPUDevice<Dtype>> {
 };
 
 #ifdef CPU_ONLY
+//CPU模式只测试CPU的float 和double
 typedef ::testing::Types<CPUDevice<float>,
                          CPUDevice<double>> TestDtypesAndDevices;
 
@@ -55,10 +56,11 @@ template <typename Dtype>
 class GPUDeviceTest : public MultiDeviceTest<GPUDevice<Dtype>> {
 };
 
+//GPU模式 测试CPU和GPU两个的float 和double
 typedef ::testing::Types<CPUDevice<float>, CPUDevice<double>,
                          CPUDevice<float>, CPUDevice<double>> TestDtypesAndDevices;
 #endif
 
 }      //namespace caffe
 
-#endif //CAFFE_TEST_CAFFE_MAIN_HPP_
+#endif //SIMPLE_CAFFE_TEST_CAFFE_MAIN_HPP_

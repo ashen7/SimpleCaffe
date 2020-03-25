@@ -25,7 +25,7 @@ message TensorProto {
 
 //多个tensor proto对象
 message TensorProtoList {
-    repeated TensorProto tensor = 1;
+    repeated TensorProto tensor_list = 1;
 }
 
 //fill的参数
@@ -44,4 +44,28 @@ message FillerParameter {
         AVERAGE = 2;
     }
     VarianceNorm variance_norm = 8;
+}
+
+//全局枚举
+enum Phase {
+    TRAIN = 0;
+    TEST = 1;
+}
+
+//layer层参数
+message LayerParameter {
+    string name = 1;        //层的名字
+    string type = 2;        //层的类型
+    string bottom = 3;      //输入tensor的名字
+    string top = 4;         //输出tensor的名字
+
+    //每个输出tensor的权重
+    repeated float loss_weight = 5;
+    //层的权重
+    repeated TensorProto tensor_list = 6;
+    //是否反向传播
+    repeated bool back_propagate = 7;
+
+    //train/test 阶段
+    Phase phase = 10;
 }

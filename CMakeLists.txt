@@ -1,5 +1,5 @@
 #开启cuda支持选项
-project(my_caffe LANGUAGES CXX CUDA)
+project(SimpleCaffe LANGUAGES CXX CUDA)
 cmake_minimum_required(VERSION 3.5.1)
 
 #这也是开启cuda支持的方法
@@ -63,7 +63,7 @@ if (${GOOGLE_TEST} STREQUAL "ON")
     set(MY_CAFFE_SOURCE ${MY_CAFFE_SOURCE}
                         ${CAFFE_ROOT_DIR}/src/gtest/gtest_main.cpp
                         ${CAFFE_SRC_DIR}/test/test_common.cpp
-                        ${CAFFE_SRC_DIR}/test/test_tensor.cpp src/caffe/test/test_filler.cpp)
+                        ${CAFFE_SRC_DIR}/test/test_tensor.cpp src/caffe/test/test_filler.cpp src/caffe/layer.cpp src/caffe/layer.hpp)
     set(LINK_LIBRARY ${LINK_LIBRARY} gtest)
 endif()
 
@@ -110,6 +110,6 @@ link_directories(${GTEST_LIB}
                  ${CUDA_LIB})
 
 #g++编译链接host端 nvcc编译链接device端 生成可执行文件
-add_executable(my_caffe.bin ${MY_CAFFE_SOURCE})
+add_executable(simple_caffe.bin ${MY_CAFFE_SOURCE})
 #cuda_add_executable(my_caffe.bin ${my_caffe_source})
-target_link_libraries(my_caffe.bin ${LINK_LIBRARY})
+target_link_libraries(simple_caffe.bin ${LINK_LIBRARY})

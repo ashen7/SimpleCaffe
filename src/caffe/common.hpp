@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/21.
 //
-#ifndef CAFFE_COMMON_HPP_
-#define CAFFE_COMMON_HPP_
+#ifndef SIMPLE_CAFFE_COMMON_HPP_
+#define SIMPLE_CAFFE_COMMON_HPP_
 
 #include <glog/logging.h>
 #include <gflags/gflags.h>
@@ -125,4 +125,4 @@ class Caffe {
 
 }      //namespace caffe
 
-#endif //CAFFE_COMMON_HPP_
+#endif //SIMPLE_CAFFE_COMMON_HPP_

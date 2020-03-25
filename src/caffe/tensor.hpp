@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/22.
 //
-#ifndef CAFFE_TENSOR_HPP_
-#define CAFFE_TENSOR_HPP_
+#ifndef SIMPLE_CAFFE_TENSOR_HPP_
+#define SIMPLE_CAFFE_TENSOR_HPP_
 
 #include <vector>
 #include <algorithm>
@@ -200,4 +200,4 @@ class Tensor {
 
 }      //namespace caffe
 
-#endif //CAFFE_TENSOR_HPP_
+#endif //SIMPLE_CAFFE_TENSOR_HPP_

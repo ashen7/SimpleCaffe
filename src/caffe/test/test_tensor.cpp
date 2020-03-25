@@ -12,14 +12,14 @@
 
 namespace caffe {
 
-//测试固件类模板
+//测试固件类模板 构造函数new一个对象 析构回收资源 每个测试函数里面都是独立的 都会重新调用构造和析构
 template <typename Dtype>
-class TensorTest : public ::testing::Test {
+class TensorSimpleTest : public ::testing::Test {
  protected:
-	TensorTest()
+	TensorSimpleTest()
 			: tensor_(new Tensor<Dtype>()),
 			  tensor_preshaped_(new Tensor<Dtype>(2, 3, 4, 5)) {}
-	virtual ~TensorTest() override {
+	virtual ~TensorSimpleTest() override {
 		if (tensor_) {
 			delete tensor_;
 		}
@@ -33,10 +33,10 @@ class TensorTest : public ::testing::Test {
 };
 
 //注册测试用例 模板类型参数化 测试float double两个类型
-TYPED_TEST_CASE(TensorTest, TestDtypes);
+TYPED_TEST_CASE(TensorSimpleTest, TestDtypes);
 
 //模板类型参数化的 test测试宏
-TYPED_TEST(TensorTest, TestInit) {
+TYPED_TEST(TensorSimpleTest, TestInit) {
 	EXPECT_TRUE(this->tensor_);
 	EXPECT_TRUE(this->tensor_preshaped_);
 	EXPECT_EQ(this->tensor_preshaped_->num(), 2);
@@ -49,14 +49,16 @@ TYPED_TEST(TensorTest, TestInit) {
 	EXPECT_EQ(this->tensor_->num_dims(), 0);
 }
 
-TYPED_TEST(TensorTest, TestCPUGPUData) {
+TYPED_TEST(TensorSimpleTest, TestCPUGPUData) {
 	EXPECT_TRUE(this->tensor_preshaped_->cpu_data());
-	EXPECT_TRUE(this->tensor_preshaped_->gpu_data());
 	EXPECT_TRUE(this->tensor_preshaped_->mutable_cpu_data());
+#ifndef CPU_ONLY
+	EXPECT_TRUE(this->tensor_preshaped_->gpu_data());
 	EXPECT_TRUE(this->tensor_preshaped_->mutable_gpu_data());
+#endif
 }
 
-TYPED_TEST(TensorTest, TestReshape) {
+TYPED_TEST(TensorSimpleTest, TestReshape) {
 	this->tensor_->Reshape(2, 3, 4, 5);
 	EXPECT_EQ(this->tensor_->num(), 2);
 	EXPECT_EQ(this->tensor_->channels(), 3);
@@ -66,7 +68,7 @@ TYPED_TEST(TensorTest, TestReshape) {
 	EXPECT_EQ(this->tensor_->num_dims(), 4);
 }
 
-TYPED_TEST(TensorTest, TestReshapeZero) {
+TYPED_TEST(TensorSimpleTest, TestReshapeZero) {
 	vector<int> shape(2);
 	shape[0] = 0;
 	shape[1] = 5;
@@ -74,7 +76,7 @@ TYPED_TEST(TensorTest, TestReshapeZero) {
 	EXPECT_EQ(this->tensor_->count(), 0);
 }
 
-TYPED_TEST(TensorTest, TestTensorProtoShapeEqual) {
+TYPED_TEST(TensorSimpleTest, TestTensorProtoShapeEqual) {
 	TensorProto tensor_proto;
 	vector<int> shape(2);
 	shape[0] = 3;

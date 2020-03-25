@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/22.
 //
-#ifndef CAFFE_SYNCED_MEMORY_HPP_
-#define CAFFE_SYNCED_MEMORY_HPP_
+#ifndef SIMPLE_CAFFE_SYNCED_MEMORY_HPP_
+#define SIMPLE_CAFFE_SYNCED_MEMORY_HPP_
 
 #include <cstdlib>
 
@@ -79,4 +79,4 @@ class SyncedMemory {
 
 }      //namespace caffe
 
-#endif //CAFFE_SYNCED_MEMORY_HPP_
+#endif //SIMPLE_CAFFE_SYNCED_MEMORY_HPP_
