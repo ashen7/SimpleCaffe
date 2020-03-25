@@ -160,11 +160,11 @@ class LayerInterface {
 	}
 
 	//cpu backward pass
-	inline void BackwardCPU(const vector<Tensor<Dtype>*>& top,
-	                        const vector<bool>& back_propagate,
+	virtual void BackwardCPU(const vector<Tensor<Dtype>*>& top,
+	                        onst vector<bool>& back_propagate,
 	                        const vector<Tensor<Dtype>*>& bottom) = 0;
 	//cpu backward pass
-	inline void BackwardGPU(const vector<Tensor<Dtype>*>& top,
+	virtual void BackwardGPU(const vector<Tensor<Dtype>*>& top,
 	                        const vector<bool>& back_propagate,
 	                        const vector<Tensor<Dtype>*>& bottom) {
 		BackwardCPU(top, back_propagate, bottom);

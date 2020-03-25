@@ -16,7 +16,7 @@
 #include <cuda_runtime.h>
 #include <curand.h>
 #ifdef USE_CUDNN
-#include "cudnn.hpp"
+//#include "cudnn.hpp"
 #endif
 
 //CUDA的函数调用检查宏 这里使用do while块 为了方便调用时最后面加一个;

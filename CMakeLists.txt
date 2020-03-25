@@ -20,51 +20,81 @@ if (${DEBUG} STREQUAL "ON")
 endif()
 
 if (${CPU_ONLY} STREQUAL "ON")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D CPU_ONLY")
+    add_definitions(-D CPU_ONLY)
+    message("current caffe mode(CPU : GPU): CPU")
 else()
     find_package(CUDA REQUIRED)
+    message("current caffe mode(CPU : GPU): GPU")
 endif()
+
+if (${USE_CUDNN} STREQUAL "ON")
+    add_definitions(-D USE_CUDNN)
+endif()
+
 
 #g++ 编译选项
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -g -O3 -W -Wall -Wfatal-errors")
 #nvcc 编译选项
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-g;-O3;-gencode arch=compute_61,code=sm_61;-std=c++11;)
 
-message("current caffe mode(CPU : GPU): ${caffe_mode}")
 message("cudnn: ${USE_CUDNN}")
 message("opencv: ${USE_OPENCV}")
 message("g++ compile flags: ${CMAKE_CXX_FLAGS}")
 message("nvcc compile flags: ${CUDA_NVCC_FLAGS}")
 
 #根目录
-set(CAFFE_ROOT_DIR .)
+set(SIMPLE_CAFFE_ROOT_DIR .)
 set(CUDA_ROOT_DIR /usr/local/cuda)
 set(THIRD_PARTY_LIBRARY /home/yipeng/thirdlib)
 
 #caffe源码目录
-set(CAFFE_SRC_DIR ${CAFFE_ROOT_DIR}/src/caffe)
+set(SIMPLE_CAFFE_SRC_DIR ${SIMPLE_CAFFE_ROOT_DIR}/src/caffe)
 #caffe头文件目录
-set(CAFFE_INC_DIR ${CAFFE_ROOT_DIR}/src)
+set(SIMPLE_CAFFE_INC_DIR ${SIMPLE_CAFFE_ROOT_DIR}/src)
 
-#源文件
-set(MY_CAFFE_SOURCE ${CAFFE_SRC_DIR}/proto/caffe.pb.cc
-                    ${CAFFE_SRC_DIR}/common.cpp
-                    ${CAFFE_SRC_DIR}/util/math_functions.cpp
-                    ${CAFFE_SRC_DIR}/synced_memory.cpp
-                    ${CAFFE_SRC_DIR}/tensor.cpp)
+#CPP源文件
+file(GLOB SIMPLE_CAFFE_PROTO_CXX_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/proto/*.cc)
+file(GLOB SIMPLE_CAFFE_UTIL_CXX_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/util/*.cpp)
+file(GLOB SIMPLE_CAFFE_LAYERS_CXX_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/layers/*.cpp)
+file(GLOB SIMPLE_CAFFE_MAIN_CXX_FILE ${SIMPLE_CAFFE_SRC_DIR}/*.cpp)
+#CUDA源文件
+file(GLOB SIMPLE_CAFFE_UTIL_CUDA_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/util/*.cu)
+file(GLOB SIMPLE_CAFFE_LAYERS_CUDA_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/layers/*.cu)
+#google test源文件
+file(GLOB SIMPLE_CAFFE_GOOGLE_TEST_FILE ${SIMPLE_CAFFE_SRC_DIR}/test/*.cpp)
+file(GLOB SIMPLE_CAFFE_MAIN_GOOGLE_TEST_FILE ${SIMPLE_CAFFE_ROOT_DIR}/src/gtest/*.cpp)
+
+message("SimpleCaffe main     cxx src: ${SIMPLE_CAFFE_MAIN_CXX_FILE}")
+message("SimpleCaffe protobuf cxx src: ${SIMPLE_CAFFE_PROTO_CXX_SRC_FILE}")
+message("SimpleCaffe utility  cxx src: ${SIMPLE_CAFFE_UTIL_CXX_SRC_FILE}")
+message("SimpleCaffe layers   cxx src: ${SIMPLE_CAFFE_LAYERS_CXX_SRC_FILE}")
+message("SimpleCaffe utility cuda src: ${SIMPLE_CAFFE_UTIL_CUDA_SRC_FILE}")
+message("SimpleCaffe layers  cuda src: ${SIMPLE_CAFFE_LAYERS_CUDA_SRC_FILE}")
+message("SimpleCaffe main google test: ${SIMPLE_CAFFE_MAIN_GOOGLE_TEST_FILE}")
+message("SimpleCaffe      google test: ${SIMPLE_CAFFE_GOOGLE_TEST_FILE}")
+
+set(SIMPLE_CAFFE_SOURCE ${SIMPLE_CAFFE_PROTO_CXX_SRC_FILE}
+                        ${SIMPLE_CAFFE_UTIL_CXX_SRC_FILE}
+                        ${SIMPLE_CAFFE_LAYERS_CXX_SRC_FILE}
+                        ${SIMPLE_CAFFE_MAIN_CXX_FILE})
 
 if (${CPU_ONLY} STREQUAL "OFF")
-    set(MY_CAFFE_SOURCE ${MY_CAFFE_SOURCE}
-                        ${CAFFE_SRC_DIR}/util/math_functions.cu)
-    set(LINK_LIBRARY ${LINK_LIBRARY} cudart cublas curand)
+    set(SIMPLE_CAFFE_SOURCE ${SIMPLE_CAFFE_SOURCE}
+                            ${SIMPLE_CAFFE_UTIL_CUDA_SRC_FILE}
+                            ${SIMPLE_CAFFE_LAYERS_CUDA_SRC_FILE})
+    set(SIMPLE_CAFFE_LINK_LIBRARY ${SIMPLE_CAFFE_LINK_LIBRARY}
+                                  cudart
+                                  cublas
+                                  curand
+                                  cudnn)
 endif()
 
 if (${GOOGLE_TEST} STREQUAL "ON")
-    set(MY_CAFFE_SOURCE ${MY_CAFFE_SOURCE}
-                        ${CAFFE_ROOT_DIR}/src/gtest/gtest_main.cpp
-                        ${CAFFE_SRC_DIR}/test/test_common.cpp
-                        ${CAFFE_SRC_DIR}/test/test_tensor.cpp src/caffe/test/test_filler.cpp src/caffe/layer.cpp src/caffe/layer.hpp)
-    set(LINK_LIBRARY ${LINK_LIBRARY} gtest)
+    set(SIMPLE_CAFFE_SOURCE ${SIMPLE_CAFFE_SOURCE}
+                            ${SIMPLE_CAFFE_GOOGLE_TEST_FILE}
+                            ${SIMPLE_CAFFE_MAIN_GOOGLE_TEST_FILE})
+    set(SIMPLE_CAFFE_LINK_LIBRARY ${SIMPLE_CAFFE_LINK_LIBRARY}
+                                  gtest)
 endif()
 
 #头文件路径
@@ -86,12 +116,20 @@ set(PROTOBUF_LIB ${THIRD_PARTY_LIBRARY}/protobuf/lib)
 set(CUDA_LIB ${CUDA_ROOT_DIR}/lib64)
 
 #链接库
-set(LINK_LIBRARY ${LINK_LIBRARY} glog gflags opencv_core
-                 opencv_highgui opencv_imgproc opencv_imgcodecs
-                 opencv_videoio openblas protobuf pthread)
+set(SIMPLE_CAFFE_LINK_LIBRARY ${SIMPLE_CAFFE_LINK_LIBRARY}
+                              glog
+                              gflags
+                              openblas
+                              protobuf
+                              pthread
+                              opencv_core
+                              opencv_highgui
+                              opencv_imgproc
+                              opencv_imgcodecs
+                              opencv_videoio)
 
 #头文件路径添加
-include_directories(${CAFFE_INC_DIR}
+include_directories(${SIMPLE_CAFFE_INC_DIR}
                     ${GTEST_INC}
                     ${GLOG_INC}
                     ${GFLAGS_INC}
@@ -110,6 +148,6 @@ link_directories(${GTEST_LIB}
                  ${CUDA_LIB})
 
 #g++编译链接host端 nvcc编译链接device端 生成可执行文件
-add_executable(simple_caffe.bin ${MY_CAFFE_SOURCE})
+add_executable(simple_caffe.bin ${SIMPLE_CAFFE_SOURCE})
 #cuda_add_executable(my_caffe.bin ${my_caffe_source})
-target_link_libraries(simple_caffe.bin ${LINK_LIBRARY})
+target_link_libraries(simple_caffe.bin ${SIMPLE_CAFFE_LINK_LIBRARY})
