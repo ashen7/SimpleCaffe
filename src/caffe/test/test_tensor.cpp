@@ -155,14 +155,14 @@ TYPED_TEST(TensorMathTest, TestSumOfSquares) {
 	}
 	//两个线程 分别得到cpu 和 gpu的data
 	switch(TypeParam::device) {
-	case Caffe::CPU:
-		this->tensor_->mutable_cpu_data();
-		break;
-	case Caffe::GPU:
-		this->tensor_->mutable_gpu_data();
-		break;
-	default:
-		LOG(FATAL) << "Unknown device: " << TypeParam::device;
+		case Caffe::CPU:
+			this->tensor_->mutable_cpu_data();
+			break;
+		case Caffe::GPU:
+			this->tensor_->mutable_gpu_data();
+			break;
+		default:
+			LOG(FATAL) << "Unknown device: " << TypeParam::device;
 	}
 
 	//浮点数近似 第三个参数是阈值

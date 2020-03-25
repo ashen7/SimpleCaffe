@@ -25,7 +25,7 @@ message TensorProto {
 
 //多个tensor proto对象
 message TensorProtoList {
-    repeated TensorProto tensor_list = 1;
+    repeated TensorProto tensors = 1;
 }
 
 //fill的参数
@@ -62,10 +62,52 @@ message LayerParameter {
     //每个输出tensor的权重
     repeated float loss_weight = 5;
     //层的权重
-    repeated TensorProto tensor_list = 6;
-    //是否反向传播
-    repeated bool back_propagate = 7;
+    repeated TensorProto tensors = 6;
+    //是否反向传播到下层
+    repeated bool propagate_down = 7;
+
+    ReLUParameter relu_param = 14;
 
     //train/test 阶段
     Phase phase = 10;
+}
+
+//relu层参数
+message ReLUParameter {
+    float negative_slope = 1;  //负数的输入加入运算
+    enum Engine {
+        DEFAULT = 0;
+        CAFFE = 1;
+        CUDNN = 2;
+    }
+    Engine engine = 2;
+}
+
+//池化层参数
+message PoolingParameter {
+    enum PoolMethod {
+        MAX = 0;        //最大池
+        AVERAGE = 1;    //平均池
+        STOCHASTIC = 2; //随机
+    }
+    PoolMethod pool = 1;
+    uint32 kernel_size = 2;
+    uint32 kernel_h = 5;
+    uint32 kernel_w = 6;
+    uint32 stride = 3;
+    uint32 stride_h = 7;
+    uint32 stride_w = 8;
+    uint32 pad = 4;
+    uint32 pad_h = 9;
+    uint32 pad_w = 10;
+
+    enum Engine {
+        DEFAULT = 0;
+        CAFFE = 1;
+        CUDNN = 2;
+    }
+    Engine engine = 11;
+    bool global_pooling = 12;
+
+
 }

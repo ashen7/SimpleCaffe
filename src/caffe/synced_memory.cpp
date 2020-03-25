@@ -33,29 +33,29 @@ inline void SyncedMemory::to_cpu() {
 	check_device();
 
 	switch (head_) {
-	case UNINITIALIZED:
-		CaffeMallocHost(&cpu_data_, size_, &cpu_malloc_use_cuda_);
-		caffe_memset(size_, 0, cpu_data_);
-		head_ = HEAD_AT_CPU;
-		own_cpu_data_ = true;
-		break;
-	case HEAD_AT_GPU:
-#ifndef CPU_ONLY
-		if (nullptr == cpu_data_) {
+		case UNINITIALIZED:
 			CaffeMallocHost(&cpu_data_, size_, &cpu_malloc_use_cuda_);
+			caffe_memset(size_, 0, cpu_data_);
+			head_ = HEAD_AT_CPU;
 			own_cpu_data_ = true;
-		}
-		//数据在gpu 现在同步to cpu 把数据从device端拷到host端来
-		caffe_gpu_memcpy(size_, gpu_data_, cpu_data_);
-		head_ = SYNCED;
+			break;
+		case HEAD_AT_GPU:
+#ifndef CPU_ONLY
+			if (nullptr == cpu_data_) {
+				CaffeMallocHost(&cpu_data_, size_, &cpu_malloc_use_cuda_);
+				own_cpu_data_ = true;
+			}
+			//数据在gpu 现在同步to cpu 把数据从device端拷到host端来
+			caffe_gpu_memcpy(size_, gpu_data_, cpu_data_);
+			head_ = SYNCED;
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-		break;
-	case HEAD_AT_CPU:
-		break;
-	case SYNCED:
-		break;
+			break;
+		case HEAD_AT_CPU:
+			break;
+		case SYNCED:
+			break;
 	}
 }
 
@@ -64,25 +64,25 @@ inline void SyncedMemory::to_gpu() {
 
 #ifndef CPU_ONLY
 	switch (head_) {
-	case UNINITIALIZED:
-		CUDA_CHECK(cudaMalloc(&gpu_data_, size_));
-		caffe_gpu_memset(size_, 0, gpu_data_);
-		head_ = HEAD_AT_GPU;
-		own_gpu_data_ = true;
-		break;
-	case HEAD_AT_CPU:
-		if (nullptr == gpu_data_) {
+		case UNINITIALIZED:
 			CUDA_CHECK(cudaMalloc(&gpu_data_, size_));
+			caffe_gpu_memset(size_, 0, gpu_data_);
+			head_ = HEAD_AT_GPU;
 			own_gpu_data_ = true;
-		}
-		//数据在cpu 现在同步to gpu 把数据从host端拷到device端来
-		caffe_gpu_memcpy(size_, cpu_data_, gpu_data_);
-		head_ = SYNCED;
-		break;
-	case HEAD_AT_GPU:
-		break;
-	case SYNCED:
-		break;
+			break;
+		case HEAD_AT_CPU:
+			if (nullptr == gpu_data_) {
+				CUDA_CHECK(cudaMalloc(&gpu_data_, size_));
+				own_gpu_data_ = true;
+			}
+			//数据在cpu 现在同步to gpu 把数据从host端拷到device端来
+			caffe_gpu_memcpy(size_, cpu_data_, gpu_data_);
+			head_ = SYNCED;
+			break;
+		case HEAD_AT_GPU:
+			break;
+		case SYNCED:
+			break;
 	}
 #else
 	NO_GPU;

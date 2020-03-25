@@ -33,7 +33,7 @@ private: \
   classname& operator=(const classname&)
 
 //实例化float和double类
-#define INSTANCE_CLASS(classname) \
+#define INSTANTIATE_CLASS(classname) \
 	template class classname<float>; \
 	template class classname<double>
 

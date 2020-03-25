@@ -22,6 +22,7 @@ class ActivationLayerInterface : public LayerInterface<Dtype> {
 	virtual void Reshape(const vector<Tensor<Dtype>*>& bottom,
 	                     const vector<Tensor<Dtype>*>& top) override;
 
+	//在激活函数里 输入和输出tensor个数是1
 	virtual inline int NumBottomTensor() const { return 1; }
 	virtual inline int NumTopTensor() const { return 1; }
 };     //class ActivationLayerInterface

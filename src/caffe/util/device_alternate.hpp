@@ -7,16 +7,39 @@
 #ifdef CPU_ONLY   //CPU Mode
 #include <vector>
 
+//Stub 桩代码 占位 满足形式但是没有实现功能的代码
+
 //cpu模式调用GPU直接FATAL
 #define NO_GPU LOG(FATAL) << "Cannot use GPU in CPU-Only Caffe Mode: check mode"
 
+#define STUB_GPU(classname) \
+template <typename Dtype> \
+void classname<Dtype>::Forward_gpu(const vector<Tensor<Dtype>*>& bottom, \
+                                   const vector<Tensor<Dtype>*>& top) { NO_GPU; } \
+template <typename Dtype> \
+void classname<Dtype>::Backward_gpu(const vector<Tensor<Dtype>*>& top, \
+                                    const vector<bool>& propagate_down, \
+                                    const vector<Tensor<Dtype>*>& bottom) { NO_GPU; }
+
+#define STUB_GPU_FORWARD(classname, funcname) \
+template <typename Dtype> \
+void classname<Dtype>::funcname##_##gpu(const vector<Tensor<Dtype>*>& bottom, \
+	                                      const vector<Tensor<Dtype>*>& top) { NO_GPU; }
+
+#define STUB_GPU_BACKWARD(classname, funcname) \
+template <typename Dtype> \
+void classname<Dtype>::funcname##_##gpu(const vector<Tensor<Dtype>*>& top, \
+                                        const vector<bool>& propagate_down, \
+                                        const vector<Tensor<Dtype>*>& bottom) { NO_GPU; }
+
 #else //GPU + CPU Mode
+
 #include <cuda.h>
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
 #include <curand.h>
 #ifdef USE_CUDNN
-//#include "cudnn.hpp"
+#include "caffe/util/cudnn.hpp"
 #endif
 
 //CUDA的函数调用检查宏 这里使用do while块 为了方便调用时最后面加一个;

@@ -37,7 +37,7 @@ namespace protobuf_caffe_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[5];
+  static const ::google::protobuf::internal::ParseTable schema[7];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -53,12 +53,18 @@ void InitDefaultsFillerParameterImpl();
 void InitDefaultsFillerParameter();
 void InitDefaultsLayerParameterImpl();
 void InitDefaultsLayerParameter();
+void InitDefaultsReLUParameterImpl();
+void InitDefaultsReLUParameter();
+void InitDefaultsPoolingParameterImpl();
+void InitDefaultsPoolingParameter();
 inline void InitDefaults() {
   InitDefaultsTensorShape();
   InitDefaultsTensorProto();
   InitDefaultsTensorProtoList();
   InitDefaultsFillerParameter();
   InitDefaultsLayerParameter();
+  InitDefaultsReLUParameter();
+  InitDefaultsPoolingParameter();
 }
 }  // namespace protobuf_caffe_2eproto
 namespace caffe {
@@ -68,6 +74,12 @@ extern FillerParameterDefaultTypeInternal _FillerParameter_default_instance_;
 class LayerParameter;
 class LayerParameterDefaultTypeInternal;
 extern LayerParameterDefaultTypeInternal _LayerParameter_default_instance_;
+class PoolingParameter;
+class PoolingParameterDefaultTypeInternal;
+extern PoolingParameterDefaultTypeInternal _PoolingParameter_default_instance_;
+class ReLUParameter;
+class ReLUParameterDefaultTypeInternal;
+extern ReLUParameterDefaultTypeInternal _ReLUParameter_default_instance_;
 class TensorProto;
 class TensorProtoDefaultTypeInternal;
 extern TensorProtoDefaultTypeInternal _TensorProto_default_instance_;
@@ -101,6 +113,72 @@ inline bool FillerParameter_VarianceNorm_Parse(
     const ::std::string& name, FillerParameter_VarianceNorm* value) {
   return ::google::protobuf::internal::ParseNamedEnum<FillerParameter_VarianceNorm>(
     FillerParameter_VarianceNorm_descriptor(), name, value);
+}
+enum ReLUParameter_Engine {
+  ReLUParameter_Engine_DEFAULT = 0,
+  ReLUParameter_Engine_CAFFE = 1,
+  ReLUParameter_Engine_CUDNN = 2,
+  ReLUParameter_Engine_ReLUParameter_Engine_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ReLUParameter_Engine_ReLUParameter_Engine_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ReLUParameter_Engine_IsValid(int value);
+const ReLUParameter_Engine ReLUParameter_Engine_Engine_MIN = ReLUParameter_Engine_DEFAULT;
+const ReLUParameter_Engine ReLUParameter_Engine_Engine_MAX = ReLUParameter_Engine_CUDNN;
+const int ReLUParameter_Engine_Engine_ARRAYSIZE = ReLUParameter_Engine_Engine_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReLUParameter_Engine_descriptor();
+inline const ::std::string& ReLUParameter_Engine_Name(ReLUParameter_Engine value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReLUParameter_Engine_descriptor(), value);
+}
+inline bool ReLUParameter_Engine_Parse(
+    const ::std::string& name, ReLUParameter_Engine* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReLUParameter_Engine>(
+    ReLUParameter_Engine_descriptor(), name, value);
+}
+enum PoolingParameter_PoolMethod {
+  PoolingParameter_PoolMethod_MAX = 0,
+  PoolingParameter_PoolMethod_AVERAGE = 1,
+  PoolingParameter_PoolMethod_STOCHASTIC = 2,
+  PoolingParameter_PoolMethod_PoolingParameter_PoolMethod_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  PoolingParameter_PoolMethod_PoolingParameter_PoolMethod_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool PoolingParameter_PoolMethod_IsValid(int value);
+const PoolingParameter_PoolMethod PoolingParameter_PoolMethod_PoolMethod_MIN = PoolingParameter_PoolMethod_MAX;
+const PoolingParameter_PoolMethod PoolingParameter_PoolMethod_PoolMethod_MAX = PoolingParameter_PoolMethod_STOCHASTIC;
+const int PoolingParameter_PoolMethod_PoolMethod_ARRAYSIZE = PoolingParameter_PoolMethod_PoolMethod_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* PoolingParameter_PoolMethod_descriptor();
+inline const ::std::string& PoolingParameter_PoolMethod_Name(PoolingParameter_PoolMethod value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    PoolingParameter_PoolMethod_descriptor(), value);
+}
+inline bool PoolingParameter_PoolMethod_Parse(
+    const ::std::string& name, PoolingParameter_PoolMethod* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<PoolingParameter_PoolMethod>(
+    PoolingParameter_PoolMethod_descriptor(), name, value);
+}
+enum PoolingParameter_Engine {
+  PoolingParameter_Engine_DEFAULT = 0,
+  PoolingParameter_Engine_CAFFE = 1,
+  PoolingParameter_Engine_CUDNN = 2,
+  PoolingParameter_Engine_PoolingParameter_Engine_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  PoolingParameter_Engine_PoolingParameter_Engine_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool PoolingParameter_Engine_IsValid(int value);
+const PoolingParameter_Engine PoolingParameter_Engine_Engine_MIN = PoolingParameter_Engine_DEFAULT;
+const PoolingParameter_Engine PoolingParameter_Engine_Engine_MAX = PoolingParameter_Engine_CUDNN;
+const int PoolingParameter_Engine_Engine_ARRAYSIZE = PoolingParameter_Engine_Engine_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* PoolingParameter_Engine_descriptor();
+inline const ::std::string& PoolingParameter_Engine_Name(PoolingParameter_Engine value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    PoolingParameter_Engine_descriptor(), value);
+}
+inline bool PoolingParameter_Engine_Parse(
+    const ::std::string& name, PoolingParameter_Engine* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<PoolingParameter_Engine>(
+    PoolingParameter_Engine_descriptor(), name, value);
 }
 enum Phase {
   TRAIN = 0,
@@ -499,23 +577,23 @@ class TensorProtoList : public ::google::protobuf::Message /* @@protoc_insertion
 
   // accessors -------------------------------------------------------
 
-  // repeated .caffe.TensorProto tensor_list = 1;
-  int tensor_list_size() const;
-  void clear_tensor_list();
-  static const int kTensorListFieldNumber = 1;
-  const ::caffe::TensorProto& tensor_list(int index) const;
-  ::caffe::TensorProto* mutable_tensor_list(int index);
-  ::caffe::TensorProto* add_tensor_list();
+  // repeated .caffe.TensorProto tensors = 1;
+  int tensors_size() const;
+  void clear_tensors();
+  static const int kTensorsFieldNumber = 1;
+  const ::caffe::TensorProto& tensors(int index) const;
+  ::caffe::TensorProto* mutable_tensors(int index);
+  ::caffe::TensorProto* add_tensors();
   ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >*
-      mutable_tensor_list();
+      mutable_tensors();
   const ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >&
-      tensor_list() const;
+      tensors() const;
 
   // @@protoc_insertion_point(class_scope:caffe.TensorProtoList)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto > tensor_list_;
+  ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto > tensors_;
   mutable int _cached_size_;
   friend struct ::protobuf_caffe_2eproto::TableStruct;
   friend void ::protobuf_caffe_2eproto::InitDefaultsTensorProtoListImpl();
@@ -800,29 +878,29 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::RepeatedField< float >*
       mutable_loss_weight();
 
-  // repeated .caffe.TensorProto tensor_list = 6;
-  int tensor_list_size() const;
-  void clear_tensor_list();
-  static const int kTensorListFieldNumber = 6;
-  const ::caffe::TensorProto& tensor_list(int index) const;
-  ::caffe::TensorProto* mutable_tensor_list(int index);
-  ::caffe::TensorProto* add_tensor_list();
+  // repeated .caffe.TensorProto tensors = 6;
+  int tensors_size() const;
+  void clear_tensors();
+  static const int kTensorsFieldNumber = 6;
+  const ::caffe::TensorProto& tensors(int index) const;
+  ::caffe::TensorProto* mutable_tensors(int index);
+  ::caffe::TensorProto* add_tensors();
   ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >*
-      mutable_tensor_list();
+      mutable_tensors();
   const ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >&
-      tensor_list() const;
+      tensors() const;
 
-  // repeated bool back_propagate = 7;
-  int back_propagate_size() const;
-  void clear_back_propagate();
-  static const int kBackPropagateFieldNumber = 7;
-  bool back_propagate(int index) const;
-  void set_back_propagate(int index, bool value);
-  void add_back_propagate(bool value);
+  // repeated bool propagate_down = 7;
+  int propagate_down_size() const;
+  void clear_propagate_down();
+  static const int kPropagateDownFieldNumber = 7;
+  bool propagate_down(int index) const;
+  void set_propagate_down(int index, bool value);
+  void add_propagate_down(bool value);
   const ::google::protobuf::RepeatedField< bool >&
-      back_propagate() const;
+      propagate_down() const;
   ::google::protobuf::RepeatedField< bool >*
-      mutable_back_propagate();
+      mutable_propagate_down();
 
   // string name = 1;
   void clear_name();
@@ -880,6 +958,15 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_top();
   void set_allocated_top(::std::string* top);
 
+  // .caffe.ReLUParameter relu_param = 14;
+  bool has_relu_param() const;
+  void clear_relu_param();
+  static const int kReluParamFieldNumber = 14;
+  const ::caffe::ReLUParameter& relu_param() const;
+  ::caffe::ReLUParameter* release_relu_param();
+  ::caffe::ReLUParameter* mutable_relu_param();
+  void set_allocated_relu_param(::caffe::ReLUParameter* relu_param);
+
   // .caffe.Phase phase = 10;
   void clear_phase();
   static const int kPhaseFieldNumber = 10;
@@ -892,17 +979,384 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedField< float > loss_weight_;
   mutable int _loss_weight_cached_byte_size_;
-  ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto > tensor_list_;
-  ::google::protobuf::RepeatedField< bool > back_propagate_;
-  mutable int _back_propagate_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto > tensors_;
+  ::google::protobuf::RepeatedField< bool > propagate_down_;
+  mutable int _propagate_down_cached_byte_size_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr type_;
   ::google::protobuf::internal::ArenaStringPtr bottom_;
   ::google::protobuf::internal::ArenaStringPtr top_;
+  ::caffe::ReLUParameter* relu_param_;
   int phase_;
   mutable int _cached_size_;
   friend struct ::protobuf_caffe_2eproto::TableStruct;
   friend void ::protobuf_caffe_2eproto::InitDefaultsLayerParameterImpl();
+};
+// -------------------------------------------------------------------
+
+class ReLUParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.ReLUParameter) */ {
+ public:
+  ReLUParameter();
+  virtual ~ReLUParameter();
+
+  ReLUParameter(const ReLUParameter& from);
+
+  inline ReLUParameter& operator=(const ReLUParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReLUParameter(ReLUParameter&& from) noexcept
+    : ReLUParameter() {
+    *this = ::std::move(from);
+  }
+
+  inline ReLUParameter& operator=(ReLUParameter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReLUParameter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReLUParameter* internal_default_instance() {
+    return reinterpret_cast<const ReLUParameter*>(
+               &_ReLUParameter_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    5;
+
+  void Swap(ReLUParameter* other);
+  friend void swap(ReLUParameter& a, ReLUParameter& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReLUParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ReLUParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ReLUParameter& from);
+  void MergeFrom(const ReLUParameter& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ReLUParameter* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReLUParameter_Engine Engine;
+  static const Engine DEFAULT =
+    ReLUParameter_Engine_DEFAULT;
+  static const Engine CAFFE =
+    ReLUParameter_Engine_CAFFE;
+  static const Engine CUDNN =
+    ReLUParameter_Engine_CUDNN;
+  static inline bool Engine_IsValid(int value) {
+    return ReLUParameter_Engine_IsValid(value);
+  }
+  static const Engine Engine_MIN =
+    ReLUParameter_Engine_Engine_MIN;
+  static const Engine Engine_MAX =
+    ReLUParameter_Engine_Engine_MAX;
+  static const int Engine_ARRAYSIZE =
+    ReLUParameter_Engine_Engine_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Engine_descriptor() {
+    return ReLUParameter_Engine_descriptor();
+  }
+  static inline const ::std::string& Engine_Name(Engine value) {
+    return ReLUParameter_Engine_Name(value);
+  }
+  static inline bool Engine_Parse(const ::std::string& name,
+      Engine* value) {
+    return ReLUParameter_Engine_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // float negative_slope = 1;
+  void clear_negative_slope();
+  static const int kNegativeSlopeFieldNumber = 1;
+  float negative_slope() const;
+  void set_negative_slope(float value);
+
+  // .caffe.ReLUParameter.Engine engine = 2;
+  void clear_engine();
+  static const int kEngineFieldNumber = 2;
+  ::caffe::ReLUParameter_Engine engine() const;
+  void set_engine(::caffe::ReLUParameter_Engine value);
+
+  // @@protoc_insertion_point(class_scope:caffe.ReLUParameter)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  float negative_slope_;
+  int engine_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsReLUParameterImpl();
+};
+// -------------------------------------------------------------------
+
+class PoolingParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.PoolingParameter) */ {
+ public:
+  PoolingParameter();
+  virtual ~PoolingParameter();
+
+  PoolingParameter(const PoolingParameter& from);
+
+  inline PoolingParameter& operator=(const PoolingParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  PoolingParameter(PoolingParameter&& from) noexcept
+    : PoolingParameter() {
+    *this = ::std::move(from);
+  }
+
+  inline PoolingParameter& operator=(PoolingParameter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PoolingParameter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PoolingParameter* internal_default_instance() {
+    return reinterpret_cast<const PoolingParameter*>(
+               &_PoolingParameter_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    6;
+
+  void Swap(PoolingParameter* other);
+  friend void swap(PoolingParameter& a, PoolingParameter& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PoolingParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PoolingParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PoolingParameter& from);
+  void MergeFrom(const PoolingParameter& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PoolingParameter* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  typedef PoolingParameter_PoolMethod PoolMethod;
+  static const PoolMethod MAX =
+    PoolingParameter_PoolMethod_MAX;
+  static const PoolMethod AVERAGE =
+    PoolingParameter_PoolMethod_AVERAGE;
+  static const PoolMethod STOCHASTIC =
+    PoolingParameter_PoolMethod_STOCHASTIC;
+  static inline bool PoolMethod_IsValid(int value) {
+    return PoolingParameter_PoolMethod_IsValid(value);
+  }
+  static const PoolMethod PoolMethod_MIN =
+    PoolingParameter_PoolMethod_PoolMethod_MIN;
+  static const PoolMethod PoolMethod_MAX =
+    PoolingParameter_PoolMethod_PoolMethod_MAX;
+  static const int PoolMethod_ARRAYSIZE =
+    PoolingParameter_PoolMethod_PoolMethod_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  PoolMethod_descriptor() {
+    return PoolingParameter_PoolMethod_descriptor();
+  }
+  static inline const ::std::string& PoolMethod_Name(PoolMethod value) {
+    return PoolingParameter_PoolMethod_Name(value);
+  }
+  static inline bool PoolMethod_Parse(const ::std::string& name,
+      PoolMethod* value) {
+    return PoolingParameter_PoolMethod_Parse(name, value);
+  }
+
+  typedef PoolingParameter_Engine Engine;
+  static const Engine DEFAULT =
+    PoolingParameter_Engine_DEFAULT;
+  static const Engine CAFFE =
+    PoolingParameter_Engine_CAFFE;
+  static const Engine CUDNN =
+    PoolingParameter_Engine_CUDNN;
+  static inline bool Engine_IsValid(int value) {
+    return PoolingParameter_Engine_IsValid(value);
+  }
+  static const Engine Engine_MIN =
+    PoolingParameter_Engine_Engine_MIN;
+  static const Engine Engine_MAX =
+    PoolingParameter_Engine_Engine_MAX;
+  static const int Engine_ARRAYSIZE =
+    PoolingParameter_Engine_Engine_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Engine_descriptor() {
+    return PoolingParameter_Engine_descriptor();
+  }
+  static inline const ::std::string& Engine_Name(Engine value) {
+    return PoolingParameter_Engine_Name(value);
+  }
+  static inline bool Engine_Parse(const ::std::string& name,
+      Engine* value) {
+    return PoolingParameter_Engine_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // .caffe.PoolingParameter.PoolMethod pool = 1;
+  void clear_pool();
+  static const int kPoolFieldNumber = 1;
+  ::caffe::PoolingParameter_PoolMethod pool() const;
+  void set_pool(::caffe::PoolingParameter_PoolMethod value);
+
+  // uint32 kernel_size = 2;
+  void clear_kernel_size();
+  static const int kKernelSizeFieldNumber = 2;
+  ::google::protobuf::uint32 kernel_size() const;
+  void set_kernel_size(::google::protobuf::uint32 value);
+
+  // uint32 stride = 3;
+  void clear_stride();
+  static const int kStrideFieldNumber = 3;
+  ::google::protobuf::uint32 stride() const;
+  void set_stride(::google::protobuf::uint32 value);
+
+  // uint32 pad = 4;
+  void clear_pad();
+  static const int kPadFieldNumber = 4;
+  ::google::protobuf::uint32 pad() const;
+  void set_pad(::google::protobuf::uint32 value);
+
+  // uint32 kernel_h = 5;
+  void clear_kernel_h();
+  static const int kKernelHFieldNumber = 5;
+  ::google::protobuf::uint32 kernel_h() const;
+  void set_kernel_h(::google::protobuf::uint32 value);
+
+  // uint32 kernel_w = 6;
+  void clear_kernel_w();
+  static const int kKernelWFieldNumber = 6;
+  ::google::protobuf::uint32 kernel_w() const;
+  void set_kernel_w(::google::protobuf::uint32 value);
+
+  // uint32 stride_h = 7;
+  void clear_stride_h();
+  static const int kStrideHFieldNumber = 7;
+  ::google::protobuf::uint32 stride_h() const;
+  void set_stride_h(::google::protobuf::uint32 value);
+
+  // uint32 stride_w = 8;
+  void clear_stride_w();
+  static const int kStrideWFieldNumber = 8;
+  ::google::protobuf::uint32 stride_w() const;
+  void set_stride_w(::google::protobuf::uint32 value);
+
+  // uint32 pad_h = 9;
+  void clear_pad_h();
+  static const int kPadHFieldNumber = 9;
+  ::google::protobuf::uint32 pad_h() const;
+  void set_pad_h(::google::protobuf::uint32 value);
+
+  // uint32 pad_w = 10;
+  void clear_pad_w();
+  static const int kPadWFieldNumber = 10;
+  ::google::protobuf::uint32 pad_w() const;
+  void set_pad_w(::google::protobuf::uint32 value);
+
+  // .caffe.PoolingParameter.Engine engine = 11;
+  void clear_engine();
+  static const int kEngineFieldNumber = 11;
+  ::caffe::PoolingParameter_Engine engine() const;
+  void set_engine(::caffe::PoolingParameter_Engine value);
+
+  // bool global_pooling = 12;
+  void clear_global_pooling();
+  static const int kGlobalPoolingFieldNumber = 12;
+  bool global_pooling() const;
+  void set_global_pooling(bool value);
+
+  // @@protoc_insertion_point(class_scope:caffe.PoolingParameter)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  int pool_;
+  ::google::protobuf::uint32 kernel_size_;
+  ::google::protobuf::uint32 stride_;
+  ::google::protobuf::uint32 pad_;
+  ::google::protobuf::uint32 kernel_h_;
+  ::google::protobuf::uint32 kernel_w_;
+  ::google::protobuf::uint32 stride_h_;
+  ::google::protobuf::uint32 stride_w_;
+  ::google::protobuf::uint32 pad_h_;
+  ::google::protobuf::uint32 pad_w_;
+  int engine_;
+  bool global_pooling_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsPoolingParameterImpl();
 };
 // ===================================================================
 
@@ -1179,34 +1633,34 @@ inline void TensorProto::set_allocated_shape(::caffe::TensorShape* shape) {
 
 // TensorProtoList
 
-// repeated .caffe.TensorProto tensor_list = 1;
-inline int TensorProtoList::tensor_list_size() const {
-  return tensor_list_.size();
+// repeated .caffe.TensorProto tensors = 1;
+inline int TensorProtoList::tensors_size() const {
+  return tensors_.size();
 }
-inline void TensorProtoList::clear_tensor_list() {
-  tensor_list_.Clear();
+inline void TensorProtoList::clear_tensors() {
+  tensors_.Clear();
 }
-inline const ::caffe::TensorProto& TensorProtoList::tensor_list(int index) const {
-  // @@protoc_insertion_point(field_get:caffe.TensorProtoList.tensor_list)
-  return tensor_list_.Get(index);
+inline const ::caffe::TensorProto& TensorProtoList::tensors(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.TensorProtoList.tensors)
+  return tensors_.Get(index);
 }
-inline ::caffe::TensorProto* TensorProtoList::mutable_tensor_list(int index) {
-  // @@protoc_insertion_point(field_mutable:caffe.TensorProtoList.tensor_list)
-  return tensor_list_.Mutable(index);
+inline ::caffe::TensorProto* TensorProtoList::mutable_tensors(int index) {
+  // @@protoc_insertion_point(field_mutable:caffe.TensorProtoList.tensors)
+  return tensors_.Mutable(index);
 }
-inline ::caffe::TensorProto* TensorProtoList::add_tensor_list() {
-  // @@protoc_insertion_point(field_add:caffe.TensorProtoList.tensor_list)
-  return tensor_list_.Add();
+inline ::caffe::TensorProto* TensorProtoList::add_tensors() {
+  // @@protoc_insertion_point(field_add:caffe.TensorProtoList.tensors)
+  return tensors_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >*
-TensorProtoList::mutable_tensor_list() {
-  // @@protoc_insertion_point(field_mutable_list:caffe.TensorProtoList.tensor_list)
-  return &tensor_list_;
+TensorProtoList::mutable_tensors() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.TensorProtoList.tensors)
+  return &tensors_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >&
-TensorProtoList::tensor_list() const {
-  // @@protoc_insertion_point(field_list:caffe.TensorProtoList.tensor_list)
-  return tensor_list_;
+TensorProtoList::tensors() const {
+  // @@protoc_insertion_point(field_list:caffe.TensorProtoList.tensors)
+  return tensors_;
 }
 
 // -------------------------------------------------------------------
@@ -1610,64 +2064,114 @@ LayerParameter::mutable_loss_weight() {
   return &loss_weight_;
 }
 
-// repeated .caffe.TensorProto tensor_list = 6;
-inline int LayerParameter::tensor_list_size() const {
-  return tensor_list_.size();
+// repeated .caffe.TensorProto tensors = 6;
+inline int LayerParameter::tensors_size() const {
+  return tensors_.size();
 }
-inline void LayerParameter::clear_tensor_list() {
-  tensor_list_.Clear();
+inline void LayerParameter::clear_tensors() {
+  tensors_.Clear();
 }
-inline const ::caffe::TensorProto& LayerParameter::tensor_list(int index) const {
-  // @@protoc_insertion_point(field_get:caffe.LayerParameter.tensor_list)
-  return tensor_list_.Get(index);
+inline const ::caffe::TensorProto& LayerParameter::tensors(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.tensors)
+  return tensors_.Get(index);
 }
-inline ::caffe::TensorProto* LayerParameter::mutable_tensor_list(int index) {
-  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.tensor_list)
-  return tensor_list_.Mutable(index);
+inline ::caffe::TensorProto* LayerParameter::mutable_tensors(int index) {
+  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.tensors)
+  return tensors_.Mutable(index);
 }
-inline ::caffe::TensorProto* LayerParameter::add_tensor_list() {
-  // @@protoc_insertion_point(field_add:caffe.LayerParameter.tensor_list)
-  return tensor_list_.Add();
+inline ::caffe::TensorProto* LayerParameter::add_tensors() {
+  // @@protoc_insertion_point(field_add:caffe.LayerParameter.tensors)
+  return tensors_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >*
-LayerParameter::mutable_tensor_list() {
-  // @@protoc_insertion_point(field_mutable_list:caffe.LayerParameter.tensor_list)
-  return &tensor_list_;
+LayerParameter::mutable_tensors() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.LayerParameter.tensors)
+  return &tensors_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >&
-LayerParameter::tensor_list() const {
-  // @@protoc_insertion_point(field_list:caffe.LayerParameter.tensor_list)
-  return tensor_list_;
+LayerParameter::tensors() const {
+  // @@protoc_insertion_point(field_list:caffe.LayerParameter.tensors)
+  return tensors_;
 }
 
-// repeated bool back_propagate = 7;
-inline int LayerParameter::back_propagate_size() const {
-  return back_propagate_.size();
+// repeated bool propagate_down = 7;
+inline int LayerParameter::propagate_down_size() const {
+  return propagate_down_.size();
 }
-inline void LayerParameter::clear_back_propagate() {
-  back_propagate_.Clear();
+inline void LayerParameter::clear_propagate_down() {
+  propagate_down_.Clear();
 }
-inline bool LayerParameter::back_propagate(int index) const {
-  // @@protoc_insertion_point(field_get:caffe.LayerParameter.back_propagate)
-  return back_propagate_.Get(index);
+inline bool LayerParameter::propagate_down(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.propagate_down)
+  return propagate_down_.Get(index);
 }
-inline void LayerParameter::set_back_propagate(int index, bool value) {
-  back_propagate_.Set(index, value);
-  // @@protoc_insertion_point(field_set:caffe.LayerParameter.back_propagate)
+inline void LayerParameter::set_propagate_down(int index, bool value) {
+  propagate_down_.Set(index, value);
+  // @@protoc_insertion_point(field_set:caffe.LayerParameter.propagate_down)
 }
-inline void LayerParameter::add_back_propagate(bool value) {
-  back_propagate_.Add(value);
-  // @@protoc_insertion_point(field_add:caffe.LayerParameter.back_propagate)
+inline void LayerParameter::add_propagate_down(bool value) {
+  propagate_down_.Add(value);
+  // @@protoc_insertion_point(field_add:caffe.LayerParameter.propagate_down)
 }
 inline const ::google::protobuf::RepeatedField< bool >&
-LayerParameter::back_propagate() const {
-  // @@protoc_insertion_point(field_list:caffe.LayerParameter.back_propagate)
-  return back_propagate_;
+LayerParameter::propagate_down() const {
+  // @@protoc_insertion_point(field_list:caffe.LayerParameter.propagate_down)
+  return propagate_down_;
 }
 inline ::google::protobuf::RepeatedField< bool >*
-LayerParameter::mutable_back_propagate() {
-  // @@protoc_insertion_point(field_mutable_list:caffe.LayerParameter.back_propagate)
-  return &back_propagate_;
+LayerParameter::mutable_propagate_down() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.LayerParameter.propagate_down)
+  return &propagate_down_;
+}
+
+// .caffe.ReLUParameter relu_param = 14;
+inline bool LayerParameter::has_relu_param() const {
+  return this != internal_default_instance() && relu_param_ != NULL;
+}
+inline void LayerParameter::clear_relu_param() {
+  if (GetArenaNoVirtual() == NULL && relu_param_ != NULL) {
+    delete relu_param_;
+  }
+  relu_param_ = NULL;
+}
+inline const ::caffe::ReLUParameter& LayerParameter::relu_param() const {
+  const ::caffe::ReLUParameter* p = relu_param_;
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.relu_param)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::ReLUParameter*>(
+      &::caffe::_ReLUParameter_default_instance_);
+}
+inline ::caffe::ReLUParameter* LayerParameter::release_relu_param() {
+  // @@protoc_insertion_point(field_release:caffe.LayerParameter.relu_param)
+  
+  ::caffe::ReLUParameter* temp = relu_param_;
+  relu_param_ = NULL;
+  return temp;
+}
+inline ::caffe::ReLUParameter* LayerParameter::mutable_relu_param() {
+  
+  if (relu_param_ == NULL) {
+    relu_param_ = new ::caffe::ReLUParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.relu_param)
+  return relu_param_;
+}
+inline void LayerParameter::set_allocated_relu_param(::caffe::ReLUParameter* relu_param) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete relu_param_;
+  }
+  if (relu_param) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      relu_param = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, relu_param, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  relu_param_ = relu_param;
+  // @@protoc_insertion_point(field_set_allocated:caffe.LayerParameter.relu_param)
 }
 
 // .caffe.Phase phase = 10;
@@ -1684,9 +2188,217 @@ inline void LayerParameter::set_phase(::caffe::Phase value) {
   // @@protoc_insertion_point(field_set:caffe.LayerParameter.phase)
 }
 
+// -------------------------------------------------------------------
+
+// ReLUParameter
+
+// float negative_slope = 1;
+inline void ReLUParameter::clear_negative_slope() {
+  negative_slope_ = 0;
+}
+inline float ReLUParameter::negative_slope() const {
+  // @@protoc_insertion_point(field_get:caffe.ReLUParameter.negative_slope)
+  return negative_slope_;
+}
+inline void ReLUParameter::set_negative_slope(float value) {
+  
+  negative_slope_ = value;
+  // @@protoc_insertion_point(field_set:caffe.ReLUParameter.negative_slope)
+}
+
+// .caffe.ReLUParameter.Engine engine = 2;
+inline void ReLUParameter::clear_engine() {
+  engine_ = 0;
+}
+inline ::caffe::ReLUParameter_Engine ReLUParameter::engine() const {
+  // @@protoc_insertion_point(field_get:caffe.ReLUParameter.engine)
+  return static_cast< ::caffe::ReLUParameter_Engine >(engine_);
+}
+inline void ReLUParameter::set_engine(::caffe::ReLUParameter_Engine value) {
+  
+  engine_ = value;
+  // @@protoc_insertion_point(field_set:caffe.ReLUParameter.engine)
+}
+
+// -------------------------------------------------------------------
+
+// PoolingParameter
+
+// .caffe.PoolingParameter.PoolMethod pool = 1;
+inline void PoolingParameter::clear_pool() {
+  pool_ = 0;
+}
+inline ::caffe::PoolingParameter_PoolMethod PoolingParameter::pool() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.pool)
+  return static_cast< ::caffe::PoolingParameter_PoolMethod >(pool_);
+}
+inline void PoolingParameter::set_pool(::caffe::PoolingParameter_PoolMethod value) {
+  
+  pool_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.pool)
+}
+
+// uint32 kernel_size = 2;
+inline void PoolingParameter::clear_kernel_size() {
+  kernel_size_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::kernel_size() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.kernel_size)
+  return kernel_size_;
+}
+inline void PoolingParameter::set_kernel_size(::google::protobuf::uint32 value) {
+  
+  kernel_size_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.kernel_size)
+}
+
+// uint32 kernel_h = 5;
+inline void PoolingParameter::clear_kernel_h() {
+  kernel_h_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::kernel_h() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.kernel_h)
+  return kernel_h_;
+}
+inline void PoolingParameter::set_kernel_h(::google::protobuf::uint32 value) {
+  
+  kernel_h_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.kernel_h)
+}
+
+// uint32 kernel_w = 6;
+inline void PoolingParameter::clear_kernel_w() {
+  kernel_w_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::kernel_w() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.kernel_w)
+  return kernel_w_;
+}
+inline void PoolingParameter::set_kernel_w(::google::protobuf::uint32 value) {
+  
+  kernel_w_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.kernel_w)
+}
+
+// uint32 stride = 3;
+inline void PoolingParameter::clear_stride() {
+  stride_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::stride() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.stride)
+  return stride_;
+}
+inline void PoolingParameter::set_stride(::google::protobuf::uint32 value) {
+  
+  stride_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.stride)
+}
+
+// uint32 stride_h = 7;
+inline void PoolingParameter::clear_stride_h() {
+  stride_h_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::stride_h() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.stride_h)
+  return stride_h_;
+}
+inline void PoolingParameter::set_stride_h(::google::protobuf::uint32 value) {
+  
+  stride_h_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.stride_h)
+}
+
+// uint32 stride_w = 8;
+inline void PoolingParameter::clear_stride_w() {
+  stride_w_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::stride_w() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.stride_w)
+  return stride_w_;
+}
+inline void PoolingParameter::set_stride_w(::google::protobuf::uint32 value) {
+  
+  stride_w_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.stride_w)
+}
+
+// uint32 pad = 4;
+inline void PoolingParameter::clear_pad() {
+  pad_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::pad() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.pad)
+  return pad_;
+}
+inline void PoolingParameter::set_pad(::google::protobuf::uint32 value) {
+  
+  pad_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.pad)
+}
+
+// uint32 pad_h = 9;
+inline void PoolingParameter::clear_pad_h() {
+  pad_h_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::pad_h() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.pad_h)
+  return pad_h_;
+}
+inline void PoolingParameter::set_pad_h(::google::protobuf::uint32 value) {
+  
+  pad_h_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.pad_h)
+}
+
+// uint32 pad_w = 10;
+inline void PoolingParameter::clear_pad_w() {
+  pad_w_ = 0u;
+}
+inline ::google::protobuf::uint32 PoolingParameter::pad_w() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.pad_w)
+  return pad_w_;
+}
+inline void PoolingParameter::set_pad_w(::google::protobuf::uint32 value) {
+  
+  pad_w_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.pad_w)
+}
+
+// .caffe.PoolingParameter.Engine engine = 11;
+inline void PoolingParameter::clear_engine() {
+  engine_ = 0;
+}
+inline ::caffe::PoolingParameter_Engine PoolingParameter::engine() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.engine)
+  return static_cast< ::caffe::PoolingParameter_Engine >(engine_);
+}
+inline void PoolingParameter::set_engine(::caffe::PoolingParameter_Engine value) {
+  
+  engine_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.engine)
+}
+
+// bool global_pooling = 12;
+inline void PoolingParameter::clear_global_pooling() {
+  global_pooling_ = false;
+}
+inline bool PoolingParameter::global_pooling() const {
+  // @@protoc_insertion_point(field_get:caffe.PoolingParameter.global_pooling)
+  return global_pooling_;
+}
+inline void PoolingParameter::set_global_pooling(bool value) {
+  
+  global_pooling_ = value;
+  // @@protoc_insertion_point(field_set:caffe.PoolingParameter.global_pooling)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1707,6 +2419,21 @@ template <> struct is_proto_enum< ::caffe::FillerParameter_VarianceNorm> : ::goo
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::caffe::FillerParameter_VarianceNorm>() {
   return ::caffe::FillerParameter_VarianceNorm_descriptor();
+}
+template <> struct is_proto_enum< ::caffe::ReLUParameter_Engine> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::caffe::ReLUParameter_Engine>() {
+  return ::caffe::ReLUParameter_Engine_descriptor();
+}
+template <> struct is_proto_enum< ::caffe::PoolingParameter_PoolMethod> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::caffe::PoolingParameter_PoolMethod>() {
+  return ::caffe::PoolingParameter_PoolMethod_descriptor();
+}
+template <> struct is_proto_enum< ::caffe::PoolingParameter_Engine> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::caffe::PoolingParameter_Engine>() {
+  return ::caffe::PoolingParameter_Engine_descriptor();
 }
 template <> struct is_proto_enum< ::caffe::Phase> : ::google::protobuf::internal::true_type {};
 template <>

@@ -159,25 +159,25 @@ template <> void Tensor<int>::Update() { NOT_IMPLEMENTED; }
 template <typename Dtype>
 void Tensor<Dtype>::Update() {
 	switch (data_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		//在cpu执行
-		caffe_axpy<Dtype>(count_, Dtype(-1),
-											static_cast<const Dtype*>(diff_->cpu_data()),
-											static_cast<Dtype*>(data_->mutable_cpu_data()));
-		break;
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			//在cpu执行
+			caffe_axpy<Dtype>(count_, Dtype(-1),
+												static_cast<const Dtype*>(diff_->cpu_data()),
+												static_cast<Dtype*>(data_->mutable_cpu_data()));
+			break;
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-		//在gpu执行
-		caffe_gpu_axpy<Dtype>(count_, Dtype(-1),
-													static_cast<const Dtype*>(diff_->gpu_data()),
-													static_cast<Dtype*>(data_->mutable_gpu_data()));
+			//在gpu执行
+			caffe_gpu_axpy<Dtype>(count_, Dtype(-1),
+														static_cast<const Dtype*>(diff_->gpu_data()),
+														static_cast<Dtype*>(data_->mutable_gpu_data()));
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-		break;
-	default:
-		LOG(FATAL) << "SyncedMemory not initialized";
+			break;
+		default:
+			LOG(FATAL) << "SyncedMemory not initialized";
 	}
 }
 
@@ -193,24 +193,24 @@ Dtype Tensor<Dtype>::asum_data() const {
 		return 0;
 	}
 	switch (data_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		return caffe_cpu_asum(count_, cpu_data());
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			return caffe_cpu_asum(count_, cpu_data());
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-	{
-		//case里因为定义了一个变量 所以要用括号
-		Dtype asum;
-		caffe_gpu_asum(count_, gpu_data(), &asum);
-		return asum;
-	}
+		{
+			//case里因为定义了一个变量 所以要用括号
+			Dtype asum;
+			caffe_gpu_asum(count_, gpu_data(), &asum);
+			return asum;
+		}
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-	case SyncedMemory::UNINITIALIZED:
-		return 0;
-	default:
-		LOG(FATAL) << "Unknown SyncedMemory head state: " << data_->head();
+		case SyncedMemory::UNINITIALIZED:
+			return 0;
+		default:
+			LOG(FATAL) << "Unknown SyncedMemory head state: " << data_->head();
 	}
 
 	return 0;
@@ -227,24 +227,24 @@ Dtype Tensor<Dtype>::asum_diff() const {
 		return 0;
 	}
 	switch (diff_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		return caffe_cpu_asum(count_, cpu_diff());
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			return caffe_cpu_asum(count_, cpu_diff());
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-	{
-		//case里因为定义了一个变量 所以要用括号
-		Dtype asum;
-		caffe_gpu_asum(count_, gpu_diff(), &asum);
-		return asum;
-	}
+		{
+			//case里因为定义了一个变量 所以要用括号
+			Dtype asum;
+			caffe_gpu_asum(count_, gpu_diff(), &asum);
+			return asum;
+		}
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-	case SyncedMemory::UNINITIALIZED:
-		return 0;
-	default:
-		LOG(FATAL) << "Unknown SyncedMemory head state: " << diff_->head();
+		case SyncedMemory::UNINITIALIZED:
+			return 0;
+		default:
+			LOG(FATAL) << "Unknown SyncedMemory head state: " << diff_->head();
 	}
 
 	return 0;
@@ -264,23 +264,23 @@ Dtype Tensor<Dtype>::sumsq_data() const {
 		return 0;
 	}
 	switch (data_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		data = cpu_data();
-		sumsq = caffe_cpu_dot(count_, data, data);
-		break;
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			data = cpu_data();
+			sumsq = caffe_cpu_dot(count_, data, data);
+			break;
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-		data = gpu_data();
-		caffe_gpu_dot(count_, data, data, &sumsq);
+			data = gpu_data();
+			caffe_gpu_dot(count_, data, data, &sumsq);
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-		break;
-	case SyncedMemory::UNINITIALIZED:
-		return 0;
-	default:
-		LOG(FATAL) << "Unknown SyncedMemory head state: " << data_->head();
+			break;
+		case SyncedMemory::UNINITIALIZED:
+			return 0;
+		default:
+			LOG(FATAL) << "Unknown SyncedMemory head state: " << data_->head();
 	}
 
 	return sumsq;
@@ -300,23 +300,23 @@ Dtype Tensor<Dtype>::sumsq_diff() const {
 		return 0;
 	}
 	switch (diff_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		diff = cpu_diff();
-		sumsq = caffe_cpu_dot(count_, diff, diff);
-		break;
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			diff = cpu_diff();
+			sumsq = caffe_cpu_dot(count_, diff, diff);
+			break;
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-		diff = gpu_diff();
-		caffe_gpu_dot(count_, diff, diff, &sumsq);
+			diff = gpu_diff();
+			caffe_gpu_dot(count_, diff, diff, &sumsq);
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-		break;
-	case SyncedMemory::UNINITIALIZED:
-		return 0;
-	default:
-		LOG(FATAL) << "Unknown SyncedMemory head state: " << diff_->head();
+			break;
+		case SyncedMemory::UNINITIALIZED:
+			return 0;
+		default:
+			LOG(FATAL) << "Unknown SyncedMemory head state: " << diff_->head();
 	}
 
 	return sumsq;
@@ -331,26 +331,26 @@ template <typename Dtype>
 void Tensor<Dtype>::scale_data(const Dtype scale) {
 	Dtype* data;
 	if (!data_) {
-		return ;
+		return;
 	}
 	switch (data_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		data = mutable_cpu_data();
-		caffe_scal(count_, scale, data);
-		return ;
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			data = mutable_cpu_data();
+			caffe_scal(count_, scale, data);
+			return;
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-		data = mutable_gpu_data();
-		caffe_gpu_scal(count_, scale, data);
-		return ;
+			data = mutable_gpu_data();
+			caffe_gpu_scal(count_, scale, data);
+			return;
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-	case SyncedMemory::UNINITIALIZED:
-		return ;
-	default:
-		LOG(FATAL) << "Unknown SyncedMemory head state: " << data_->head();
+		case SyncedMemory::UNINITIALIZED:
+			return;
+		default:
+			LOG(FATAL) << "Unknown SyncedMemory head state: " << data_->head();
 	}
 }
 
@@ -366,23 +366,23 @@ void Tensor<Dtype>::scale_diff(const Dtype scale) {
 		return;
 	}
 	switch (diff_->head()) {
-	case SyncedMemory::HEAD_AT_CPU:
-		diff = mutable_cpu_diff();
-		caffe_scal(count_, scale, diff);
-		return;
-	case SyncedMemory::HEAD_AT_GPU:
-	case SyncedMemory::SYNCED:
+		case SyncedMemory::HEAD_AT_CPU:
+			diff = mutable_cpu_diff();
+			caffe_scal(count_, scale, diff);
+			return;
+		case SyncedMemory::HEAD_AT_GPU:
+		case SyncedMemory::SYNCED:
 #ifndef CPU_ONLY
-		diff = mutable_gpu_diff();
-		caffe_gpu_scal(count_, scale, diff);
-		return;
+			diff = mutable_gpu_diff();
+			caffe_gpu_scal(count_, scale, diff);
+			return;
 #else
-		NO_GPU;
+			NO_GPU;
 #endif
-	case SyncedMemory::UNINITIALIZED:
-		return;
-	default:
-		LOG(FATAL) << "Unknown SyncedMemory head state: " << diff_->head();
+		case SyncedMemory::UNINITIALIZED:
+			return;
+		default:
+			LOG(FATAL) << "Unknown SyncedMemory head state: " << diff_->head();
 	}
 }
 
@@ -419,26 +419,26 @@ void Tensor<Dtype>::CopyFrom(const Tensor<Dtype>& source, bool copy_diff, bool r
 		}
 	}
 	switch (Caffe::mode()) {
-	case Caffe::GPU:
-		if (copy_diff) {
-			caffe_copy(count_, source.gpu_diff(),
-								 static_cast<Dtype*>(diff_->mutable_gpu_data()));
-		} else {
-			caffe_copy(count_, source.gpu_data(),
-			           static_cast<Dtype*>(data_->mutable_gpu_data()));
-		}
-		break;
-	case Caffe::CPU:
-		if (copy_diff) {
-			caffe_copy(count_, source.cpu_diff(),
-			           static_cast<Dtype*>(diff_->mutable_cpu_data()));
-		} else {
-			caffe_copy(count_, source.cpu_data(),
-			           static_cast<Dtype*>(data_->mutable_cpu_data()));
-		}
-		break;
-	default:
-		LOG(FATAL) << "Unknown caffe mode";
+		case Caffe::GPU:
+			if (copy_diff) {
+				caffe_copy(count_, source.gpu_diff(),
+									 static_cast<Dtype*>(diff_->mutable_gpu_data()));
+			} else {
+				caffe_copy(count_, source.gpu_data(),
+				           static_cast<Dtype*>(data_->mutable_gpu_data()));
+			}
+			break;
+		case Caffe::CPU:
+			if (copy_diff) {
+				caffe_copy(count_, source.cpu_diff(),
+				           static_cast<Dtype*>(diff_->mutable_cpu_data()));
+			} else {
+				caffe_copy(count_, source.cpu_data(),
+				           static_cast<Dtype*>(data_->mutable_cpu_data()));
+			}
+			break;
+		default:
+			LOG(FATAL) << "Unknown caffe mode";
 	}
 }
 
@@ -533,7 +533,7 @@ void Tensor<Dtype>::FromProto(const TensorProto& proto, bool reshape) {
 }
 
 //注册float double的tensor类
-INSTANCE_CLASS(Tensor);
+INSTANTIATE_CLASS(Tensor);
 template class Tensor<int>;
 }       //namespace caffe
 
