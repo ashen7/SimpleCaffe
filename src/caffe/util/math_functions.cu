@@ -1,3 +1,6 @@
+//
+// Created by yipeng on 2020/3/21.
+//
 #include <cmath>
 
 #include <cuda.h>

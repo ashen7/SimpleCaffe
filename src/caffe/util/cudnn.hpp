@@ -82,8 +82,8 @@ template <> class dataType<double> {
 
 //创建cudnn 4d张量的描述符
 template <typename Dtype>
-inline void CreateTensor4dDesc(cudnnTensorDescriptor_t* desc) {
-	CUDNN_CHECK(cudnnCreateTensorDescriptor(desc));
+inline void CreateTensor4dDesc(cudnnTensorDescriptor_t* tensor_desc) {
+	CUDNN_CHECK(cudnnCreateTensorDescriptor(tensor_desc));
 }
 
 /*
@@ -94,10 +94,10 @@ inline void CreateTensor4dDesc(cudnnTensorDescriptor_t* desc) {
  * w: width
  */
 template <typename Dtype>
-inline void SetTensor4dDesc(cudnnTensorDescriptor_t* desc,
+inline void SetTensor4dDesc(cudnnTensorDescriptor_t* tensor_desc,
 	                          int n, int c, int h, int w,
 	                          int stride_n, int stride_c, int stride_h, int stride_w) {
-	CUDNN_CHECK(cudnnSetTensor4dDescriptorEx(*desc,
+	CUDNN_CHECK(cudnnSetTensor4dDescriptorEx(*tensor_desc,
 		                                                dataType<Dtype>::type,
 		                                                n, c, h, w,
 		                                                stride_n, stride_c, stride_h, stride_w));
@@ -111,13 +111,13 @@ inline void SetTensor4dDesc(cudnnTensorDescriptor_t* desc,
  * w: 输入/输出 width
  */
 template <typename Dtype>
-inline void SetTensor4dDesc(cudnnTensorDescriptor_t* desc,
+inline void SetTensor4dDesc(cudnnTensorDescriptor_t* tensor_desc,
                             int n, int c, int h, int w) {
 	const int stride_w = 1;
 	const int stride_h = w * stride_w;
 	const int stride_c = h * stride_h;
 	const int stride_n = c * stride_c;
-	setTensor4dDesc<Dtype>(desc, n, c, h, w,
+	SetTensor4dDesc<Dtype>(tensor_desc, n, c, h, w,
 	                       stride_n, stride_c, stride_h, stride_w);
 }
 
@@ -129,18 +129,18 @@ inline void SetTensor4dDesc(cudnnTensorDescriptor_t* desc,
  * w: filter width
  */
 template <typename Dtype>
-inline void CreateFilterDesc(cudnnFilterDescriptor_t* desc,
+inline void CreateFilterDesc(cudnnFilterDescriptor_t* filter_desc,
                              int n, int c, int h, int w) {
 	//创建卷积核的描述符
-	CUDNN_CHECK(cudnnCreateFilterDescriptor(desc));
+	CUDNN_CHECK(cudnnCreateFilterDescriptor(filter_desc));
 #if CUDNN_VERSION_MIN(5, 0, 0)
 	//设置卷积核的描述符
-	CUDNN_CHECK(cudnnSetFilter4dDescriptor(*desc,
+	CUDNN_CHECK(cudnnSetFilter4dDescriptor(*filter_desc,
 		                                              dataType<Dtype>::type,
 		                                              CUDNN_TENSOR_NCHW,
 		                                              n, c, h, w));
 #else
-	CUDNN_CHECK(cudnnSetFilter4dDescriptor_v4(*desc,
+	CUDNN_CHECK(cudnnSetFilter4dDescriptor_v4(*filter_desc,
 																					   dataType<Dtype>::type,
 		                                         CUDNN_TENSOR_NCHW,
 		                                         n, c, h, w));
@@ -149,21 +149,21 @@ inline void CreateFilterDesc(cudnnFilterDescriptor_t* desc,
 
 //创建卷积操作的描述符
 template <typename Dtype>
-inline void CreateConvolutionDesc(cudnnConvolutionDescriptor_t* conv) {
-	CUDNN_CHECK(cudnnCreateConvolutionDescriptor((conv)));
+inline void CreateConvolutionDesc(cudnnConvolutionDescriptor_t* conv_desc) {
+	CUDNN_CHECK(cudnnCreateConvolutionDescriptor((conv_desc)));
 }
 
 /*
  * 设置cudnn 卷积操作的描述符
  */
 template <typename Dtype>
-inline void SetConvolutionDesc(cudnnConvolutionDescriptor_t* conv,
+inline void SetConvolutionDesc(cudnnConvolutionDescriptor_t* conv_desc,
 															 cudnnTensorDescriptor_t bottom,
 															 cudnnFilterDescriptor_t filter,
 															 int pad_h, int pad_w,
 															 int stride_h, int stride_w) {
 #if CUDNN_VERSION_MIN(6, 0, 0)
-	CUDNN_CHECK(cudnnSetConvolution2dDescriptor(*conv,
+	CUDNN_CHECK(cudnnSetConvolution2dDescriptor(*conv_desc,
 																										   pad_h,
 																										   pad_w,
 																										   stride_h,
@@ -173,7 +173,7 @@ inline void SetConvolutionDesc(cudnnConvolutionDescriptor_t* conv,
 																										   CUDNN_CROSS_CORRELATION,
 																										   dataType<Dtype>::type));
 #else
-	CUDNN_CHECK(cudnnSetConvolution2dDescriptor(*conv,
+	CUDNN_CHECK(cudnnSetConvolution2dDescriptor(*conv_desc,
 																					    pad_h,
 																					    pad_w,
 																					    stride_h,

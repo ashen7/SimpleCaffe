@@ -32,10 +32,35 @@ private: \
   classname(const classname&); \
   classname& operator=(const classname&)
 
-//实例化float和double类
+//实例化float和double类型模板类
 #define INSTANTIATE_CLASS(classname) \
 	template class classname<float>; \
 	template class classname<double>
+
+//实例化层的float和double类型 GPU前向计算
+#define INSTANTIATE_LAYER_GPU_FORWARD(classname) \
+	template void classname<float>::Forward_gpu( \
+			const std::vector<Tensor<float>*>& bottom, \
+			const std::vector<Tensor<float>*>& top); \
+	template void classname<double>::Forward_gpu( \
+			const std::vector<Tensor<double>*>& bottom, \
+			const std::vector<Tensor<double>*>& top);
+
+//实例化层的float和double类型 GPU反向计算
+#define INSTANTIATE_LAYER_GPU_BACKWARD(classname) \
+	template void classname<float>::Backward_gpu( \
+			const std::vector<Tensor<float>*>& top, \
+			const std::vector<bool>& propagate_down, \
+			const std::vector<Tensor<float>*>& bottom); \
+	template void classname<double>::Backward_gpu( \
+			const std::vector<Tensor<double>*>& top, \
+			const std::vector<bool>& propagate_down, \
+			const std::vector<Tensor<double>*>& bottom);
+
+//实例化层的float和double类型 GPU前向计算和反向计算
+#define INSTANTIATE_LAYER_GPU_FUNCS(classname) \
+	INSTANTIATE_LAYER_GPU_FORWARD(classname); \
+	INSTANTIATE_LAYER_GPU_BACKWARD(classname)
 
 //还没有定义的api返回没有实现
 #define NOT_IMPLEMENTED LOG(FATAL) << " That API Not Implemented Yet"

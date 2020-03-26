@@ -21,26 +21,25 @@ endif()
 
 if (${CPU_ONLY} STREQUAL "ON")
     add_definitions(-D CPU_ONLY)
-    message("current caffe mode(CPU : GPU): CPU")
+    message("Current SimpleCaffe Mode(CPU : GPU): CPU")
 else()
     find_package(CUDA REQUIRED)
-    message("current caffe mode(CPU : GPU): GPU")
+    message("Current SimpleCaffe Mode(CPU : GPU): GPU")
 endif()
 
 if (${USE_CUDNN} STREQUAL "ON")
     add_definitions(-D USE_CUDNN)
 endif()
 
-
 #g++ 编译选项
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -g -O3 -W -Wall -Wfatal-errors")
 #nvcc 编译选项
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-g;-O3;-gencode arch=compute_61,code=sm_61;-std=c++11;)
 
-message("cudnn: ${USE_CUDNN}")
-message("opencv: ${USE_OPENCV}")
+message("CuDNN: ${USE_CUDNN}")
+message("Opencv: ${USE_OPENCV}")
 message("g++ compile flags: ${CMAKE_CXX_FLAGS}")
-message("nvcc compile flags: ${CUDA_NVCC_FLAGS}")
+message("NVCC compile flags: ${CUDA_NVCC_FLAGS}")
 
 #根目录
 set(SIMPLE_CAFFE_ROOT_DIR .)
@@ -60,18 +59,18 @@ file(GLOB SIMPLE_CAFFE_MAIN_CXX_FILE ${SIMPLE_CAFFE_SRC_DIR}/*.cpp)
 #CUDA源文件
 file(GLOB SIMPLE_CAFFE_UTIL_CUDA_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/util/*.cu)
 file(GLOB SIMPLE_CAFFE_LAYERS_CUDA_SRC_FILE ${SIMPLE_CAFFE_SRC_DIR}/layers/*.cu)
-#google test源文件
+#Google Test源文件
 file(GLOB SIMPLE_CAFFE_GOOGLE_TEST_FILE ${SIMPLE_CAFFE_SRC_DIR}/test/*.cpp)
 file(GLOB SIMPLE_CAFFE_MAIN_GOOGLE_TEST_FILE ${SIMPLE_CAFFE_ROOT_DIR}/src/gtest/*.cpp)
 
-message("SimpleCaffe main     cxx src: ${SIMPLE_CAFFE_MAIN_CXX_FILE}")
-message("SimpleCaffe protobuf cxx src: ${SIMPLE_CAFFE_PROTO_CXX_SRC_FILE}")
-message("SimpleCaffe utility  cxx src: ${SIMPLE_CAFFE_UTIL_CXX_SRC_FILE}")
-message("SimpleCaffe layers   cxx src: ${SIMPLE_CAFFE_LAYERS_CXX_SRC_FILE}")
-message("SimpleCaffe utility cuda src: ${SIMPLE_CAFFE_UTIL_CUDA_SRC_FILE}")
-message("SimpleCaffe layers  cuda src: ${SIMPLE_CAFFE_LAYERS_CUDA_SRC_FILE}")
-message("SimpleCaffe main google test: ${SIMPLE_CAFFE_MAIN_GOOGLE_TEST_FILE}")
-message("SimpleCaffe      google test: ${SIMPLE_CAFFE_GOOGLE_TEST_FILE}")
+message("SimpleCaffe Main     CXX SRC: ${SIMPLE_CAFFE_MAIN_CXX_FILE}")
+message("SimpleCaffe Protobuf CXX SRC: ${SIMPLE_CAFFE_PROTO_CXX_SRC_FILE}")
+message("SimpleCaffe Utility  CXX SRC: ${SIMPLE_CAFFE_UTIL_CXX_SRC_FILE}")
+message("SimpleCaffe Layers   CXX SRC: ${SIMPLE_CAFFE_LAYERS_CXX_SRC_FILE}")
+message("SimpleCaffe Utility CUDA SRC: ${SIMPLE_CAFFE_UTIL_CUDA_SRC_FILE}")
+message("SimpleCaffe Layers  CUDA SRC: ${SIMPLE_CAFFE_LAYERS_CUDA_SRC_FILE}")
+message("SimpleCaffe Main Google Test: ${SIMPLE_CAFFE_MAIN_GOOGLE_TEST_FILE}")
+message("SimpleCaffe      Google Test: ${SIMPLE_CAFFE_GOOGLE_TEST_FILE}")
 
 set(SIMPLE_CAFFE_SOURCE ${SIMPLE_CAFFE_PROTO_CXX_SRC_FILE}
                         ${SIMPLE_CAFFE_UTIL_CXX_SRC_FILE}

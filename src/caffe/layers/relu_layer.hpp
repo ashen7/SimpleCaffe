@@ -21,12 +21,13 @@ class ReLULayer : public ActivationLayerInterface<Dtype> {
 	explicit ReLULayer(const LayerParameter& param)
 			: ActivationLayerInterface<Dtype>(param) {}
 
+	virtual ~ReLULayer() {}
 	//层的类型
 	virtual inline const char* type() const override { return "ReLU"; }
 
  protected:
 	/*
-	 * 层的前向计算
+	 * 内部函数： 层的前向计算
 	 * 输入tensor vector大小是1个tensor
 	 * 输出tensor vector大小也是1个tensor
 	 * 计算y = max(0, x) 如果有negative_slope 会计算是负数的情况
@@ -37,7 +38,7 @@ class ReLULayer : public ActivationLayerInterface<Dtype> {
 	                         const vector<Tensor<Dtype>*>& top) override;
 
 	/*
-	 * 层的反向计算
+	 * 内部函数： 层的反向计算
 	 * 输出tensor vector大小是1个tensor
 	 * bool vector 表明下标对应值是否反向传播
 	 * 输入tensor vector大小也是1个tensor
