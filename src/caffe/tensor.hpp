@@ -13,7 +13,7 @@
 #include "caffe/synced_memory.hpp"
 #include "caffe/proto/caffe.pb.h"
 
-const int kMaxTensorDims = 32;
+const int kMaxTensorAxes = 32;
 
 namespace caffe {
 
@@ -46,48 +46,54 @@ class Tensor {
 	}
 
 	//规范的索引 通过正负索引都可返回维度  可以传-1得到最后一个维度
-  //索引大于0 直接返回对应维度 小于0 返回index + dims()
-	inline int CanonicalDimsIndex(int dim_index) const {
-		CHECK_GE(dim_index, -num_dims()) << "dim: " << dim_index
-			<< " out of range for " << num_dims() << "-D Tensor with shape " << shape_string();
-		CHECK_LT(dim_index, num_dims()) << "dim: " << dim_index
-		  << " out of range for " << num_dims() << "-D Tensor with shape " << shape_string();
-		if (dim_index < 0) {
-			return dim_index + num_dims();
+  //索引大于0 直接返回对应维度 小于0 返回index + axes()
+	inline int CanonicalAxisIndex(int axis_index) const {
+		CHECK_GE(axis_index, -num_axes()) << "axis: " << axis_index
+			<< " out of range for " << num_axes() << "-D Tensor with shape " << shape_string();
+		CHECK_LT(axis_index, num_axes()) << "axis: " << axis_index
+		  << " out of range for " << num_axes() << "-D Tensor with shape " << shape_string();
+		if (axis_index < 0) {
+			return axis_index + num_axes();
 		}
-		return dim_index;
+		return axis_index;
 	}
 
 	inline const vector<int>& shape() const { return shape_; } //得到形状的vector
-	inline int num_dims() const { return shape_.size(); } //得到维度 4d 3d 2d 1d
-	inline int count() const { return count_; } //得到数据总数
+	inline int num_axes() const { return shape_.size(); }      //得到维度/轴个数/秩
+	inline int count() const { return count_; }                //得到数据大小
 
 	inline int shape(int index) const {
-		return shape_[CanonicalDimsIndex(index)];
+		return shape_[CanonicalAxisIndex(index)];
 	}
 
 	//如果索引在正常范围[-4 - 3] 但是大于了当前shape的维度 就返回1
 	inline int LegacyShape(int index) const {
-		CHECK_LE(num_dims(), 4) << "tensor dims can not exceed 4";
+		CHECK_LE(num_axes(), 4) << "tensor axes can not exceed 4";
 		CHECK_LT(index, 4);
 		CHECK_GE(index, -4);
-		if (index >= num_dims() || index < -num_dims()) {
+		if (index >= num_axes() || index < -num_axes()) {
 			return 1;
 		}
 		return shape(index);
 	}
 
-	inline int count(int start_dim, int end_dim) const {
-		CHECK_LE(start_dim, end_dim);
-		CHECK_GE(start_dim, 0);
-		CHECK_GE(end_dim, 0);
-		CHECK_LE(start_dim, num_dims());
-		CHECK_LE(end_dim, num_dims());
+	//根据开始轴和结束轴得到数据数量
+	inline int count(int start_axis, int end_axis) const {
+		CHECK_LE(start_axis, end_axis);
+		CHECK_GE(start_axis, 0);
+		CHECK_GE(end_axis, 0);
+		CHECK_LE(start_axis, num_axes());
+		CHECK_LE(end_axis, num_axes());
 		int count = 1;
-		for (int i = start_dim; i < end_dim; ++i) {
+		for (int i = start_axis; i < end_axis; ++i) {
 			count *= shape(i);
 		}
 		return count;
+	}
+
+	//从开始轴到最后一个轴得到数据数量
+	inline int count(int start_axis) const {
+		return count(start_axis, num_axes());
 	}
 
 	//得到N C H W 如果合理范围但是越界 维度返回1
@@ -112,11 +118,11 @@ class Tensor {
 					 h * width() + w;
 	}
 
-//	通过4个下标来计算偏移量
+	//通过4个轴下标来计算偏移量
 	inline int offset(const vector<int>& indices) const {
-		CHECK_LE(indices.size(), num_dims());
+		CHECK_LE(indices.size(), num_axes());
 		int offset = 0;
-		for (int i = 0; i < num_dims(); ++i) {
+		for (int i = 0; i < num_axes(); ++i) {
 			offset *= shape(i);
 			if (indices.size() > i) {
 				CHECK_GE(indices[i], 0);

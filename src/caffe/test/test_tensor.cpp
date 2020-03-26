@@ -44,9 +44,9 @@ TYPED_TEST(TensorSimpleTest, TestInit) {
 	EXPECT_EQ(this->tensor_preshaped_->height(), 4);
 	EXPECT_EQ(this->tensor_preshaped_->width(), 5);
 	EXPECT_EQ(this->tensor_preshaped_->count(), 120);
-	EXPECT_EQ(this->tensor_preshaped_->num_dims(), 4);
+	EXPECT_EQ(this->tensor_preshaped_->num_axes(), 4);
 	EXPECT_EQ(this->tensor_->count(), 0);
-	EXPECT_EQ(this->tensor_->num_dims(), 0);
+	EXPECT_EQ(this->tensor_->num_axes(), 0);
 }
 
 TYPED_TEST(TensorSimpleTest, TestCPUGPUData) {
@@ -65,7 +65,7 @@ TYPED_TEST(TensorSimpleTest, TestReshape) {
 	EXPECT_EQ(this->tensor_->height(), 4);
 	EXPECT_EQ(this->tensor_->width(), 5);
 	EXPECT_EQ(this->tensor_->count(), 120);
-	EXPECT_EQ(this->tensor_->num_dims(), 4);
+	EXPECT_EQ(this->tensor_->num_axes(), 4);
 }
 
 TYPED_TEST(TensorSimpleTest, TestReshapeZero) {

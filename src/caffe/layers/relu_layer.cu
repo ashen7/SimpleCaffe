@@ -58,6 +58,6 @@ void ReLULayer<Dtype>::Backward_gpu(const vector<Tensor<Dtype>*>& top,
 }
 
 //注册float double类型
-INSTANTIATE_CLASS(ReLULayer);
+INSTANTIATE_LAYER_GPU_FUNCS(ReLULayer);
 
 }        //namespace caffe

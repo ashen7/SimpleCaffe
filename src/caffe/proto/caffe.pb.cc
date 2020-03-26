@@ -50,6 +50,16 @@ class ReLUParameterDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReLUParameter>
       _instance;
 } _ReLUParameter_default_instance_;
+class SigmoidParameterDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<SigmoidParameter>
+      _instance;
+} _SigmoidParameter_default_instance_;
+class FullyConnectedParameterDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<FullyConnectedParameter>
+      _instance;
+} _FullyConnectedParameter_default_instance_;
 class PoolingParameterDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<PoolingParameter>
@@ -153,6 +163,7 @@ void InitDefaultsLayerParameterImpl() {
 #endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   protobuf_caffe_2eproto::InitDefaultsTensorProto();
   protobuf_caffe_2eproto::InitDefaultsReLUParameter();
+  protobuf_caffe_2eproto::InitDefaultsFullyConnectedParameter();
   {
     void* ptr = &::caffe::_LayerParameter_default_instance_;
     new (ptr) ::caffe::LayerParameter();
@@ -187,6 +198,49 @@ void InitDefaultsReLUParameter() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsReLUParameterImpl);
 }
 
+void InitDefaultsSigmoidParameterImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  {
+    void* ptr = &::caffe::_SigmoidParameter_default_instance_;
+    new (ptr) ::caffe::SigmoidParameter();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::caffe::SigmoidParameter::InitAsDefaultInstance();
+}
+
+void InitDefaultsSigmoidParameter() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSigmoidParameterImpl);
+}
+
+void InitDefaultsFullyConnectedParameterImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  protobuf_caffe_2eproto::InitDefaultsFillerParameter();
+  {
+    void* ptr = &::caffe::_FullyConnectedParameter_default_instance_;
+    new (ptr) ::caffe::FullyConnectedParameter();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::caffe::FullyConnectedParameter::InitAsDefaultInstance();
+}
+
+void InitDefaultsFullyConnectedParameter() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFullyConnectedParameterImpl);
+}
+
 void InitDefaultsPoolingParameterImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -208,8 +262,8 @@ void InitDefaultsPoolingParameter() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPoolingParameterImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[7];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[5];
+::google::protobuf::Metadata file_level_metadata[9];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -263,8 +317,9 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, loss_weight_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, tensors_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, propagate_down_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, relu_param_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, phase_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, relu_param_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, fully_connected_param_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::ReLUParameter, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -272,6 +327,23 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::ReLUParameter, negative_slope_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::ReLUParameter, engine_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SigmoidParameter, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SigmoidParameter, engine_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, num_output_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, bias_term_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, weight_filler_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, bias_filler_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, axis_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FullyConnectedParameter, transpose_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::PoolingParameter, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -296,8 +368,10 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 20, -1, sizeof(::caffe::TensorProtoList)},
   { 26, -1, sizeof(::caffe::FillerParameter)},
   { 39, -1, sizeof(::caffe::LayerParameter)},
-  { 53, -1, sizeof(::caffe::ReLUParameter)},
-  { 60, -1, sizeof(::caffe::PoolingParameter)},
+  { 54, -1, sizeof(::caffe::ReLUParameter)},
+  { 61, -1, sizeof(::caffe::SigmoidParameter)},
+  { 67, -1, sizeof(::caffe::FullyConnectedParameter)},
+  { 78, -1, sizeof(::caffe::PoolingParameter)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -307,6 +381,8 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_FillerParameter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_LayerParameter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_ReLUParameter_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_SigmoidParameter_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_FullyConnectedParameter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_PoolingParameter_default_instance_),
 };
 
@@ -326,7 +402,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 7);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 9);
 }
 
 void AddDescriptorsImpl() {
@@ -345,29 +421,39 @@ void AddDescriptorsImpl() {
       "se\030\007 \001(\005\022:\n\rvariance_norm\030\010 \001(\0162#.caffe."
       "FillerParameter.VarianceNorm\"4\n\014Variance"
       "Norm\022\n\n\006FAN_IN\020\000\022\013\n\007FAN_OUT\020\001\022\013\n\007AVERAGE"
-      "\020\002\"\342\001\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004t"
+      "\020\002\"\241\002\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004t"
       "ype\030\002 \001(\t\022\016\n\006bottom\030\003 \001(\t\022\013\n\003top\030\004 \001(\t\022\023"
       "\n\013loss_weight\030\005 \003(\002\022#\n\007tensors\030\006 \003(\0132\022.c"
       "affe.TensorProto\022\026\n\016propagate_down\030\007 \003(\010"
-      "\022(\n\nrelu_param\030\016 \001(\0132\024.caffe.ReLUParamet"
-      "er\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase\"\201\001\n\rReLU"
-      "Parameter\022\026\n\016negative_slope\030\001 \001(\002\022+\n\006eng"
-      "ine\030\002 \001(\0162\033.caffe.ReLUParameter.Engine\"+"
+      "\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase\022(\n\nrelu_pa"
+      "ram\030\020 \001(\0132\024.caffe.ReLUParameter\022=\n\025fully"
+      "_connected_param\030\021 \001(\0132\036.caffe.FullyConn"
+      "ectedParameter\"\201\001\n\rReLUParameter\022\026\n\016nega"
+      "tive_slope\030\001 \001(\002\022+\n\006engine\030\002 \001(\0162\033.caffe"
+      ".ReLUParameter.Engine\"+\n\006Engine\022\013\n\007DEFAU"
+      "LT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"o\n\020SigmoidPar"
+      "ameter\022.\n\006engine\030\001 \001(\0162\036.caffe.SigmoidPa"
+      "rameter.Engine\"+\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n"
+      "\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"\275\001\n\027FullyConnectedPa"
+      "rameter\022\022\n\nnum_output\030\001 \001(\r\022\021\n\tbias_term"
+      "\030\002 \001(\010\022-\n\rweight_filler\030\003 \001(\0132\026.caffe.Fi"
+      "llerParameter\022+\n\013bias_filler\030\004 \001(\0132\026.caf"
+      "fe.FillerParameter\022\014\n\004axis\030\005 \001(\005\022\021\n\ttran"
+      "spose\030\006 \001(\010\"\205\003\n\020PoolingParameter\0220\n\004pool"
+      "\030\001 \001(\0162\".caffe.PoolingParameter.PoolMeth"
+      "od\022\023\n\013kernel_size\030\002 \001(\r\022\020\n\010kernel_h\030\005 \001("
+      "\r\022\020\n\010kernel_w\030\006 \001(\r\022\016\n\006stride\030\003 \001(\r\022\020\n\010s"
+      "tride_h\030\007 \001(\r\022\020\n\010stride_w\030\010 \001(\r\022\013\n\003pad\030\004"
+      " \001(\r\022\r\n\005pad_h\030\t \001(\r\022\r\n\005pad_w\030\n \001(\r\022.\n\006en"
+      "gine\030\013 \001(\0162\036.caffe.PoolingParameter.Engi"
+      "ne\022\026\n\016global_pooling\030\014 \001(\010\"2\n\nPoolMethod"
+      "\022\007\n\003MAX\020\000\022\013\n\007AVERAGE\020\001\022\016\n\nSTOCHASTIC\020\002\"+"
       "\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDN"
-      "N\020\002\"\205\003\n\020PoolingParameter\0220\n\004pool\030\001 \001(\0162\""
-      ".caffe.PoolingParameter.PoolMethod\022\023\n\013ke"
-      "rnel_size\030\002 \001(\r\022\020\n\010kernel_h\030\005 \001(\r\022\020\n\010ker"
-      "nel_w\030\006 \001(\r\022\016\n\006stride\030\003 \001(\r\022\020\n\010stride_h\030"
-      "\007 \001(\r\022\020\n\010stride_w\030\010 \001(\r\022\013\n\003pad\030\004 \001(\r\022\r\n\005"
-      "pad_h\030\t \001(\r\022\r\n\005pad_w\030\n \001(\r\022.\n\006engine\030\013 \001"
-      "(\0162\036.caffe.PoolingParameter.Engine\022\026\n\016gl"
-      "obal_pooling\030\014 \001(\010\"2\n\nPoolMethod\022\007\n\003MAX\020"
-      "\000\022\013\n\007AVERAGE\020\001\022\016\n\nSTOCHASTIC\020\002\"+\n\006Engine"
-      "\022\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002*\034\n\005P"
-      "hase\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020\001b\006proto3"
+      "N\020\002*\034\n\005Phase\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020\001b\006proto"
+      "3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1313);
+      descriptor, 1681);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "caffe.proto", &protobuf_RegisterTypes);
 }
@@ -430,9 +516,32 @@ const ReLUParameter_Engine ReLUParameter::Engine_MIN;
 const ReLUParameter_Engine ReLUParameter::Engine_MAX;
 const int ReLUParameter::Engine_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* PoolingParameter_PoolMethod_descriptor() {
+const ::google::protobuf::EnumDescriptor* SigmoidParameter_Engine_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_caffe_2eproto::file_level_enum_descriptors[2];
+}
+bool SigmoidParameter_Engine_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const SigmoidParameter_Engine SigmoidParameter::DEFAULT;
+const SigmoidParameter_Engine SigmoidParameter::CAFFE;
+const SigmoidParameter_Engine SigmoidParameter::CUDNN;
+const SigmoidParameter_Engine SigmoidParameter::Engine_MIN;
+const SigmoidParameter_Engine SigmoidParameter::Engine_MAX;
+const int SigmoidParameter::Engine_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* PoolingParameter_PoolMethod_descriptor() {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[3];
 }
 bool PoolingParameter_PoolMethod_IsValid(int value) {
   switch (value) {
@@ -455,7 +564,7 @@ const int PoolingParameter::PoolMethod_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* PoolingParameter_Engine_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_caffe_2eproto::file_level_enum_descriptors[3];
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[4];
 }
 bool PoolingParameter_Engine_IsValid(int value) {
   switch (value) {
@@ -478,7 +587,7 @@ const int PoolingParameter::Engine_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* Phase_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_caffe_2eproto::file_level_enum_descriptors[4];
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[5];
 }
 bool Phase_IsValid(int value) {
   switch (value) {
@@ -2158,6 +2267,8 @@ void FillerParameter::InternalSwap(FillerParameter* other) {
 void LayerParameter::InitAsDefaultInstance() {
   ::caffe::_LayerParameter_default_instance_._instance.get_mutable()->relu_param_ = const_cast< ::caffe::ReLUParameter*>(
       ::caffe::ReLUParameter::internal_default_instance());
+  ::caffe::_LayerParameter_default_instance_._instance.get_mutable()->fully_connected_param_ = const_cast< ::caffe::FullyConnectedParameter*>(
+      ::caffe::FullyConnectedParameter::internal_default_instance());
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int LayerParameter::kNameFieldNumber;
@@ -2167,8 +2278,9 @@ const int LayerParameter::kTopFieldNumber;
 const int LayerParameter::kLossWeightFieldNumber;
 const int LayerParameter::kTensorsFieldNumber;
 const int LayerParameter::kPropagateDownFieldNumber;
-const int LayerParameter::kReluParamFieldNumber;
 const int LayerParameter::kPhaseFieldNumber;
+const int LayerParameter::kReluParamFieldNumber;
+const int LayerParameter::kFullyConnectedParamFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LayerParameter::LayerParameter()
@@ -2208,6 +2320,11 @@ LayerParameter::LayerParameter(const LayerParameter& from)
   } else {
     relu_param_ = NULL;
   }
+  if (from.has_fully_connected_param()) {
+    fully_connected_param_ = new ::caffe::FullyConnectedParameter(*from.fully_connected_param_);
+  } else {
+    fully_connected_param_ = NULL;
+  }
   phase_ = from.phase_;
   // @@protoc_insertion_point(copy_constructor:caffe.LayerParameter)
 }
@@ -2234,6 +2351,7 @@ void LayerParameter::SharedDtor() {
   bottom_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   top_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete relu_param_;
+  if (this != internal_default_instance()) delete fully_connected_param_;
 }
 
 void LayerParameter::SetCachedSize(int size) const {
@@ -2276,6 +2394,10 @@ void LayerParameter::Clear() {
     delete relu_param_;
   }
   relu_param_ = NULL;
+  if (GetArenaNoVirtual() == NULL && fully_connected_param_ != NULL) {
+    delete fully_connected_param_;
+  }
+  fully_connected_param_ = NULL;
   phase_ = 0;
   _internal_metadata_.Clear();
 }
@@ -2286,7 +2408,7 @@ bool LayerParameter::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:caffe.LayerParameter)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -2418,12 +2540,24 @@ bool LayerParameter::MergePartialFromCodedStream(
         break;
       }
 
-      // .caffe.ReLUParameter relu_param = 14;
-      case 14: {
+      // .caffe.ReLUParameter relu_param = 16;
+      case 16: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(114u /* 114 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(130u /* 130 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_relu_param()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.FullyConnectedParameter fully_connected_param = 17;
+      case 17: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(138u /* 138 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_fully_connected_param()));
         } else {
           goto handle_unusual;
         }
@@ -2527,10 +2661,16 @@ void LayerParameter::SerializeWithCachedSizes(
       10, this->phase(), output);
   }
 
-  // .caffe.ReLUParameter relu_param = 14;
+  // .caffe.ReLUParameter relu_param = 16;
   if (this->has_relu_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, *this->relu_param_, output);
+      16, *this->relu_param_, output);
+  }
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  if (this->has_fully_connected_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      17, *this->fully_connected_param_, output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -2631,11 +2771,18 @@ void LayerParameter::SerializeWithCachedSizes(
       10, this->phase(), target);
   }
 
-  // .caffe.ReLUParameter relu_param = 14;
+  // .caffe.ReLUParameter relu_param = 16;
   if (this->has_relu_param()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        14, *this->relu_param_, deterministic, target);
+        16, *this->relu_param_, deterministic, target);
+  }
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  if (this->has_fully_connected_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        17, *this->fully_connected_param_, deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -2726,11 +2873,18 @@ size_t LayerParameter::ByteSizeLong() const {
         this->top());
   }
 
-  // .caffe.ReLUParameter relu_param = 14;
+  // .caffe.ReLUParameter relu_param = 16;
   if (this->has_relu_param()) {
-    total_size += 1 +
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *this->relu_param_);
+  }
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  if (this->has_fully_connected_param()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->fully_connected_param_);
   }
 
   // .caffe.Phase phase = 10;
@@ -2790,6 +2944,9 @@ void LayerParameter::MergeFrom(const LayerParameter& from) {
   if (from.has_relu_param()) {
     mutable_relu_param()->::caffe::ReLUParameter::MergeFrom(from.relu_param());
   }
+  if (from.has_fully_connected_param()) {
+    mutable_fully_connected_param()->::caffe::FullyConnectedParameter::MergeFrom(from.fully_connected_param());
+  }
   if (from.phase() != 0) {
     set_phase(from.phase());
   }
@@ -2827,6 +2984,7 @@ void LayerParameter::InternalSwap(LayerParameter* other) {
   bottom_.Swap(&other->bottom_);
   top_.Swap(&other->top_);
   swap(relu_param_, other->relu_param_);
+  swap(fully_connected_param_, other->fully_connected_param_);
   swap(phase_, other->phase_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -3113,6 +3271,692 @@ void ReLUParameter::InternalSwap(ReLUParameter* other) {
 }
 
 ::google::protobuf::Metadata ReLUParameter::GetMetadata() const {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void SigmoidParameter::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SigmoidParameter::kEngineFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+SigmoidParameter::SigmoidParameter()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_caffe_2eproto::InitDefaultsSigmoidParameter();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SigmoidParameter)
+}
+SigmoidParameter::SigmoidParameter(const SigmoidParameter& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  engine_ = from.engine_;
+  // @@protoc_insertion_point(copy_constructor:caffe.SigmoidParameter)
+}
+
+void SigmoidParameter::SharedCtor() {
+  engine_ = 0;
+  _cached_size_ = 0;
+}
+
+SigmoidParameter::~SigmoidParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SigmoidParameter)
+  SharedDtor();
+}
+
+void SigmoidParameter::SharedDtor() {
+}
+
+void SigmoidParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SigmoidParameter::descriptor() {
+  ::protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const SigmoidParameter& SigmoidParameter::default_instance() {
+  ::protobuf_caffe_2eproto::InitDefaultsSigmoidParameter();
+  return *internal_default_instance();
+}
+
+SigmoidParameter* SigmoidParameter::New(::google::protobuf::Arena* arena) const {
+  SigmoidParameter* n = new SigmoidParameter;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void SigmoidParameter::Clear() {
+// @@protoc_insertion_point(message_clear_start:caffe.SigmoidParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  engine_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool SigmoidParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SigmoidParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .caffe.SigmoidParameter.Engine engine = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_engine(static_cast< ::caffe::SigmoidParameter_Engine >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SigmoidParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SigmoidParameter)
+  return false;
+#undef DO_
+}
+
+void SigmoidParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SigmoidParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .caffe.SigmoidParameter.Engine engine = 1;
+  if (this->engine() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->engine(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SigmoidParameter)
+}
+
+::google::protobuf::uint8* SigmoidParameter::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SigmoidParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .caffe.SigmoidParameter.Engine engine = 1;
+  if (this->engine() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->engine(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SigmoidParameter)
+  return target;
+}
+
+size_t SigmoidParameter::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:caffe.SigmoidParameter)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .caffe.SigmoidParameter.Engine engine = 1;
+  if (this->engine() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->engine());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SigmoidParameter::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:caffe.SigmoidParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  const SigmoidParameter* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const SigmoidParameter>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:caffe.SigmoidParameter)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:caffe.SigmoidParameter)
+    MergeFrom(*source);
+  }
+}
+
+void SigmoidParameter::MergeFrom(const SigmoidParameter& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:caffe.SigmoidParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.engine() != 0) {
+    set_engine(from.engine());
+  }
+}
+
+void SigmoidParameter::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:caffe.SigmoidParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SigmoidParameter::CopyFrom(const SigmoidParameter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:caffe.SigmoidParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SigmoidParameter::IsInitialized() const {
+  return true;
+}
+
+void SigmoidParameter::Swap(SigmoidParameter* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void SigmoidParameter::InternalSwap(SigmoidParameter* other) {
+  using std::swap;
+  swap(engine_, other->engine_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata SigmoidParameter::GetMetadata() const {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void FullyConnectedParameter::InitAsDefaultInstance() {
+  ::caffe::_FullyConnectedParameter_default_instance_._instance.get_mutable()->weight_filler_ = const_cast< ::caffe::FillerParameter*>(
+      ::caffe::FillerParameter::internal_default_instance());
+  ::caffe::_FullyConnectedParameter_default_instance_._instance.get_mutable()->bias_filler_ = const_cast< ::caffe::FillerParameter*>(
+      ::caffe::FillerParameter::internal_default_instance());
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int FullyConnectedParameter::kNumOutputFieldNumber;
+const int FullyConnectedParameter::kBiasTermFieldNumber;
+const int FullyConnectedParameter::kWeightFillerFieldNumber;
+const int FullyConnectedParameter::kBiasFillerFieldNumber;
+const int FullyConnectedParameter::kAxisFieldNumber;
+const int FullyConnectedParameter::kTransposeFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+FullyConnectedParameter::FullyConnectedParameter()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_caffe_2eproto::InitDefaultsFullyConnectedParameter();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.FullyConnectedParameter)
+}
+FullyConnectedParameter::FullyConnectedParameter(const FullyConnectedParameter& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_weight_filler()) {
+    weight_filler_ = new ::caffe::FillerParameter(*from.weight_filler_);
+  } else {
+    weight_filler_ = NULL;
+  }
+  if (from.has_bias_filler()) {
+    bias_filler_ = new ::caffe::FillerParameter(*from.bias_filler_);
+  } else {
+    bias_filler_ = NULL;
+  }
+  ::memcpy(&num_output_, &from.num_output_,
+    static_cast<size_t>(reinterpret_cast<char*>(&axis_) -
+    reinterpret_cast<char*>(&num_output_)) + sizeof(axis_));
+  // @@protoc_insertion_point(copy_constructor:caffe.FullyConnectedParameter)
+}
+
+void FullyConnectedParameter::SharedCtor() {
+  ::memset(&weight_filler_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&axis_) -
+      reinterpret_cast<char*>(&weight_filler_)) + sizeof(axis_));
+  _cached_size_ = 0;
+}
+
+FullyConnectedParameter::~FullyConnectedParameter() {
+  // @@protoc_insertion_point(destructor:caffe.FullyConnectedParameter)
+  SharedDtor();
+}
+
+void FullyConnectedParameter::SharedDtor() {
+  if (this != internal_default_instance()) delete weight_filler_;
+  if (this != internal_default_instance()) delete bias_filler_;
+}
+
+void FullyConnectedParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* FullyConnectedParameter::descriptor() {
+  ::protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const FullyConnectedParameter& FullyConnectedParameter::default_instance() {
+  ::protobuf_caffe_2eproto::InitDefaultsFullyConnectedParameter();
+  return *internal_default_instance();
+}
+
+FullyConnectedParameter* FullyConnectedParameter::New(::google::protobuf::Arena* arena) const {
+  FullyConnectedParameter* n = new FullyConnectedParameter;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void FullyConnectedParameter::Clear() {
+// @@protoc_insertion_point(message_clear_start:caffe.FullyConnectedParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && weight_filler_ != NULL) {
+    delete weight_filler_;
+  }
+  weight_filler_ = NULL;
+  if (GetArenaNoVirtual() == NULL && bias_filler_ != NULL) {
+    delete bias_filler_;
+  }
+  bias_filler_ = NULL;
+  ::memset(&num_output_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&axis_) -
+      reinterpret_cast<char*>(&num_output_)) + sizeof(axis_));
+  _internal_metadata_.Clear();
+}
+
+bool FullyConnectedParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.FullyConnectedParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint32 num_output = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &num_output_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool bias_term = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &bias_term_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.FillerParameter weight_filler = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_weight_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.FillerParameter bias_filler = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_bias_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 axis = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &axis_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool transpose = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &transpose_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.FullyConnectedParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.FullyConnectedParameter)
+  return false;
+#undef DO_
+}
+
+void FullyConnectedParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.FullyConnectedParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 num_output = 1;
+  if (this->num_output() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->num_output(), output);
+  }
+
+  // bool bias_term = 2;
+  if (this->bias_term() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->bias_term(), output);
+  }
+
+  // .caffe.FillerParameter weight_filler = 3;
+  if (this->has_weight_filler()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, *this->weight_filler_, output);
+  }
+
+  // .caffe.FillerParameter bias_filler = 4;
+  if (this->has_bias_filler()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, *this->bias_filler_, output);
+  }
+
+  // int32 axis = 5;
+  if (this->axis() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->axis(), output);
+  }
+
+  // bool transpose = 6;
+  if (this->transpose() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->transpose(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.FullyConnectedParameter)
+}
+
+::google::protobuf::uint8* FullyConnectedParameter::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.FullyConnectedParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 num_output = 1;
+  if (this->num_output() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->num_output(), target);
+  }
+
+  // bool bias_term = 2;
+  if (this->bias_term() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->bias_term(), target);
+  }
+
+  // .caffe.FillerParameter weight_filler = 3;
+  if (this->has_weight_filler()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, *this->weight_filler_, deterministic, target);
+  }
+
+  // .caffe.FillerParameter bias_filler = 4;
+  if (this->has_bias_filler()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, *this->bias_filler_, deterministic, target);
+  }
+
+  // int32 axis = 5;
+  if (this->axis() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->axis(), target);
+  }
+
+  // bool transpose = 6;
+  if (this->transpose() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->transpose(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.FullyConnectedParameter)
+  return target;
+}
+
+size_t FullyConnectedParameter::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:caffe.FullyConnectedParameter)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .caffe.FillerParameter weight_filler = 3;
+  if (this->has_weight_filler()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->weight_filler_);
+  }
+
+  // .caffe.FillerParameter bias_filler = 4;
+  if (this->has_bias_filler()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->bias_filler_);
+  }
+
+  // uint32 num_output = 1;
+  if (this->num_output() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->num_output());
+  }
+
+  // bool bias_term = 2;
+  if (this->bias_term() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool transpose = 6;
+  if (this->transpose() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // int32 axis = 5;
+  if (this->axis() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->axis());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void FullyConnectedParameter::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:caffe.FullyConnectedParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FullyConnectedParameter* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const FullyConnectedParameter>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:caffe.FullyConnectedParameter)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:caffe.FullyConnectedParameter)
+    MergeFrom(*source);
+  }
+}
+
+void FullyConnectedParameter::MergeFrom(const FullyConnectedParameter& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:caffe.FullyConnectedParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_weight_filler()) {
+    mutable_weight_filler()->::caffe::FillerParameter::MergeFrom(from.weight_filler());
+  }
+  if (from.has_bias_filler()) {
+    mutable_bias_filler()->::caffe::FillerParameter::MergeFrom(from.bias_filler());
+  }
+  if (from.num_output() != 0) {
+    set_num_output(from.num_output());
+  }
+  if (from.bias_term() != 0) {
+    set_bias_term(from.bias_term());
+  }
+  if (from.transpose() != 0) {
+    set_transpose(from.transpose());
+  }
+  if (from.axis() != 0) {
+    set_axis(from.axis());
+  }
+}
+
+void FullyConnectedParameter::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:caffe.FullyConnectedParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FullyConnectedParameter::CopyFrom(const FullyConnectedParameter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:caffe.FullyConnectedParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FullyConnectedParameter::IsInitialized() const {
+  return true;
+}
+
+void FullyConnectedParameter::Swap(FullyConnectedParameter* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void FullyConnectedParameter::InternalSwap(FullyConnectedParameter* other) {
+  using std::swap;
+  swap(weight_filler_, other->weight_filler_);
+  swap(bias_filler_, other->bias_filler_);
+  swap(num_output_, other->num_output_);
+  swap(bias_term_, other->bias_term_);
+  swap(transpose_, other->transpose_);
+  swap(axis_, other->axis_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata FullyConnectedParameter::GetMetadata() const {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
 }

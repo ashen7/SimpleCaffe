@@ -37,7 +37,7 @@ namespace protobuf_caffe_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[7];
+  static const ::google::protobuf::internal::ParseTable schema[9];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -55,6 +55,10 @@ void InitDefaultsLayerParameterImpl();
 void InitDefaultsLayerParameter();
 void InitDefaultsReLUParameterImpl();
 void InitDefaultsReLUParameter();
+void InitDefaultsSigmoidParameterImpl();
+void InitDefaultsSigmoidParameter();
+void InitDefaultsFullyConnectedParameterImpl();
+void InitDefaultsFullyConnectedParameter();
 void InitDefaultsPoolingParameterImpl();
 void InitDefaultsPoolingParameter();
 inline void InitDefaults() {
@@ -64,6 +68,8 @@ inline void InitDefaults() {
   InitDefaultsFillerParameter();
   InitDefaultsLayerParameter();
   InitDefaultsReLUParameter();
+  InitDefaultsSigmoidParameter();
+  InitDefaultsFullyConnectedParameter();
   InitDefaultsPoolingParameter();
 }
 }  // namespace protobuf_caffe_2eproto
@@ -71,6 +77,9 @@ namespace caffe {
 class FillerParameter;
 class FillerParameterDefaultTypeInternal;
 extern FillerParameterDefaultTypeInternal _FillerParameter_default_instance_;
+class FullyConnectedParameter;
+class FullyConnectedParameterDefaultTypeInternal;
+extern FullyConnectedParameterDefaultTypeInternal _FullyConnectedParameter_default_instance_;
 class LayerParameter;
 class LayerParameterDefaultTypeInternal;
 extern LayerParameterDefaultTypeInternal _LayerParameter_default_instance_;
@@ -80,6 +89,9 @@ extern PoolingParameterDefaultTypeInternal _PoolingParameter_default_instance_;
 class ReLUParameter;
 class ReLUParameterDefaultTypeInternal;
 extern ReLUParameterDefaultTypeInternal _ReLUParameter_default_instance_;
+class SigmoidParameter;
+class SigmoidParameterDefaultTypeInternal;
+extern SigmoidParameterDefaultTypeInternal _SigmoidParameter_default_instance_;
 class TensorProto;
 class TensorProtoDefaultTypeInternal;
 extern TensorProtoDefaultTypeInternal _TensorProto_default_instance_;
@@ -135,6 +147,28 @@ inline bool ReLUParameter_Engine_Parse(
     const ::std::string& name, ReLUParameter_Engine* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReLUParameter_Engine>(
     ReLUParameter_Engine_descriptor(), name, value);
+}
+enum SigmoidParameter_Engine {
+  SigmoidParameter_Engine_DEFAULT = 0,
+  SigmoidParameter_Engine_CAFFE = 1,
+  SigmoidParameter_Engine_CUDNN = 2,
+  SigmoidParameter_Engine_SigmoidParameter_Engine_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  SigmoidParameter_Engine_SigmoidParameter_Engine_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool SigmoidParameter_Engine_IsValid(int value);
+const SigmoidParameter_Engine SigmoidParameter_Engine_Engine_MIN = SigmoidParameter_Engine_DEFAULT;
+const SigmoidParameter_Engine SigmoidParameter_Engine_Engine_MAX = SigmoidParameter_Engine_CUDNN;
+const int SigmoidParameter_Engine_Engine_ARRAYSIZE = SigmoidParameter_Engine_Engine_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SigmoidParameter_Engine_descriptor();
+inline const ::std::string& SigmoidParameter_Engine_Name(SigmoidParameter_Engine value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SigmoidParameter_Engine_descriptor(), value);
+}
+inline bool SigmoidParameter_Engine_Parse(
+    const ::std::string& name, SigmoidParameter_Engine* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SigmoidParameter_Engine>(
+    SigmoidParameter_Engine_descriptor(), name, value);
 }
 enum PoolingParameter_PoolMethod {
   PoolingParameter_PoolMethod_MAX = 0,
@@ -958,14 +992,23 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_top();
   void set_allocated_top(::std::string* top);
 
-  // .caffe.ReLUParameter relu_param = 14;
+  // .caffe.ReLUParameter relu_param = 16;
   bool has_relu_param() const;
   void clear_relu_param();
-  static const int kReluParamFieldNumber = 14;
+  static const int kReluParamFieldNumber = 16;
   const ::caffe::ReLUParameter& relu_param() const;
   ::caffe::ReLUParameter* release_relu_param();
   ::caffe::ReLUParameter* mutable_relu_param();
   void set_allocated_relu_param(::caffe::ReLUParameter* relu_param);
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  bool has_fully_connected_param() const;
+  void clear_fully_connected_param();
+  static const int kFullyConnectedParamFieldNumber = 17;
+  const ::caffe::FullyConnectedParameter& fully_connected_param() const;
+  ::caffe::FullyConnectedParameter* release_fully_connected_param();
+  ::caffe::FullyConnectedParameter* mutable_fully_connected_param();
+  void set_allocated_fully_connected_param(::caffe::FullyConnectedParameter* fully_connected_param);
 
   // .caffe.Phase phase = 10;
   void clear_phase();
@@ -987,6 +1030,7 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr bottom_;
   ::google::protobuf::internal::ArenaStringPtr top_;
   ::caffe::ReLUParameter* relu_param_;
+  ::caffe::FullyConnectedParameter* fully_connected_param_;
   int phase_;
   mutable int _cached_size_;
   friend struct ::protobuf_caffe_2eproto::TableStruct;
@@ -1128,6 +1172,273 @@ class ReLUParameter : public ::google::protobuf::Message /* @@protoc_insertion_p
 };
 // -------------------------------------------------------------------
 
+class SigmoidParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.SigmoidParameter) */ {
+ public:
+  SigmoidParameter();
+  virtual ~SigmoidParameter();
+
+  SigmoidParameter(const SigmoidParameter& from);
+
+  inline SigmoidParameter& operator=(const SigmoidParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SigmoidParameter(SigmoidParameter&& from) noexcept
+    : SigmoidParameter() {
+    *this = ::std::move(from);
+  }
+
+  inline SigmoidParameter& operator=(SigmoidParameter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SigmoidParameter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SigmoidParameter* internal_default_instance() {
+    return reinterpret_cast<const SigmoidParameter*>(
+               &_SigmoidParameter_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    6;
+
+  void Swap(SigmoidParameter* other);
+  friend void swap(SigmoidParameter& a, SigmoidParameter& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SigmoidParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SigmoidParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SigmoidParameter& from);
+  void MergeFrom(const SigmoidParameter& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SigmoidParameter* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  typedef SigmoidParameter_Engine Engine;
+  static const Engine DEFAULT =
+    SigmoidParameter_Engine_DEFAULT;
+  static const Engine CAFFE =
+    SigmoidParameter_Engine_CAFFE;
+  static const Engine CUDNN =
+    SigmoidParameter_Engine_CUDNN;
+  static inline bool Engine_IsValid(int value) {
+    return SigmoidParameter_Engine_IsValid(value);
+  }
+  static const Engine Engine_MIN =
+    SigmoidParameter_Engine_Engine_MIN;
+  static const Engine Engine_MAX =
+    SigmoidParameter_Engine_Engine_MAX;
+  static const int Engine_ARRAYSIZE =
+    SigmoidParameter_Engine_Engine_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Engine_descriptor() {
+    return SigmoidParameter_Engine_descriptor();
+  }
+  static inline const ::std::string& Engine_Name(Engine value) {
+    return SigmoidParameter_Engine_Name(value);
+  }
+  static inline bool Engine_Parse(const ::std::string& name,
+      Engine* value) {
+    return SigmoidParameter_Engine_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // .caffe.SigmoidParameter.Engine engine = 1;
+  void clear_engine();
+  static const int kEngineFieldNumber = 1;
+  ::caffe::SigmoidParameter_Engine engine() const;
+  void set_engine(::caffe::SigmoidParameter_Engine value);
+
+  // @@protoc_insertion_point(class_scope:caffe.SigmoidParameter)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  int engine_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsSigmoidParameterImpl();
+};
+// -------------------------------------------------------------------
+
+class FullyConnectedParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.FullyConnectedParameter) */ {
+ public:
+  FullyConnectedParameter();
+  virtual ~FullyConnectedParameter();
+
+  FullyConnectedParameter(const FullyConnectedParameter& from);
+
+  inline FullyConnectedParameter& operator=(const FullyConnectedParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  FullyConnectedParameter(FullyConnectedParameter&& from) noexcept
+    : FullyConnectedParameter() {
+    *this = ::std::move(from);
+  }
+
+  inline FullyConnectedParameter& operator=(FullyConnectedParameter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FullyConnectedParameter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const FullyConnectedParameter* internal_default_instance() {
+    return reinterpret_cast<const FullyConnectedParameter*>(
+               &_FullyConnectedParameter_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    7;
+
+  void Swap(FullyConnectedParameter* other);
+  friend void swap(FullyConnectedParameter& a, FullyConnectedParameter& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FullyConnectedParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  FullyConnectedParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const FullyConnectedParameter& from);
+  void MergeFrom(const FullyConnectedParameter& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(FullyConnectedParameter* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .caffe.FillerParameter weight_filler = 3;
+  bool has_weight_filler() const;
+  void clear_weight_filler();
+  static const int kWeightFillerFieldNumber = 3;
+  const ::caffe::FillerParameter& weight_filler() const;
+  ::caffe::FillerParameter* release_weight_filler();
+  ::caffe::FillerParameter* mutable_weight_filler();
+  void set_allocated_weight_filler(::caffe::FillerParameter* weight_filler);
+
+  // .caffe.FillerParameter bias_filler = 4;
+  bool has_bias_filler() const;
+  void clear_bias_filler();
+  static const int kBiasFillerFieldNumber = 4;
+  const ::caffe::FillerParameter& bias_filler() const;
+  ::caffe::FillerParameter* release_bias_filler();
+  ::caffe::FillerParameter* mutable_bias_filler();
+  void set_allocated_bias_filler(::caffe::FillerParameter* bias_filler);
+
+  // uint32 num_output = 1;
+  void clear_num_output();
+  static const int kNumOutputFieldNumber = 1;
+  ::google::protobuf::uint32 num_output() const;
+  void set_num_output(::google::protobuf::uint32 value);
+
+  // bool bias_term = 2;
+  void clear_bias_term();
+  static const int kBiasTermFieldNumber = 2;
+  bool bias_term() const;
+  void set_bias_term(bool value);
+
+  // bool transpose = 6;
+  void clear_transpose();
+  static const int kTransposeFieldNumber = 6;
+  bool transpose() const;
+  void set_transpose(bool value);
+
+  // int32 axis = 5;
+  void clear_axis();
+  static const int kAxisFieldNumber = 5;
+  ::google::protobuf::int32 axis() const;
+  void set_axis(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:caffe.FullyConnectedParameter)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::caffe::FillerParameter* weight_filler_;
+  ::caffe::FillerParameter* bias_filler_;
+  ::google::protobuf::uint32 num_output_;
+  bool bias_term_;
+  bool transpose_;
+  ::google::protobuf::int32 axis_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsFullyConnectedParameterImpl();
+};
+// -------------------------------------------------------------------
+
 class PoolingParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.PoolingParameter) */ {
  public:
   PoolingParameter();
@@ -1163,7 +1474,7 @@ class PoolingParameter : public ::google::protobuf::Message /* @@protoc_insertio
                &_PoolingParameter_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+    8;
 
   void Swap(PoolingParameter* other);
   friend void swap(PoolingParameter& a, PoolingParameter& b) {
@@ -2124,7 +2435,21 @@ LayerParameter::mutable_propagate_down() {
   return &propagate_down_;
 }
 
-// .caffe.ReLUParameter relu_param = 14;
+// .caffe.Phase phase = 10;
+inline void LayerParameter::clear_phase() {
+  phase_ = 0;
+}
+inline ::caffe::Phase LayerParameter::phase() const {
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.phase)
+  return static_cast< ::caffe::Phase >(phase_);
+}
+inline void LayerParameter::set_phase(::caffe::Phase value) {
+  
+  phase_ = value;
+  // @@protoc_insertion_point(field_set:caffe.LayerParameter.phase)
+}
+
+// .caffe.ReLUParameter relu_param = 16;
 inline bool LayerParameter::has_relu_param() const {
   return this != internal_default_instance() && relu_param_ != NULL;
 }
@@ -2174,18 +2499,54 @@ inline void LayerParameter::set_allocated_relu_param(::caffe::ReLUParameter* rel
   // @@protoc_insertion_point(field_set_allocated:caffe.LayerParameter.relu_param)
 }
 
-// .caffe.Phase phase = 10;
-inline void LayerParameter::clear_phase() {
-  phase_ = 0;
+// .caffe.FullyConnectedParameter fully_connected_param = 17;
+inline bool LayerParameter::has_fully_connected_param() const {
+  return this != internal_default_instance() && fully_connected_param_ != NULL;
 }
-inline ::caffe::Phase LayerParameter::phase() const {
-  // @@protoc_insertion_point(field_get:caffe.LayerParameter.phase)
-  return static_cast< ::caffe::Phase >(phase_);
+inline void LayerParameter::clear_fully_connected_param() {
+  if (GetArenaNoVirtual() == NULL && fully_connected_param_ != NULL) {
+    delete fully_connected_param_;
+  }
+  fully_connected_param_ = NULL;
 }
-inline void LayerParameter::set_phase(::caffe::Phase value) {
+inline const ::caffe::FullyConnectedParameter& LayerParameter::fully_connected_param() const {
+  const ::caffe::FullyConnectedParameter* p = fully_connected_param_;
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.fully_connected_param)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::FullyConnectedParameter*>(
+      &::caffe::_FullyConnectedParameter_default_instance_);
+}
+inline ::caffe::FullyConnectedParameter* LayerParameter::release_fully_connected_param() {
+  // @@protoc_insertion_point(field_release:caffe.LayerParameter.fully_connected_param)
   
-  phase_ = value;
-  // @@protoc_insertion_point(field_set:caffe.LayerParameter.phase)
+  ::caffe::FullyConnectedParameter* temp = fully_connected_param_;
+  fully_connected_param_ = NULL;
+  return temp;
+}
+inline ::caffe::FullyConnectedParameter* LayerParameter::mutable_fully_connected_param() {
+  
+  if (fully_connected_param_ == NULL) {
+    fully_connected_param_ = new ::caffe::FullyConnectedParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.fully_connected_param)
+  return fully_connected_param_;
+}
+inline void LayerParameter::set_allocated_fully_connected_param(::caffe::FullyConnectedParameter* fully_connected_param) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete fully_connected_param_;
+  }
+  if (fully_connected_param) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      fully_connected_param = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, fully_connected_param, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  fully_connected_param_ = fully_connected_param;
+  // @@protoc_insertion_point(field_set_allocated:caffe.LayerParameter.fully_connected_param)
 }
 
 // -------------------------------------------------------------------
@@ -2218,6 +2579,184 @@ inline void ReLUParameter::set_engine(::caffe::ReLUParameter_Engine value) {
   
   engine_ = value;
   // @@protoc_insertion_point(field_set:caffe.ReLUParameter.engine)
+}
+
+// -------------------------------------------------------------------
+
+// SigmoidParameter
+
+// .caffe.SigmoidParameter.Engine engine = 1;
+inline void SigmoidParameter::clear_engine() {
+  engine_ = 0;
+}
+inline ::caffe::SigmoidParameter_Engine SigmoidParameter::engine() const {
+  // @@protoc_insertion_point(field_get:caffe.SigmoidParameter.engine)
+  return static_cast< ::caffe::SigmoidParameter_Engine >(engine_);
+}
+inline void SigmoidParameter::set_engine(::caffe::SigmoidParameter_Engine value) {
+  
+  engine_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SigmoidParameter.engine)
+}
+
+// -------------------------------------------------------------------
+
+// FullyConnectedParameter
+
+// uint32 num_output = 1;
+inline void FullyConnectedParameter::clear_num_output() {
+  num_output_ = 0u;
+}
+inline ::google::protobuf::uint32 FullyConnectedParameter::num_output() const {
+  // @@protoc_insertion_point(field_get:caffe.FullyConnectedParameter.num_output)
+  return num_output_;
+}
+inline void FullyConnectedParameter::set_num_output(::google::protobuf::uint32 value) {
+  
+  num_output_ = value;
+  // @@protoc_insertion_point(field_set:caffe.FullyConnectedParameter.num_output)
+}
+
+// bool bias_term = 2;
+inline void FullyConnectedParameter::clear_bias_term() {
+  bias_term_ = false;
+}
+inline bool FullyConnectedParameter::bias_term() const {
+  // @@protoc_insertion_point(field_get:caffe.FullyConnectedParameter.bias_term)
+  return bias_term_;
+}
+inline void FullyConnectedParameter::set_bias_term(bool value) {
+  
+  bias_term_ = value;
+  // @@protoc_insertion_point(field_set:caffe.FullyConnectedParameter.bias_term)
+}
+
+// .caffe.FillerParameter weight_filler = 3;
+inline bool FullyConnectedParameter::has_weight_filler() const {
+  return this != internal_default_instance() && weight_filler_ != NULL;
+}
+inline void FullyConnectedParameter::clear_weight_filler() {
+  if (GetArenaNoVirtual() == NULL && weight_filler_ != NULL) {
+    delete weight_filler_;
+  }
+  weight_filler_ = NULL;
+}
+inline const ::caffe::FillerParameter& FullyConnectedParameter::weight_filler() const {
+  const ::caffe::FillerParameter* p = weight_filler_;
+  // @@protoc_insertion_point(field_get:caffe.FullyConnectedParameter.weight_filler)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::FillerParameter*>(
+      &::caffe::_FillerParameter_default_instance_);
+}
+inline ::caffe::FillerParameter* FullyConnectedParameter::release_weight_filler() {
+  // @@protoc_insertion_point(field_release:caffe.FullyConnectedParameter.weight_filler)
+  
+  ::caffe::FillerParameter* temp = weight_filler_;
+  weight_filler_ = NULL;
+  return temp;
+}
+inline ::caffe::FillerParameter* FullyConnectedParameter::mutable_weight_filler() {
+  
+  if (weight_filler_ == NULL) {
+    weight_filler_ = new ::caffe::FillerParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.FullyConnectedParameter.weight_filler)
+  return weight_filler_;
+}
+inline void FullyConnectedParameter::set_allocated_weight_filler(::caffe::FillerParameter* weight_filler) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete weight_filler_;
+  }
+  if (weight_filler) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      weight_filler = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, weight_filler, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  weight_filler_ = weight_filler;
+  // @@protoc_insertion_point(field_set_allocated:caffe.FullyConnectedParameter.weight_filler)
+}
+
+// .caffe.FillerParameter bias_filler = 4;
+inline bool FullyConnectedParameter::has_bias_filler() const {
+  return this != internal_default_instance() && bias_filler_ != NULL;
+}
+inline void FullyConnectedParameter::clear_bias_filler() {
+  if (GetArenaNoVirtual() == NULL && bias_filler_ != NULL) {
+    delete bias_filler_;
+  }
+  bias_filler_ = NULL;
+}
+inline const ::caffe::FillerParameter& FullyConnectedParameter::bias_filler() const {
+  const ::caffe::FillerParameter* p = bias_filler_;
+  // @@protoc_insertion_point(field_get:caffe.FullyConnectedParameter.bias_filler)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::FillerParameter*>(
+      &::caffe::_FillerParameter_default_instance_);
+}
+inline ::caffe::FillerParameter* FullyConnectedParameter::release_bias_filler() {
+  // @@protoc_insertion_point(field_release:caffe.FullyConnectedParameter.bias_filler)
+  
+  ::caffe::FillerParameter* temp = bias_filler_;
+  bias_filler_ = NULL;
+  return temp;
+}
+inline ::caffe::FillerParameter* FullyConnectedParameter::mutable_bias_filler() {
+  
+  if (bias_filler_ == NULL) {
+    bias_filler_ = new ::caffe::FillerParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.FullyConnectedParameter.bias_filler)
+  return bias_filler_;
+}
+inline void FullyConnectedParameter::set_allocated_bias_filler(::caffe::FillerParameter* bias_filler) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete bias_filler_;
+  }
+  if (bias_filler) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      bias_filler = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, bias_filler, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  bias_filler_ = bias_filler;
+  // @@protoc_insertion_point(field_set_allocated:caffe.FullyConnectedParameter.bias_filler)
+}
+
+// int32 axis = 5;
+inline void FullyConnectedParameter::clear_axis() {
+  axis_ = 0;
+}
+inline ::google::protobuf::int32 FullyConnectedParameter::axis() const {
+  // @@protoc_insertion_point(field_get:caffe.FullyConnectedParameter.axis)
+  return axis_;
+}
+inline void FullyConnectedParameter::set_axis(::google::protobuf::int32 value) {
+  
+  axis_ = value;
+  // @@protoc_insertion_point(field_set:caffe.FullyConnectedParameter.axis)
+}
+
+// bool transpose = 6;
+inline void FullyConnectedParameter::clear_transpose() {
+  transpose_ = false;
+}
+inline bool FullyConnectedParameter::transpose() const {
+  // @@protoc_insertion_point(field_get:caffe.FullyConnectedParameter.transpose)
+  return transpose_;
+}
+inline void FullyConnectedParameter::set_transpose(bool value) {
+  
+  transpose_ = value;
+  // @@protoc_insertion_point(field_set:caffe.FullyConnectedParameter.transpose)
 }
 
 // -------------------------------------------------------------------
@@ -2407,6 +2946,10 @@ inline void PoolingParameter::set_global_pooling(bool value) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -2424,6 +2967,11 @@ template <> struct is_proto_enum< ::caffe::ReLUParameter_Engine> : ::google::pro
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::caffe::ReLUParameter_Engine>() {
   return ::caffe::ReLUParameter_Engine_descriptor();
+}
+template <> struct is_proto_enum< ::caffe::SigmoidParameter_Engine> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::caffe::SigmoidParameter_Engine>() {
+  return ::caffe::SigmoidParameter_Engine_descriptor();
 }
 template <> struct is_proto_enum< ::caffe::PoolingParameter_PoolMethod> : ::google::protobuf::internal::true_type {};
 template <>

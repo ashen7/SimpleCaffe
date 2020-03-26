@@ -88,8 +88,8 @@ public:
 		CHECK_GT(tensor->count(), 0);
 		//C * H * W
 		int fan_in = tensor->count() / tensor->shape(0);
-		//H * W
-		int fan_out = tensor->num_dims() > 1 ?
+		//N * H * W
+		int fan_out = tensor->num_axes() > 1 ?
 									tensor->count() / tensor->shape(1) :
 									tensor->count();
 		Dtype n = fan_in;  //默认fan_in

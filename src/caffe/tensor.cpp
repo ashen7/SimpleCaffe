@@ -37,7 +37,7 @@ void Tensor<Dtype>::Reshape(const int num, const int channels, const int height,
 //此时不会分配内存 第一次调用数据时才会分配内存
 template <typename Dtype>
 void Tensor<Dtype>::Reshape(const vector<int>& shape) {
-	CHECK_LE(shape.size(), kMaxTensorDims);
+	CHECK_LE(shape.size(), kMaxTensorAxes);
 	count_ = 1;
 	shape_.resize(shape.size());
 	for (int i = 0; i < shape.size(); ++i) {
@@ -58,7 +58,7 @@ void Tensor<Dtype>::Reshape(const vector<int>& shape) {
 
 template <typename Dtype>
 void Tensor<Dtype>::Reshape(const TensorShape& shape) {
-	CHECK_LE(shape.dim_size(), kMaxTensorDims);
+	CHECK_LE(shape.dim_size(), kMaxTensorAxes);
 	vector<int> shape_list(shape.dim_size());
 	for (int i = 0; i < shape.dim_size(); ++i) {
 		shape_list[i] = shape.dim(i);
