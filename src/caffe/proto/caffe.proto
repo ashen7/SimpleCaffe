@@ -62,7 +62,7 @@ message LayerParameter {
     //每个输出tensor的权重
     repeated float loss_weight = 5;
     //层的权重
-    repeated TensorProto tensors = 6;
+    repeated TensorProto weights = 6;
     //是否反向传播到下层
     repeated bool propagate_down = 7;
 
@@ -71,6 +71,8 @@ message LayerParameter {
 
     ReLUParameter relu_param = 16;   //relu层参数
     FullyConnectedParameter fully_connected_param = 17; //全连接层参数
+
+
 
 }
 

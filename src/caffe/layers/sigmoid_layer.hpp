@@ -44,10 +44,10 @@ class SigmoidLayer : public ActivationLayerInterface<Dtype> {
 	 * 输入tensor vector大小也是1个tensor
 	 */
 	virtual void Backward_cpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) override;
 	virtual void Backward_gpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) override;
 };     //class SigmoidLayer
 

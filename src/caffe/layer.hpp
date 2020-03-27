@@ -15,20 +15,22 @@
 
 namespace caffe {
 
-//层接口 多个层组成一个net 网络 层的子类必须实现前向计算 可以实现反向计算
+/*
+ * 层接口 多个层组成一个net 网络
+ * 层的子类必须实现前向计算 和 反向计算
+ */
 template <typename Dtype>
 class LayerInterface {
  public:
-	//构造函数 传一个层参数 通过proto初始化权重和阶段
+	//构造函数 传一个层参数 通过proto初始化权重和梯度(如果写diff为true)
 	explicit LayerInterface(const LayerParameter& param)
 			: layer_param_(param) {
 		phase_ = param.phase();
-		if (layer_param_.tensors_size() > 0) {
-			weights_.resize(layer_param_.tensors_size());
-			for (int i = 0; i < layer_param_.tensors_size(); ++i) {
-				//new 每个tensor对象 然后反序列化 reshape后分配内存 并得到数据 如果write_diff为ture 也会赋值diff
+		if (layer_param_.weights_size() > 0) {
+			weights_.resize(layer_param_.weights_size());
+			for (int i = 0; i < layer_param_.weights_size(); ++i) {
 				weights_[i].reset(new Tensor<Dtype>());
-				weights_[i]->FromProto(layer_param_.tensors(i));
+				weights_[i]->FromProto(layer_param_.weights(i));
 			}
 		}
 	}
@@ -90,7 +92,7 @@ class LayerInterface {
 	 * 参数: 输入tensor diff存放的是误差梯度
 	 */
 	inline void Backward(const vector<Tensor<Dtype>*>& top,
-	                     const vector<bool>& propagate_down,
+	                     const vector<bool>& error_propagate_down,
 	                     const vector<Tensor<Dtype>*>& bottom);
 
 	//得到权重
@@ -137,26 +139,26 @@ class LayerInterface {
 	//层要求输入和输出的tensor个数相同 返回true
 	virtual inline bool EqualNumBottomTopTensor() const { return false; }
 
-	//得到当前索引对应的tensor是否计算梯度
-	inline bool param_propagate_down(const int param_index) {
-		return (param_propagate_down_.size() > param_index) ?
-				param_propagate_down_[param_index] : false;
+	//得到当前索引对应的权重是否计算梯度
+	inline bool gradient_propagate_down(const int param_index) {
+		return (gradient_propagate_down_.size() > param_index) ?
+		       gradient_propagate_down_[param_index] : false;
 	}
 
-	//设置该索引对应的tensor是否计算梯度
-	inline void set_param_propagate_down(const int param_index,
-																		   const bool value) {
-		if (param_propagate_down_.size() <= param_index) {
-			param_propagate_down_.resize(param_index + 1, true);
+	//设置该索引对应的权重是否计算梯度
+	inline void set_gradient_propagate_down(const int param_index,
+																		      const bool value) {
+		if (gradient_propagate_down_.size() <= param_index) {
+			gradient_propagate_down_.resize(param_index + 1, true);
 		}
-		param_propagate_down_[param_index] = value;
+		gradient_propagate_down_[param_index] = value;
 	}
 
  protected:
 	LayerParameter layer_param_;                //层的参数
 	Phase phase_;                               //train/test阶段
 	vector<shared_ptr<Tensor<Dtype>>> weights_; //权重
-	vector<bool> param_propagate_down_;         //和权重同size 有同样的tensor个数 表示每个tensor是否反向传播计算梯度
+	vector<bool> gradient_propagate_down_;      //和权重同size 有同样的tensor个数 表示每个权重是否计算梯度
 	vector<Dtype> loss_;                        //每个输出值是否有一个非零权重
 
 	//内部函数 虚函数 子类重写 cpu forward pass接口
@@ -170,13 +172,13 @@ class LayerInterface {
 
 	//内部函数 虚函数 子类重写 cpu backward pass接口
 	virtual void Backward_cpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) = 0;
 	//内部函数 虚函数 子类重写 cpu backward pass 如果没有重写gpu版本 后退调用cpu版本
 	virtual void Backward_gpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) {
-		Backward_cpu(top, propagate_down, bottom);
+		Backward_cpu(top, error_propagate_down, bottom);
 	}
 
 	//内部函数 父类函数 层初始化时调用 检查输入输出tensor是否正确
@@ -220,7 +222,6 @@ class LayerInterface {
 					<< "for each bottom tensor input";
 		}
 	}
-
 
 	inline void SetLossWeights(const vector<Tensor<Dtype>*>& top) {
 	}
@@ -281,32 +282,30 @@ inline Dtype LayerInterface<Dtype>::Forward(const vector<Tensor<Dtype>*>& bottom
 //父类函数 backward pass 包装了Backward_cpu/Backward_gpu实现
 template <typename Dtype>
 inline void Backward(const vector<Tensor<Dtype>*>& top,
-                     const vector<bool>& propagate_down,
+                     const vector<bool>& error_propagate_down,
                      const vector<Tensor<Dtype>*>& bottom) {
 	switch (Caffe::mode()) {
 		case Caffe::CPU:
 			//子类的反向计算 cpu实现
-			Backward_cpu(top, propagate_down, bottom);
+			Backward_cpu(top, error_propagate_down, bottom);
 			break;
 		case Caffe::GPU:
 			//子类的反向计算 gpu实现
-			Backward_gpu(top, propagate_down, bottom);
+			Backward_gpu(top, error_propagate_down, bottom);
 			break;
 		default:
 			LOG(FATAL) << "Unknown caffe mode";
 	}
 }
 
-//虚函数 序列化层参数 to google protocal buffer
+//虚函数 写权重和梯度(如果write_diff为true)序列化到proto对象
 template <typename Dtype>
 void LayerInterface<Dtype>::ToProto(LayerParameter* param, bool write_diff) {
 	param->Clear();
 	param->CopyFrom(layer_param_);
-	param->clear_tensors();
-	//proto反序列化的时候 得到了phase和权重 现在用新的权重序列化
+	param->clear_weights();
 	for (int i = 0; i < weights_.size(); ++i) {
-		//每个tensor 会写入shape和data 如果write_diff为true 也会写入diff
-		weights_[i]->ToProto(param->add_tensors(), write_diff);
+		weights_[i]->ToProto(param->add_weights(), write_diff);
 	}
 }
 

@@ -43,9 +43,11 @@ __global__ void ReLUBackwardKernel(const int n, const Dtype* input_diff,
 //gpu relu backward pass
 template <typename Dtype>
 void ReLULayer<Dtype>::Backward_gpu(const vector<Tensor<Dtype>*>& top,
-                                    const vector<bool>& propagate_down,
+                                    const vector<bool>& error_propagate_down,
                                     const vector<Tensor<Dtype>*>& bottom) {
-	if (propagate_down[0]) {
+	//误差传递 输出diff 传给输入diff
+	//输入data > 0: 输入diff = 输出diff 否则为0
+	if (error_propagate_down[0]) {
 		const Dtype* bottom_data = bottom[0]->gpu_data();
 		const Dtype* top_diff = top[0]->gpu_diff();
 		Dtype* bottom_diff = bottom[0]->mutable_gpu_diff();

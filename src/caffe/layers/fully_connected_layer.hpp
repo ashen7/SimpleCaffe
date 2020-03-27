@@ -49,17 +49,17 @@ class FullyConnectedLayer : public LayerInterface<Dtype> {
 	 * 输入tensor vector大小也是1个tensor
 	 */
 	virtual void Backward_cpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) override;
 	virtual void Backward_gpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) override;
 
 	int M_;           //batch size
 	int N_;           //输出size
 	int K_;           //输入size
 	bool bias_term_;  //是否添加偏置项
-	Tensor<Dtype> bias_multiplier_;
+	Tensor<Dtype> bias_multiplier_;  //值为1(相当于值为1的输入) size = batch_size
 	bool transpose_;  //权重是否转置
 };     //class FullyConnectedLayer
 

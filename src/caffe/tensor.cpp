@@ -408,6 +408,7 @@ bool Tensor<Dtype>::ShapeEqual(const TensorProto& other) {
 	return shape_ == other_shape;
 }
 
+//copy from函数 从tensor对象中要么copy diff 要么copy data
 template <typename Dtype>
 void Tensor<Dtype>::CopyFrom(const Tensor<Dtype>& source, bool copy_diff, bool reshape) {
 	if (source.count() != count_ ||
@@ -442,7 +443,7 @@ void Tensor<Dtype>::CopyFrom(const Tensor<Dtype>& source, bool copy_diff, bool r
 	}
 }
 
-//to proto 序列化成proto对象保存下来
+//to proto 序列化成proto对象保存下来 写data和diff
 template <>
 void Tensor<float>::ToProto(TensorProto* proto, bool write_diff) const {
 	proto->clear_shape();
@@ -465,7 +466,7 @@ void Tensor<float>::ToProto(TensorProto* proto, bool write_diff) const {
 	}
 }
 
-//to proto 序列化成proto对象保存下来
+//to proto 序列化成proto对象保存下来 写data和diff
 template <>
 void Tensor<double>::ToProto(TensorProto* proto, bool write_diff) const {
 	proto->clear_shape();
@@ -488,7 +489,7 @@ void Tensor<double>::ToProto(TensorProto* proto, bool write_diff) const {
 	}
 }
 
-//from proto反序列化 从proto对象 来得到值
+//from proto反序列化 从proto对象 来得到data和diff
 template <typename Dtype>
 void Tensor<Dtype>::FromProto(const TensorProto& proto, bool reshape) {
 	if (reshape) {

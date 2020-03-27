@@ -15,5 +15,6 @@ void ActivationLayerInterface<Dtype>::Reshape(const vector<Tensor<Dtype>*>& bott
 	top[0]->ReshapeLike(*bottom[0]);
 }
 
+//注册参数模板类
 INSTANTIATE_CLASS(ActivationLayerInterface);
 }        //namespace caffe

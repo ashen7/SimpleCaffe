@@ -9,6 +9,7 @@
 
 namespace caffe {
 
+//重写 层初始化接口
 template <typename Dtype>
 void FullyConnectedLayer<Dtype>::LayerSetUp(const vector<Tensor<Dtype>*>& bottom,
 																					  const vector<Tensor<Dtype>*>& top) {
@@ -58,8 +59,8 @@ void FullyConnectedLayer<Dtype>::LayerSetUp(const vector<Tensor<Dtype>*>& bottom
 			bias_filler->Fill(this->weights_[1].get());
 		}
 	}
-	//默认权重的每个tensor(权重/偏置)都计算梯度
-	this->param_propagate_down_.resize(this->weights_.size(), true);
+	//默认每个权重/偏置都计算梯度
+	this->gradient_propagate_down_.resize(this->weights_.size(), true);
 }
 
 //重写 reshape接口
@@ -83,7 +84,7 @@ void FullyConnectedLayer<Dtype>::Reshape(const vector<Tensor<Dtype>*>& bottom,
 	if (bias_term_) {
 		vector<int> bias_shape(1, M_);
 		bias_multiplier_.Reshape(bias_shape);
-		caffe_set(M_, Dtype(1), bias_multiplier_.mutalbe_cpu_data());
+		caffe_set(M_, Dtype(1), bias_multiplier_.mutable_cpu_data());
 	}
 }
 
@@ -114,5 +115,80 @@ void FullyConnectedLayer<Dtype>::Forward_cpu(const vector<Tensor<Dtype>*>& botto
 													top_data);
 	}
 }
+
+//cpu fully connected backward pass
+template <typename Dtype>
+void FullyConnectedLayer<Dtype>::Backward_cpu(const vector<Tensor<Dtype>*>& top,
+                                              const vector<bool>& error_propagate_down,
+                                              const vector<Tensor<Dtype>*>& bottom) {
+	//计算权重梯度
+	if (this->gradient_propagate_down_[0]) {
+		const Dtype* top_diff = top[0]->cpu_diff();
+		const Dtype* bottom_data = bottom[0]->cpu_data();
+		//权重梯度 = 输出误差 .* 输入的转置 (+ 权重梯度)
+		if (transpose_) {
+			caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans,
+														K_, N_, M_,
+														Dtype(1),
+														bottom_data,
+														top_diff,
+														Dtype(1),
+														this->weights_[0]->mutable_cpu_diff());
+		} else {
+			caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans,
+				                    N_, K_, M_,
+				                    Dtype(1),
+				                    top_diff,
+				                    bottom_data,
+				                    Dtype(1),
+				                    this->weights_[0]->mutable_cpu_diff());
+		}
+	}
+
+	//如果添加bias 计算偏置梯度
+	if (bias_term_ && this->gradient_propagate_down_[1]) {
+		//偏置梯度 = 输出误差 (+ 偏置梯度)
+		const Dtype* top_diff = top[0]->cpu_diff();
+		caffe_cpu_gemv<Dtype>(CblasTrans,
+													M_, N_,
+													Dtype(1),
+													top_diff,
+													bias_multiplier_.cpu_data(),
+													Dtype(1),
+													this->weights_[1]->mutable_cpu_diff());
+	}
+
+	//误差传递到下一层
+	if (error_propagate_down[0]) {
+		//输入diff = 权重的转置 .* 输出diff
+		const Dtype* top_diff = top[0]->cpu_diff();
+		if (transpose_) {
+			caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasTrans,
+														M_, K_, N_,
+														Dtype(1),
+														top_diff,
+														this->weights_[0]->cpu_data(),
+														Dtype(0),
+														bottom[0]->mutable_cpu_diff());
+		} else {
+			caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasNoTrans,
+			                      M_, K_, N_,
+			                      Dtype(1),
+			                      top_diff,
+			                      this->weights_[0]->cpu_data(),
+			                      Dtype(0),
+			                      bottom[0]->mutable_cpu_diff());
+		}
+	}
+}
+
+#ifdef CPU_ONLY
+STUB_GPU(FullyConnectedLayer);
+#endif
+
+//注册float double参数模板类
+INSTANTIATE_CLASS(FullyConnectedLayer);
+//注册全连接layer
+
 
 }       //namespace caffe

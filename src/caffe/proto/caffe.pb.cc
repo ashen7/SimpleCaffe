@@ -315,7 +315,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, bottom_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, top_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, loss_weight_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, tensors_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, weights_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, propagate_down_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, phase_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, relu_param_),
@@ -423,7 +423,7 @@ void AddDescriptorsImpl() {
       "Norm\022\n\n\006FAN_IN\020\000\022\013\n\007FAN_OUT\020\001\022\013\n\007AVERAGE"
       "\020\002\"\241\002\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004t"
       "ype\030\002 \001(\t\022\016\n\006bottom\030\003 \001(\t\022\013\n\003top\030\004 \001(\t\022\023"
-      "\n\013loss_weight\030\005 \003(\002\022#\n\007tensors\030\006 \003(\0132\022.c"
+      "\n\013loss_weight\030\005 \003(\002\022#\n\007weights\030\006 \003(\0132\022.c"
       "affe.TensorProto\022\026\n\016propagate_down\030\007 \003(\010"
       "\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase\022(\n\nrelu_pa"
       "ram\030\020 \001(\0132\024.caffe.ReLUParameter\022=\n\025fully"
@@ -2276,7 +2276,7 @@ const int LayerParameter::kTypeFieldNumber;
 const int LayerParameter::kBottomFieldNumber;
 const int LayerParameter::kTopFieldNumber;
 const int LayerParameter::kLossWeightFieldNumber;
-const int LayerParameter::kTensorsFieldNumber;
+const int LayerParameter::kWeightsFieldNumber;
 const int LayerParameter::kPropagateDownFieldNumber;
 const int LayerParameter::kPhaseFieldNumber;
 const int LayerParameter::kReluParamFieldNumber;
@@ -2295,7 +2295,7 @@ LayerParameter::LayerParameter(const LayerParameter& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       loss_weight_(from.loss_weight_),
-      tensors_(from.tensors_),
+      weights_(from.weights_),
       propagate_down_(from.propagate_down_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -2384,7 +2384,7 @@ void LayerParameter::Clear() {
   (void) cached_has_bits;
 
   loss_weight_.Clear();
-  tensors_.Clear();
+  weights_.Clear();
   propagate_down_.Clear();
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   type_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -2495,11 +2495,11 @@ bool LayerParameter::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .caffe.TensorProto tensors = 6;
+      // repeated .caffe.TensorProto weights = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tensors()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_weights()));
         } else {
           goto handle_unusual;
         }
@@ -2639,11 +2639,11 @@ void LayerParameter::SerializeWithCachedSizes(
       this->loss_weight().data(), this->loss_weight_size(), output);
   }
 
-  // repeated .caffe.TensorProto tensors = 6;
+  // repeated .caffe.TensorProto weights = 6;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tensors_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->weights_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->tensors(static_cast<int>(i)), output);
+      6, this->weights(static_cast<int>(i)), output);
   }
 
   // repeated bool propagate_down = 7;
@@ -2744,12 +2744,12 @@ void LayerParameter::SerializeWithCachedSizes(
       WriteFloatNoTagToArray(this->loss_weight_, target);
   }
 
-  // repeated .caffe.TensorProto tensors = 6;
+  // repeated .caffe.TensorProto weights = 6;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tensors_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->weights_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, this->tensors(static_cast<int>(i)), deterministic, target);
+        6, this->weights(static_cast<int>(i)), deterministic, target);
   }
 
   // repeated bool propagate_down = 7;
@@ -2818,14 +2818,14 @@ size_t LayerParameter::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated .caffe.TensorProto tensors = 6;
+  // repeated .caffe.TensorProto weights = 6;
   {
-    unsigned int count = static_cast<unsigned int>(this->tensors_size());
+    unsigned int count = static_cast<unsigned int>(this->weights_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->tensors(static_cast<int>(i)));
+          this->weights(static_cast<int>(i)));
     }
   }
 
@@ -2923,7 +2923,7 @@ void LayerParameter::MergeFrom(const LayerParameter& from) {
   (void) cached_has_bits;
 
   loss_weight_.MergeFrom(from.loss_weight_);
-  tensors_.MergeFrom(from.tensors_);
+  weights_.MergeFrom(from.weights_);
   propagate_down_.MergeFrom(from.propagate_down_);
   if (from.name().size() > 0) {
 
@@ -2977,7 +2977,7 @@ void LayerParameter::Swap(LayerParameter* other) {
 void LayerParameter::InternalSwap(LayerParameter* other) {
   using std::swap;
   loss_weight_.InternalSwap(&other->loss_weight_);
-  tensors_.InternalSwap(&other->tensors_);
+  weights_.InternalSwap(&other->weights_);
   propagate_down_.InternalSwap(&other->propagate_down_);
   name_.Swap(&other->name_);
   type_.Swap(&other->type_);

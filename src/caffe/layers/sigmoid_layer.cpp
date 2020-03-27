@@ -27,12 +27,13 @@ void SigmoidLayer<Dtype>::Forward_cpu(const vector<Tensor<Dtype>*>& bottom,
 	}
 }
 
-//cpu relu backward pass
+//cpu sigmoid backward pass
 template <typename Dtype>
 void SigmoidLayer<Dtype>::Backward_cpu(const vector<Tensor<Dtype>*>& top,
-                                       const vector<bool>& propagate_down,
+                                       const vector<bool>& error_propagate_down,
                                        const vector<Tensor<Dtype>*>& bottom) {
-	if (propagate_down[0]) {
+	//误差传递 输入diff = 输出diff * 输出值 * (1 - 输出值)
+	if (error_propagate_down[0]) {
 		const Dtype* top_data = top[0]->cpu_data();
 		const Dtype* top_diff = top[0]->cpu_diff();
 		Dtype* bottom_diff = bottom[0]->mutable_cpu_diff();

@@ -912,17 +912,17 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::RepeatedField< float >*
       mutable_loss_weight();
 
-  // repeated .caffe.TensorProto tensors = 6;
-  int tensors_size() const;
-  void clear_tensors();
-  static const int kTensorsFieldNumber = 6;
-  const ::caffe::TensorProto& tensors(int index) const;
-  ::caffe::TensorProto* mutable_tensors(int index);
-  ::caffe::TensorProto* add_tensors();
+  // repeated .caffe.TensorProto weights = 6;
+  int weights_size() const;
+  void clear_weights();
+  static const int kWeightsFieldNumber = 6;
+  const ::caffe::TensorProto& weights(int index) const;
+  ::caffe::TensorProto* mutable_weights(int index);
+  ::caffe::TensorProto* add_weights();
   ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >*
-      mutable_tensors();
+      mutable_weights();
   const ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >&
-      tensors() const;
+      weights() const;
 
   // repeated bool propagate_down = 7;
   int propagate_down_size() const;
@@ -1022,7 +1022,7 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedField< float > loss_weight_;
   mutable int _loss_weight_cached_byte_size_;
-  ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto > tensors_;
+  ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto > weights_;
   ::google::protobuf::RepeatedField< bool > propagate_down_;
   mutable int _propagate_down_cached_byte_size_;
   ::google::protobuf::internal::ArenaStringPtr name_;
@@ -2375,34 +2375,34 @@ LayerParameter::mutable_loss_weight() {
   return &loss_weight_;
 }
 
-// repeated .caffe.TensorProto tensors = 6;
-inline int LayerParameter::tensors_size() const {
-  return tensors_.size();
+// repeated .caffe.TensorProto weights = 6;
+inline int LayerParameter::weights_size() const {
+  return weights_.size();
 }
-inline void LayerParameter::clear_tensors() {
-  tensors_.Clear();
+inline void LayerParameter::clear_weights() {
+  weights_.Clear();
 }
-inline const ::caffe::TensorProto& LayerParameter::tensors(int index) const {
-  // @@protoc_insertion_point(field_get:caffe.LayerParameter.tensors)
-  return tensors_.Get(index);
+inline const ::caffe::TensorProto& LayerParameter::weights(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.weights)
+  return weights_.Get(index);
 }
-inline ::caffe::TensorProto* LayerParameter::mutable_tensors(int index) {
-  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.tensors)
-  return tensors_.Mutable(index);
+inline ::caffe::TensorProto* LayerParameter::mutable_weights(int index) {
+  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.weights)
+  return weights_.Mutable(index);
 }
-inline ::caffe::TensorProto* LayerParameter::add_tensors() {
-  // @@protoc_insertion_point(field_add:caffe.LayerParameter.tensors)
-  return tensors_.Add();
+inline ::caffe::TensorProto* LayerParameter::add_weights() {
+  // @@protoc_insertion_point(field_add:caffe.LayerParameter.weights)
+  return weights_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >*
-LayerParameter::mutable_tensors() {
-  // @@protoc_insertion_point(field_mutable_list:caffe.LayerParameter.tensors)
-  return &tensors_;
+LayerParameter::mutable_weights() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.LayerParameter.weights)
+  return &weights_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::caffe::TensorProto >&
-LayerParameter::tensors() const {
-  // @@protoc_insertion_point(field_list:caffe.LayerParameter.tensors)
-  return tensors_;
+LayerParameter::weights() const {
+  // @@protoc_insertion_point(field_list:caffe.LayerParameter.weights)
+  return weights_;
 }
 
 // repeated bool propagate_down = 7;

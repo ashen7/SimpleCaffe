@@ -50,11 +50,11 @@ private: \
 #define INSTANTIATE_LAYER_GPU_BACKWARD(classname) \
 	template void classname<float>::Backward_gpu( \
 			const std::vector<Tensor<float>*>& top, \
-			const std::vector<bool>& propagate_down, \
+			const std::vector<bool>& error_propagate_down, \
 			const std::vector<Tensor<float>*>& bottom); \
 	template void classname<double>::Backward_gpu( \
 			const std::vector<Tensor<double>*>& top, \
-			const std::vector<bool>& propagate_down, \
+			const std::vector<bool>& error_propagate_down, \
 			const std::vector<Tensor<double>*>& bottom);
 
 //实例化层的float和double类型 GPU前向计算和反向计算

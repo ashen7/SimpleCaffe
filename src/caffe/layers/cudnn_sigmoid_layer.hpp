@@ -4,6 +4,8 @@
 #ifndef SIMPLE_CAFFE_CUDNN_SIGMOID_LAYER_HPP_
 #define SIMPLE_CAFFE_CUDNN_SIGMOID_LAYER_HPP_
 
+#ifdef USE_CUDNN
+
 #include <vector>
 
 #include "caffe/tensor.hpp"
@@ -14,8 +16,6 @@
 #include "caffe/layers/sigmoid_layer.hpp"
 
 namespace caffe {
-
-#ifdef USE_CUDNN
 
 template <typename Dtype>
 class CuDNNSigmoidLayer : public SigmoidLayer<Dtype> {
@@ -47,7 +47,7 @@ class CuDNNSigmoidLayer : public SigmoidLayer<Dtype> {
 	 * 输入tensor vector大小也是1个tensor
 	 */
 	virtual void Backward_gpu(const vector<Tensor<Dtype>*>& top,
-	                          const vector<bool>& propagate_down,
+	                          const vector<bool>& error_propagate_down,
 	                          const vector<Tensor<Dtype>*>& bottom) override;
 
 	bool handles_setup_;
@@ -55,9 +55,9 @@ class CuDNNSigmoidLayer : public SigmoidLayer<Dtype> {
 	cudnnTensorDescriptor_t bottom_desc_;         //输入张量的描述符
 	cudnnTensorDescriptor_t top_desc_;            //输出张量的描述符
 	cudnnActivationDescriptor_t activation_desc_; //激活函数操作的描述符
-};
-#endif //USE_CUDNN
+};     //class CuDNNSigmoidLayer
 
 }      //namespace caffe
 
+#endif //USE_CUDNN
 #endif //SIMPLE_CAFFE_CUDNN_SIGMOID_LAYER_HPP_

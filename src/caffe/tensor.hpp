@@ -195,11 +195,11 @@ class Tensor {
 	bool ShapeEqual(const TensorProto& other);
 
  protected:
-	shared_ptr<SyncedMemory> data_;  //前向计算的数据 输入/输出
-	shared_ptr<SyncedMemory> diff_;  //反向计算的梯度 误差
-	vector<int> shape_;              //维度形状 N C H W(batch大小,通道,高,宽)
+	shared_ptr<SyncedMemory> data_;  //作为bottom/top时 data存放的是输入输出值    作为weights时 data存放的是权重
+	shared_ptr<SyncedMemory> diff_;  //作为bottom/top时 diff存放的是输入输出误差值 作为weights时 diff存放的是梯度
+	vector<int> shape_;              //维度形状 N C H W(batch_size,通道,高,宽)
 	int count_;                      //数据总个数
-	int capacity_;                   //当前容量
+	int capacity_;                   //容量
 
 	DISABLE_COPY_AND_ASSIGN(Tensor);
 };     //class Tensor
