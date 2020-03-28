@@ -153,7 +153,7 @@ TYPED_TEST(TensorMathTest, TestSumOfSquares) {
 	for (int i = 0; i< this->tensor_->count(); ++i) {
 		expected_sumsq += data[i] * data[i];
 	}
-	//两个线程 分别得到cpu 和 gpu的data
+	//四个线程 分别得到float/double的 cpu/gpu的data
 	switch(TypeParam::device) {
 		case Caffe::CPU:
 			this->tensor_->mutable_cpu_data();
@@ -174,7 +174,7 @@ TYPED_TEST(TensorMathTest, TestSumOfSquares) {
 	const Dtype kDiffScale = 7;
 	caffe_cpu_scale(this->tensor_->count(), kDiffScale, data,
 		              this->tensor_->mutable_cpu_diff());
-	//两个线程 分别得到cpu 和 gpu的diff
+	//四个线程 分别得到float/double的 cpu/gpu的diff
 	switch(TypeParam::device) {
 		case Caffe::CPU:
 			this->tensor_->mutable_cpu_diff();
@@ -214,7 +214,7 @@ TYPED_TEST(TensorMathTest, TestAsum) {
 	for (int i = 0; i< this->tensor_->count(); ++i) {
 		expected_asum += std::fabs(data[i]);
 	}
-	//两个线程 分别得到cpu 和 gpu的data
+	//四个线程 分别得到float/double的 cpu/gpu的data
 	switch(TypeParam::device) {
 		case Caffe::CPU:
 			this->tensor_->mutable_cpu_data();
@@ -235,7 +235,7 @@ TYPED_TEST(TensorMathTest, TestAsum) {
 	const Dtype kDiffScale = 7;
 	caffe_cpu_scale(this->tensor_->count(), kDiffScale, data,
 	                this->tensor_->mutable_cpu_diff());
-	//两个线程 分别得到cpu 和 gpu的diff
+	//四个线程 分别得到float/double的 cpu/gpu的diff
 	switch(TypeParam::device) {
 		case Caffe::CPU:
 			this->tensor_->mutable_cpu_diff();
@@ -266,7 +266,7 @@ TYPED_TEST(TensorMathTest, TestScaleData) {
 	filler.Fill(this->tensor_);
 	const Dtype asum_before_scale = this->tensor_->asum_data();
 
-	//两个线程 分别得到cpu 和 gpu的data
+	//四个线程 分别得到float/double的 cpu/gpu的data
 	switch(TypeParam::device) {
 		case Caffe::CPU:
 			this->tensor_->mutable_cpu_data();
@@ -296,7 +296,7 @@ TYPED_TEST(TensorMathTest, TestScaleData) {
 			asum_before_scale * kDataScale * kDataToDiffScale;
 	EXPECT_NEAR(expected_asum_before_sacle_diff, this->tensor_->asum_diff(),
 		          this->epsilon_ * expected_asum_before_sacle_diff);
-	//两个线程 分别得到cpu 和 gpu的diff
+	//四个线程 分别得到float/double的 cpu/gpu的diff
 	switch(TypeParam::device) {
 		case Caffe::CPU:
 			this->tensor_->mutable_cpu_diff();

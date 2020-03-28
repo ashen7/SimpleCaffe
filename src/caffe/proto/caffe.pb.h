@@ -1001,10 +1001,19 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::caffe::ReLUParameter* mutable_relu_param();
   void set_allocated_relu_param(::caffe::ReLUParameter* relu_param);
 
-  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  // .caffe.SigmoidParameter sigmoid_param = 17;
+  bool has_sigmoid_param() const;
+  void clear_sigmoid_param();
+  static const int kSigmoidParamFieldNumber = 17;
+  const ::caffe::SigmoidParameter& sigmoid_param() const;
+  ::caffe::SigmoidParameter* release_sigmoid_param();
+  ::caffe::SigmoidParameter* mutable_sigmoid_param();
+  void set_allocated_sigmoid_param(::caffe::SigmoidParameter* sigmoid_param);
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 18;
   bool has_fully_connected_param() const;
   void clear_fully_connected_param();
-  static const int kFullyConnectedParamFieldNumber = 17;
+  static const int kFullyConnectedParamFieldNumber = 18;
   const ::caffe::FullyConnectedParameter& fully_connected_param() const;
   ::caffe::FullyConnectedParameter* release_fully_connected_param();
   ::caffe::FullyConnectedParameter* mutable_fully_connected_param();
@@ -1030,6 +1039,7 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr bottom_;
   ::google::protobuf::internal::ArenaStringPtr top_;
   ::caffe::ReLUParameter* relu_param_;
+  ::caffe::SigmoidParameter* sigmoid_param_;
   ::caffe::FullyConnectedParameter* fully_connected_param_;
   int phase_;
   mutable int _cached_size_;
@@ -2499,7 +2509,57 @@ inline void LayerParameter::set_allocated_relu_param(::caffe::ReLUParameter* rel
   // @@protoc_insertion_point(field_set_allocated:caffe.LayerParameter.relu_param)
 }
 
-// .caffe.FullyConnectedParameter fully_connected_param = 17;
+// .caffe.SigmoidParameter sigmoid_param = 17;
+inline bool LayerParameter::has_sigmoid_param() const {
+  return this != internal_default_instance() && sigmoid_param_ != NULL;
+}
+inline void LayerParameter::clear_sigmoid_param() {
+  if (GetArenaNoVirtual() == NULL && sigmoid_param_ != NULL) {
+    delete sigmoid_param_;
+  }
+  sigmoid_param_ = NULL;
+}
+inline const ::caffe::SigmoidParameter& LayerParameter::sigmoid_param() const {
+  const ::caffe::SigmoidParameter* p = sigmoid_param_;
+  // @@protoc_insertion_point(field_get:caffe.LayerParameter.sigmoid_param)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::SigmoidParameter*>(
+      &::caffe::_SigmoidParameter_default_instance_);
+}
+inline ::caffe::SigmoidParameter* LayerParameter::release_sigmoid_param() {
+  // @@protoc_insertion_point(field_release:caffe.LayerParameter.sigmoid_param)
+  
+  ::caffe::SigmoidParameter* temp = sigmoid_param_;
+  sigmoid_param_ = NULL;
+  return temp;
+}
+inline ::caffe::SigmoidParameter* LayerParameter::mutable_sigmoid_param() {
+  
+  if (sigmoid_param_ == NULL) {
+    sigmoid_param_ = new ::caffe::SigmoidParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.LayerParameter.sigmoid_param)
+  return sigmoid_param_;
+}
+inline void LayerParameter::set_allocated_sigmoid_param(::caffe::SigmoidParameter* sigmoid_param) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete sigmoid_param_;
+  }
+  if (sigmoid_param) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      sigmoid_param = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, sigmoid_param, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  sigmoid_param_ = sigmoid_param;
+  // @@protoc_insertion_point(field_set_allocated:caffe.LayerParameter.sigmoid_param)
+}
+
+// .caffe.FullyConnectedParameter fully_connected_param = 18;
 inline bool LayerParameter::has_fully_connected_param() const {
   return this != internal_default_instance() && fully_connected_param_ != NULL;
 }

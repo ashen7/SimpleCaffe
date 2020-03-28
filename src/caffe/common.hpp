@@ -75,11 +75,12 @@ using std::vector;
 using std::set;
 using std::map;
 using std::pair;
-using std::make_pair;
 using std::iterator;
-
 using std::shared_ptr;
 
+using std::make_pair;
+
+//glog gflags全局初始化
 void GlobalInit(int* pargc, char*** pargv);
 
 class Caffe {
@@ -87,6 +88,7 @@ class Caffe {
 	~Caffe();
 	static Caffe& Get();
 
+	//随机数生成引擎
 	typedef std::mt19937 rng_t;
 	enum Mode { CPU, GPU };
 
@@ -102,6 +104,14 @@ class Caffe {
 		class Generator;
 		shared_ptr<Generator> generator_;
 	};
+
+	//new一个RNG对象
+	inline static RNG& rng_stream() {
+		if (!Get().random_generator_.get()) {
+			Get().random_generator_.reset(new RNG());
+		}
+		return *(Get().random_generator_.get());
+	}
 
 #ifndef CPU_ONLY
 	//得到cublas和curand句柄
@@ -121,13 +131,10 @@ class Caffe {
 	static void SetDevice(const int device_id);
 	static int FindDevice(const int start_id = 0);
 
-//	new一个RNG对象
-	inline static RNG& rng_stream() {
-		if (!Get().random_generator_.get()) {
-			Get().random_generator_.reset(new RNG());
-		}
-		return *(Get().random_generator_.get());
-	}
+	inline static bool root_solver() { return Get().solver_rank_ == 0; }
+
+
+
 
  protected:
 #ifndef CPU_ONLY

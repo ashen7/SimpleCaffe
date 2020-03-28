@@ -163,6 +163,7 @@ void InitDefaultsLayerParameterImpl() {
 #endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   protobuf_caffe_2eproto::InitDefaultsTensorProto();
   protobuf_caffe_2eproto::InitDefaultsReLUParameter();
+  protobuf_caffe_2eproto::InitDefaultsSigmoidParameter();
   protobuf_caffe_2eproto::InitDefaultsFullyConnectedParameter();
   {
     void* ptr = &::caffe::_LayerParameter_default_instance_;
@@ -319,6 +320,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, propagate_down_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, phase_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, relu_param_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, sigmoid_param_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, fully_connected_param_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::ReLUParameter, _internal_metadata_),
@@ -368,10 +370,10 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 20, -1, sizeof(::caffe::TensorProtoList)},
   { 26, -1, sizeof(::caffe::FillerParameter)},
   { 39, -1, sizeof(::caffe::LayerParameter)},
-  { 54, -1, sizeof(::caffe::ReLUParameter)},
-  { 61, -1, sizeof(::caffe::SigmoidParameter)},
-  { 67, -1, sizeof(::caffe::FullyConnectedParameter)},
-  { 78, -1, sizeof(::caffe::PoolingParameter)},
+  { 55, -1, sizeof(::caffe::ReLUParameter)},
+  { 62, -1, sizeof(::caffe::SigmoidParameter)},
+  { 68, -1, sizeof(::caffe::FullyConnectedParameter)},
+  { 79, -1, sizeof(::caffe::PoolingParameter)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -421,39 +423,40 @@ void AddDescriptorsImpl() {
       "se\030\007 \001(\005\022:\n\rvariance_norm\030\010 \001(\0162#.caffe."
       "FillerParameter.VarianceNorm\"4\n\014Variance"
       "Norm\022\n\n\006FAN_IN\020\000\022\013\n\007FAN_OUT\020\001\022\013\n\007AVERAGE"
-      "\020\002\"\241\002\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004t"
+      "\020\002\"\321\002\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004t"
       "ype\030\002 \001(\t\022\016\n\006bottom\030\003 \001(\t\022\013\n\003top\030\004 \001(\t\022\023"
       "\n\013loss_weight\030\005 \003(\002\022#\n\007weights\030\006 \003(\0132\022.c"
       "affe.TensorProto\022\026\n\016propagate_down\030\007 \003(\010"
       "\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase\022(\n\nrelu_pa"
-      "ram\030\020 \001(\0132\024.caffe.ReLUParameter\022=\n\025fully"
-      "_connected_param\030\021 \001(\0132\036.caffe.FullyConn"
-      "ectedParameter\"\201\001\n\rReLUParameter\022\026\n\016nega"
-      "tive_slope\030\001 \001(\002\022+\n\006engine\030\002 \001(\0162\033.caffe"
-      ".ReLUParameter.Engine\"+\n\006Engine\022\013\n\007DEFAU"
-      "LT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"o\n\020SigmoidPar"
-      "ameter\022.\n\006engine\030\001 \001(\0162\036.caffe.SigmoidPa"
-      "rameter.Engine\"+\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n"
-      "\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"\275\001\n\027FullyConnectedPa"
-      "rameter\022\022\n\nnum_output\030\001 \001(\r\022\021\n\tbias_term"
-      "\030\002 \001(\010\022-\n\rweight_filler\030\003 \001(\0132\026.caffe.Fi"
-      "llerParameter\022+\n\013bias_filler\030\004 \001(\0132\026.caf"
-      "fe.FillerParameter\022\014\n\004axis\030\005 \001(\005\022\021\n\ttran"
-      "spose\030\006 \001(\010\"\205\003\n\020PoolingParameter\0220\n\004pool"
-      "\030\001 \001(\0162\".caffe.PoolingParameter.PoolMeth"
-      "od\022\023\n\013kernel_size\030\002 \001(\r\022\020\n\010kernel_h\030\005 \001("
-      "\r\022\020\n\010kernel_w\030\006 \001(\r\022\016\n\006stride\030\003 \001(\r\022\020\n\010s"
-      "tride_h\030\007 \001(\r\022\020\n\010stride_w\030\010 \001(\r\022\013\n\003pad\030\004"
-      " \001(\r\022\r\n\005pad_h\030\t \001(\r\022\r\n\005pad_w\030\n \001(\r\022.\n\006en"
-      "gine\030\013 \001(\0162\036.caffe.PoolingParameter.Engi"
-      "ne\022\026\n\016global_pooling\030\014 \001(\010\"2\n\nPoolMethod"
-      "\022\007\n\003MAX\020\000\022\013\n\007AVERAGE\020\001\022\016\n\nSTOCHASTIC\020\002\"+"
-      "\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDN"
-      "N\020\002*\034\n\005Phase\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020\001b\006proto"
-      "3"
+      "ram\030\020 \001(\0132\024.caffe.ReLUParameter\022.\n\rsigmo"
+      "id_param\030\021 \001(\0132\027.caffe.SigmoidParameter\022"
+      "=\n\025fully_connected_param\030\022 \001(\0132\036.caffe.F"
+      "ullyConnectedParameter\"\201\001\n\rReLUParameter"
+      "\022\026\n\016negative_slope\030\001 \001(\002\022+\n\006engine\030\002 \001(\016"
+      "2\033.caffe.ReLUParameter.Engine\"+\n\006Engine\022"
+      "\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"o\n\020Si"
+      "gmoidParameter\022.\n\006engine\030\001 \001(\0162\036.caffe.S"
+      "igmoidParameter.Engine\"+\n\006Engine\022\013\n\007DEFA"
+      "ULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"\275\001\n\027FullyCon"
+      "nectedParameter\022\022\n\nnum_output\030\001 \001(\r\022\021\n\tb"
+      "ias_term\030\002 \001(\010\022-\n\rweight_filler\030\003 \001(\0132\026."
+      "caffe.FillerParameter\022+\n\013bias_filler\030\004 \001"
+      "(\0132\026.caffe.FillerParameter\022\014\n\004axis\030\005 \001(\005"
+      "\022\021\n\ttranspose\030\006 \001(\010\"\205\003\n\020PoolingParameter"
+      "\0220\n\004pool\030\001 \001(\0162\".caffe.PoolingParameter."
+      "PoolMethod\022\023\n\013kernel_size\030\002 \001(\r\022\020\n\010kerne"
+      "l_h\030\005 \001(\r\022\020\n\010kernel_w\030\006 \001(\r\022\016\n\006stride\030\003 "
+      "\001(\r\022\020\n\010stride_h\030\007 \001(\r\022\020\n\010stride_w\030\010 \001(\r\022"
+      "\013\n\003pad\030\004 \001(\r\022\r\n\005pad_h\030\t \001(\r\022\r\n\005pad_w\030\n \001"
+      "(\r\022.\n\006engine\030\013 \001(\0162\036.caffe.PoolingParame"
+      "ter.Engine\022\026\n\016global_pooling\030\014 \001(\010\"2\n\nPo"
+      "olMethod\022\007\n\003MAX\020\000\022\013\n\007AVERAGE\020\001\022\016\n\nSTOCHA"
+      "STIC\020\002\"+\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001"
+      "\022\t\n\005CUDNN\020\002*\034\n\005Phase\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020"
+      "\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1681);
+      descriptor, 1729);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "caffe.proto", &protobuf_RegisterTypes);
 }
@@ -2267,6 +2270,8 @@ void FillerParameter::InternalSwap(FillerParameter* other) {
 void LayerParameter::InitAsDefaultInstance() {
   ::caffe::_LayerParameter_default_instance_._instance.get_mutable()->relu_param_ = const_cast< ::caffe::ReLUParameter*>(
       ::caffe::ReLUParameter::internal_default_instance());
+  ::caffe::_LayerParameter_default_instance_._instance.get_mutable()->sigmoid_param_ = const_cast< ::caffe::SigmoidParameter*>(
+      ::caffe::SigmoidParameter::internal_default_instance());
   ::caffe::_LayerParameter_default_instance_._instance.get_mutable()->fully_connected_param_ = const_cast< ::caffe::FullyConnectedParameter*>(
       ::caffe::FullyConnectedParameter::internal_default_instance());
 }
@@ -2280,6 +2285,7 @@ const int LayerParameter::kWeightsFieldNumber;
 const int LayerParameter::kPropagateDownFieldNumber;
 const int LayerParameter::kPhaseFieldNumber;
 const int LayerParameter::kReluParamFieldNumber;
+const int LayerParameter::kSigmoidParamFieldNumber;
 const int LayerParameter::kFullyConnectedParamFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -2320,6 +2326,11 @@ LayerParameter::LayerParameter(const LayerParameter& from)
   } else {
     relu_param_ = NULL;
   }
+  if (from.has_sigmoid_param()) {
+    sigmoid_param_ = new ::caffe::SigmoidParameter(*from.sigmoid_param_);
+  } else {
+    sigmoid_param_ = NULL;
+  }
   if (from.has_fully_connected_param()) {
     fully_connected_param_ = new ::caffe::FullyConnectedParameter(*from.fully_connected_param_);
   } else {
@@ -2351,6 +2362,7 @@ void LayerParameter::SharedDtor() {
   bottom_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   top_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete relu_param_;
+  if (this != internal_default_instance()) delete sigmoid_param_;
   if (this != internal_default_instance()) delete fully_connected_param_;
 }
 
@@ -2394,6 +2406,10 @@ void LayerParameter::Clear() {
     delete relu_param_;
   }
   relu_param_ = NULL;
+  if (GetArenaNoVirtual() == NULL && sigmoid_param_ != NULL) {
+    delete sigmoid_param_;
+  }
+  sigmoid_param_ = NULL;
   if (GetArenaNoVirtual() == NULL && fully_connected_param_ != NULL) {
     delete fully_connected_param_;
   }
@@ -2552,10 +2568,22 @@ bool LayerParameter::MergePartialFromCodedStream(
         break;
       }
 
-      // .caffe.FullyConnectedParameter fully_connected_param = 17;
+      // .caffe.SigmoidParameter sigmoid_param = 17;
       case 17: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(138u /* 138 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_sigmoid_param()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.FullyConnectedParameter fully_connected_param = 18;
+      case 18: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(146u /* 146 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_fully_connected_param()));
         } else {
@@ -2667,10 +2695,16 @@ void LayerParameter::SerializeWithCachedSizes(
       16, *this->relu_param_, output);
   }
 
-  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  // .caffe.SigmoidParameter sigmoid_param = 17;
+  if (this->has_sigmoid_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      17, *this->sigmoid_param_, output);
+  }
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 18;
   if (this->has_fully_connected_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, *this->fully_connected_param_, output);
+      18, *this->fully_connected_param_, output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -2778,11 +2812,18 @@ void LayerParameter::SerializeWithCachedSizes(
         16, *this->relu_param_, deterministic, target);
   }
 
-  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  // .caffe.SigmoidParameter sigmoid_param = 17;
+  if (this->has_sigmoid_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        17, *this->sigmoid_param_, deterministic, target);
+  }
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 18;
   if (this->has_fully_connected_param()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        17, *this->fully_connected_param_, deterministic, target);
+        18, *this->fully_connected_param_, deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -2880,7 +2921,14 @@ size_t LayerParameter::ByteSizeLong() const {
         *this->relu_param_);
   }
 
-  // .caffe.FullyConnectedParameter fully_connected_param = 17;
+  // .caffe.SigmoidParameter sigmoid_param = 17;
+  if (this->has_sigmoid_param()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->sigmoid_param_);
+  }
+
+  // .caffe.FullyConnectedParameter fully_connected_param = 18;
   if (this->has_fully_connected_param()) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
@@ -2944,6 +2992,9 @@ void LayerParameter::MergeFrom(const LayerParameter& from) {
   if (from.has_relu_param()) {
     mutable_relu_param()->::caffe::ReLUParameter::MergeFrom(from.relu_param());
   }
+  if (from.has_sigmoid_param()) {
+    mutable_sigmoid_param()->::caffe::SigmoidParameter::MergeFrom(from.sigmoid_param());
+  }
   if (from.has_fully_connected_param()) {
     mutable_fully_connected_param()->::caffe::FullyConnectedParameter::MergeFrom(from.fully_connected_param());
   }
@@ -2984,6 +3035,7 @@ void LayerParameter::InternalSwap(LayerParameter* other) {
   bottom_.Swap(&other->bottom_);
   top_.Swap(&other->top_);
   swap(relu_param_, other->relu_param_);
+  swap(sigmoid_param_, other->sigmoid_param_);
   swap(fully_connected_param_, other->fully_connected_param_);
   swap(phase_, other->phase_);
   _internal_metadata_.Swap(&other->_internal_metadata_);

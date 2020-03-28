@@ -158,32 +158,32 @@ void Caffe::DeviceQuery() {
 		return;
 	}
 	CUDA_CHECK(cudaGetDeviceProperties(&prop, device));
-	std::cout << "====================================================================================================" << std::endl;
-	LOG(INFO) << "Device id:                     " << device;
-	LOG(INFO) << "Major revision number:         " << prop.major;
-	LOG(INFO) << "Minor revision number:         " << prop.minor;
-	LOG(INFO) << "Name:                          " << prop.name;
-	LOG(INFO) << "Total global memory:           " << prop.totalGlobalMem / 1024.0 / 1024.0 << "MB";
-	LOG(INFO) << "Total shared memory per block: " << prop.sharedMemPerBlock / 1024.0 << "KB";
-	LOG(INFO) << "Total registers per block:     " << prop.regsPerBlock;
-	LOG(INFO) << "Warp size:                     " << prop.warpSize;
-	LOG(INFO) << "Maximum memory pitch:          " << prop.memPitch;
-	LOG(INFO) << "Maximum threads per block:     " << prop.maxThreadsPerBlock;
-	LOG(INFO) << "Maximum dimension of block:    "
-	          << prop.maxThreadsDim[0] <<     ", " << prop.maxThreadsDim[1] << ", "
-	          << prop.maxThreadsDim[2];
-	LOG(INFO) << "Maximum dimension of grid:     "
-	          << prop.maxGridSize[0] <<       ", " << prop.maxGridSize[1] << ", "
-	          << prop.maxGridSize[2];
-	LOG(INFO) << "Clock rate:                    " << prop.clockRate;
-	LOG(INFO) << "Total constant memory:         " << prop.totalConstMem / 1024.0 << "KB";
-	LOG(INFO) << "Texture alignment:             " << prop.textureAlignment;
-	LOG(INFO) << "Concurrent copy and execution: "
-	          << (prop.deviceOverlap ? "Yes" : "No");
-	LOG(INFO) << "Number of multiprocessors:     " << prop.multiProcessorCount;
-	LOG(INFO) << "Kernel execution timeout:      "
-	          << (prop.kernelExecTimeoutEnabled ? "Yes" : "No");
-	std::cout << "====================================================================================================" << std::endl;
+	std::cout << "=============================================================" << std::endl;
+	std::cout << "Device id:                     " << device << std::endl;
+	std::cout << "Major revision number:         " << prop.major << std::endl;
+	std::cout << "Minor revision number:         " << prop.minor << std::endl;
+	std::cout << "Name:                          " << prop.name << std::endl;
+	std::cout << "Total global memory:           " << prop.totalGlobalMem / 1024.0 / 1024.0 << "MB" << std::endl;
+	std::cout << "Total shared memory per block: " << prop.sharedMemPerBlock / 1024.0 << "KB" << std::endl;
+	std::cout << "Total registers per block:     " << prop.regsPerBlock << std::endl;
+	std::cout << "Warp size:                     " << prop.warpSize << std::endl;
+	std::cout << "Maximum memory pitch:          " << prop.memPitch << std::endl;
+	std::cout << "Maximum threads per block:     " << prop.maxThreadsPerBlock << std::endl;
+	std::cout << "Maximum dimension of block:    "
+	          << prop.maxThreadsDim[0] << ", " << prop.maxThreadsDim[1] << ", "
+	          << prop.maxThreadsDim[2] << std::endl;
+	std::cout << "Maximum dimension of grid:     "
+	          << prop.maxGridSize[0] << ", " << prop.maxGridSize[1] << ", "
+	          << prop.maxGridSize[2] << std::endl;
+	std::cout << "Clock rate:                    " << prop.clockRate << std::endl;
+	std::cout << "Total constant memory:         " << prop.totalConstMem / 1024.0 << "KB" << std::endl;
+	std::cout << "Texture alignment:             " << prop.textureAlignment << std::endl;
+	std::cout << "Concurrent copy and execution: "
+	          << (prop.deviceOverlap ? "Yes" : "No") << std::endl;
+	std::cout << "Number of multiprocessors:     " << prop.multiProcessorCount << std::endl;
+	std::cout << "Kernel execution timeout:      "
+	          << (prop.kernelExecTimeoutEnabled ? "Yes" : "No") << std::endl;
+	std::cout << "=============================================================" << std::endl;
 }
 
 void Caffe::SetDevice(const int device_id) {
