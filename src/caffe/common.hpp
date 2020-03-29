@@ -134,8 +134,6 @@ class Caffe {
 	inline static bool root_solver() { return Get().solver_rank_ == 0; }
 
 
-
-
  protected:
 #ifndef CPU_ONLY
 	cublasHandle_t cublas_handle_;

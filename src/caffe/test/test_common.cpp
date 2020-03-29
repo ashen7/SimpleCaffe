@@ -6,6 +6,7 @@
 #include "caffe/common.hpp"
 #include "caffe/synced_memory.hpp"
 #include "caffe/util/math_functions.hpp"
+
 #include "caffe/test/test_caffe_main.hpp"
 
 namespace caffe {

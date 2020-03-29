@@ -93,8 +93,13 @@ Dtype caffe_cpu_asum(const int N, const Dtype* Y);
 template <typename Dtype>
 void caffe_cpu_scale(const int N, const Dtype alpha, const Dtype* X, Dtype* Y);
 
+//内联函数 实现可以写在头文件 普通函数会报重定义
 inline Caffe::rng_t& caffe_rng() {
 	return (*static_cast<Caffe::rng_t*>(Caffe::rng_stream().generator()));
+}
+
+inline unsigned int caffe_rng_rand() {
+	return caffe_rng()();
 }
 
 template <typename Dtype>
@@ -126,8 +131,9 @@ void caffe_cpu_##name(const int n, const Dtype* x, Dtype* y) { \
   } \
 }
 
-// 1为positives, 0为zero, -1为negatives
+// x为positives输出1, 为zero输出0, 为negative输出-1
 DEFINE_CAFFE_CPU_UNARY_FUNC(sign, y[i] = caffe_sign<Dtype>(x[i]))
+// x为负数输出1 其他输出0
 DEFINE_CAFFE_CPU_UNARY_FUNC(sgnbit, y[i] = static_cast<bool>((std::signbit)(x[i])))
 DEFINE_CAFFE_CPU_UNARY_FUNC(fabs, y[i] = std::fabs(x[i]))
 

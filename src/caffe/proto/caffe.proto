@@ -59,7 +59,7 @@ message LayerParameter {
     string bottom = 3;      //输入tensor的名字
     string top = 4;         //输出tensor的名字
 
-    //每个输出tensor的权重
+    //每个输出tensor的loss
     repeated float loss_weight = 5;
     //层的权重
     repeated TensorProto weights = 6;
@@ -105,7 +105,6 @@ message FullyConnectedParameter {
     FillerParameter bias_filler = 4;   //偏置的填充
     int32 axis = 5;                    //轴/维度
     bool transpose = 6;                //权重矩阵是否转置
-
 }
 
 //池化层参数

@@ -39,12 +39,12 @@ class LayerInterface {
 	/*
 	 * 父类函数
 	 * 公共层的初始化函数
-	 * 参数: 预reshape的输入tensor
-	 * 参数: 输出tensor 未reshape的同步内存对象
+	 * 参数: 预reshape的输入tensor list(个数>=1)
+	 * 参数: 未reshape的输出tensor list(个数>=1)
 	 * 1. 检查输入和输出tensor是否正确
 	 * 2. 调用层初始化为独立的层初始化 比如初始化cudnn
 	 * 3. reshape为输出tensor所需要的分配空间
-	 * 4. 为非零的损失权重设置损失权重
+	 * 4. 设置loss 给输出tensor设置diff
 	 * */
 	void SetUp(const vector<Tensor<Dtype>*>& bottom,
 		         const vector<Tensor<Dtype>*>& top) {
@@ -57,9 +57,9 @@ class LayerInterface {
 	/*
 	 * 虚函数 子类重写
 	 * 独立层的初始化函数
-	 * 参数: 预reshape的输入tensor data存放的这个层的输入数据
-	 * 参数: 输出tensor 未reshape的同步内存对象
-	 * 这个函数执行一次性的独立层初始化 比如初始化cudnn
+	 * 参数: 预reshape的输入tensor list(个数>=1)
+	 * 参数: 未reshape的输出tensor list(个数>=1)
+	 * 这个函数执行一次性的独立层初始化
 	 * */
 	virtual void LayerSetUp(const vector<Tensor<Dtype>*>& bottom,
 	                        const vector<Tensor<Dtype>*>& top) {}
@@ -67,8 +67,8 @@ class LayerInterface {
 	/*
 	 * 虚函数 子类重写
 	 * 用输入tensor来调整输出tensor的shape
-	 * 参数: 输入tensor 已经是输入的shape
-	 * 参数: 输出tensor 调用reshape得到所需的size
+	 * 参数: 预reshape的输入tensor list(个数>=1)
+	 * 参数: 未reshape的输出tensor list(个数>=1)
 	 */
 	virtual void Reshape(const vector<Tensor<Dtype>*>& bottom,
 	                     const vector<Tensor<Dtype>*>& top) = 0;
@@ -76,8 +76,8 @@ class LayerInterface {
 	/*
 	 * 父类函数
 	 * 给定输入tensor 计算输出tensor和loss
-	 * 参数: 输入tensor data存放的本层的输入
-	 * 参数: 输出tensor data存放的本层的输出
+	 * 参数: 输入tensor data存放本层的输入值 diff存放本层的输入误差值
+	 * 参数: 输出tensor data存放本层的输出值 diff存放本层的输出误差值
 	 * 返回 本层的总loss
 	 * 如果层有非零损失权重 计算返回loss
 	 */
@@ -87,9 +87,9 @@ class LayerInterface {
 	/*
 	 * 父类函数
 	 * 给定输出层的误差梯度 计算输入层的误差梯度
-	 * 参数: 输出tensor diff存放的是误差梯度
-	 * 参数: 反向传播 一个和输入tensor list同size的bool list 每个索引表示对应tensor是否进行反向传播
-	 * 参数: 输入tensor diff存放的是误差梯度
+	 * 参数: 输出tensor data存放本层的输出值 diff存放本层的输出误差值
+	 * 参数: 每个索引表示对应tensor是否进行误差传递
+	 * 参数: 输入tensor data存放本层的输入值 diff存放本层的输入误差值
 	 */
 	inline void Backward(const vector<Tensor<Dtype>*>& top,
 	                     const vector<bool>& error_propagate_down,
@@ -126,18 +126,20 @@ class LayerInterface {
 
 	//虚函数 子类重写 层所需的输入tensor的个数
 	virtual inline int NumBottomTensor() const { return -1; }
-	//虚函数 子类重写 层所需的最小输入tensor的个数
+	//虚函数 层所需的最小输入tensor的个数
 	virtual inline int MinBottomTensor() const { return -1; }
-	//虚函数 子类重写 层所需的最大输入tensor的个数
+	//虚函数 层所需的最大输入tensor的个数
 	virtual inline int MaxBottomTensor() const { return -1; }
 	//虚函数 子类重写 层所需的输出tensor的个数
 	virtual inline int NumTopTensor() const { return -1; }
-	//虚函数 子类重写 层所需的最小输出tensor的个数
+	//虚函数 层所需的最小输出tensor的个数
 	virtual inline int MinTopTensor() const { return -1; }
-	//虚函数 子类重写 层所需的最大输出tensor的个数
+	//虚函数 层所需的最大输出tensor的个数
 	virtual inline int MaxTopTensor() const { return -1; }
 	//层要求输入和输出的tensor个数相同 返回true
 	virtual inline bool EqualNumBottomTopTensor() const { return false; }
+
+
 
 	//得到当前索引对应的权重是否计算梯度
 	inline bool gradient_propagate_down(const int param_index) {
@@ -159,7 +161,7 @@ class LayerInterface {
 	Phase phase_;                               //train/test阶段
 	vector<shared_ptr<Tensor<Dtype>>> weights_; //权重
 	vector<bool> gradient_propagate_down_;      //和权重同size 有同样的tensor个数 表示每个权重是否计算梯度
-	vector<Dtype> loss_;                        //每个输出值是否有一个非零权重
+	vector<Dtype> loss_;                        //loss
 
 	//内部函数 虚函数 子类重写 cpu forward pass接口
 	virtual void Forward_cpu(const vector<Tensor<Dtype>*>& bottom,
@@ -223,7 +225,23 @@ class LayerInterface {
 		}
 	}
 
+	//设置loss 给输出tensor设置diff
 	inline void SetLossWeights(const vector<Tensor<Dtype>*>& top) {
+		const int num_loss_weights = layer_param_.loss_weight_size();
+		if (num_loss_weights) {
+			CHECK_EQ(top.size(), num_loss_weights) << "loss weight must be "
+					<< "unspecified or specified once per top tensor";
+			for (int top_index = 0; top_index < top.size(); ++top_index) {
+				const Dtype loss_weight = layer_param_.loss_weight(top_index);
+				if (Dtype(0) == loss_weight) {
+					continue;
+				}
+				this->set_loss(top_index, loss_weight);
+				const int count = top[top_index]->count();
+				Dtype* loss_multiplier = top[top_index]->mutable_cpu_diff();
+				caffe_set(count, loss_weight, loss_multiplier);
+			}
+		}
 	}
 
  private:
@@ -281,9 +299,9 @@ inline Dtype LayerInterface<Dtype>::Forward(const vector<Tensor<Dtype>*>& bottom
 
 //父类函数 backward pass 包装了Backward_cpu/Backward_gpu实现
 template <typename Dtype>
-inline void Backward(const vector<Tensor<Dtype>*>& top,
-                     const vector<bool>& error_propagate_down,
-                     const vector<Tensor<Dtype>*>& bottom) {
+inline void LayerInterface<Dtype>::Backward(const vector<Tensor<Dtype>*>& top,
+												                    const vector<bool>& error_propagate_down,
+												                    const vector<Tensor<Dtype>*>& bottom) {
 	switch (Caffe::mode()) {
 		case Caffe::CPU:
 			//子类的反向计算 cpu实现

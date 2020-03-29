@@ -40,6 +40,7 @@ void FullyConnectedLayer<Dtype>::LayerSetUp(const vector<Tensor<Dtype>*>& bottom
 			weight_shape[0] = num_output_;
 			weight_shape[1] = num_input_;
 		}
+
 		//给权重reshape 分配size = 输入数量 × 输出数量
 		this->weights_[0].reset(new Tensor<Dtype>(weight_shape));
 		//fill填充权重 填充类型由层参数的proto定义 返回一个对象指针 由shared_ptr保管

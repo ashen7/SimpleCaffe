@@ -14,7 +14,6 @@
 
 //::func() 表示调用的是全局函数 而不是类中的函数 如果在类中调用同名函数 会调用全局的
 namespace caffe {
-
 //模板类型参数化
 typedef ::testing::Types<float, double> TestDtypes;
 

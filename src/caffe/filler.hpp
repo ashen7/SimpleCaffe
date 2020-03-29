@@ -72,7 +72,7 @@ public:
 		CHECK_GT(tensor->count(), 0);
 		caffe_rng_gaussian(tensor->count(), Dtype(this->fill_param_.mean()),
 		                   Dtype(this->fill_param_.stddev()), tensor->mutable_cpu_data());
-		int sparse = this->fill_param_.sparse();
+		//int sparse = this->fill_param_.sparse();
 	}
 };     //class GaussianFill
 

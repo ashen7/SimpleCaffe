@@ -8,6 +8,7 @@
 #include "caffe/tensor.hpp"
 #include "caffe/common.hpp"
 #include "caffe/filler.hpp"
+
 #include "caffe/test/test_caffe_main.hpp"
 
 namespace caffe {
