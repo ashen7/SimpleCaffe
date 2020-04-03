@@ -53,7 +53,7 @@ TEST_F(CommonTest, TestRandomSeedGPU) {
 #ifndef CPU_ONLY
 	SyncedMemory a(10 * sizeof(unsigned int));
 	SyncedMemory b(10 * sizeof(unsigned int));
-//	设置一样的seed 看看生成的随机值是否一样
+  //设置一样的seed 看看生成的随机值是否一样
 	Caffe::set_random_seed(1701);
 	CURAND_CHECK(curandGenerate(Caffe::curand_generator(),
 		           static_cast<unsigned int*>(a.mutable_gpu_data()), 10));

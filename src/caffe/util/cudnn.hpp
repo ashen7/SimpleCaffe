@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/25.
 //
-#ifndef SIMPLE_CAFFE_CUDNN_HPP_
-#define SIMPLE_CAFFE_CUDNN_HPP_
+#ifndef SIMPLE_CAFFE_UTILITY_CUDNN_HPP_
+#define SIMPLE_CAFFE_UTILITY_CUDNN_HPP_
 
 #ifdef USE_CUDNN
 
@@ -250,4 +250,4 @@ inline void CreateActivationDescriptor(cudnnActivationDescriptor_t* activation_d
 }      //namespace caffe
 
 #endif //USE_CUDNN
-#endif //SIMPLE_CAFFE_CUDNN_HPP_
+#endif //SIMPLE_CAFFE_UTILITY_CUDNN_HPP_

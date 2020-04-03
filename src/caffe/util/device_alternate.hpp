@@ -1,8 +1,8 @@
 //
 // Created by yipeng on 2020/3/21.
 //
-#ifndef SIMPLE_CAFFE_DEVICE_ALTERNATE_HPP_
-#define SIMPLE_CAFFE_DEVICE_ALTERNATE_HPP_
+#ifndef SIMPLE_CAFFE_UTILITY_DEVICE_ALTERNATE_HPP_
+#define SIMPLE_CAFFE_UTILITY_DEVICE_ALTERNATE_HPP_
 
 #ifdef CPU_ONLY   //CPU Mode
 #include <vector>
@@ -86,4 +86,4 @@ const char* curandGetErrorString(curandStatus_t status);
 }      //namespace caffe
 
 #endif //!CPU_ONLY
-#endif //SIMPLE_CAFFE_DEVICE_ALTERNATE_HPP_
+#endif //SIMPLE_CAFFE_UTILITY_DEVICE_ALTERNATE_HPP_

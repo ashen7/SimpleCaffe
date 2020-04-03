@@ -40,11 +40,26 @@ class FillerParameterDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<FillerParameter>
       _instance;
 } _FillerParameter_default_instance_;
+class NetStateDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<NetState>
+      _instance;
+} _NetState_default_instance_;
 class LayerParameterDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<LayerParameter>
       _instance;
 } _LayerParameter_default_instance_;
+class NetParameterDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<NetParameter>
+      _instance;
+} _NetParameter_default_instance_;
+class SolverParameterDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<SolverParameter>
+      _instance;
+} _SolverParameter_default_instance_;
 class ReLUParameterDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReLUParameter>
@@ -153,6 +168,27 @@ void InitDefaultsFillerParameter() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFillerParameterImpl);
 }
 
+void InitDefaultsNetStateImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  {
+    void* ptr = &::caffe::_NetState_default_instance_;
+    new (ptr) ::caffe::NetState();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::caffe::NetState::InitAsDefaultInstance();
+}
+
+void InitDefaultsNetState() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsNetStateImpl);
+}
+
 void InitDefaultsLayerParameterImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -176,6 +212,52 @@ void InitDefaultsLayerParameterImpl() {
 void InitDefaultsLayerParameter() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsLayerParameterImpl);
+}
+
+void InitDefaultsNetParameterImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  protobuf_caffe_2eproto::InitDefaultsNetState();
+  protobuf_caffe_2eproto::InitDefaultsLayerParameter();
+  {
+    void* ptr = &::caffe::_NetParameter_default_instance_;
+    new (ptr) ::caffe::NetParameter();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::caffe::NetParameter::InitAsDefaultInstance();
+}
+
+void InitDefaultsNetParameter() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsNetParameterImpl);
+}
+
+void InitDefaultsSolverParameterImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  protobuf_caffe_2eproto::InitDefaultsNetParameter();
+  protobuf_caffe_2eproto::InitDefaultsNetState();
+  {
+    void* ptr = &::caffe::_SolverParameter_default_instance_;
+    new (ptr) ::caffe::SolverParameter();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::caffe::SolverParameter::InitAsDefaultInstance();
+}
+
+void InitDefaultsSolverParameter() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSolverParameterImpl);
 }
 
 void InitDefaultsReLUParameterImpl() {
@@ -263,8 +345,8 @@ void InitDefaultsPoolingParameter() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPoolingParameterImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[9];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
+::google::protobuf::Metadata file_level_metadata[12];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[8];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -307,6 +389,14 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FillerParameter, sparse_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::FillerParameter, variance_norm_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetState, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetState, phase_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetState, level_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetState, stage_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -322,6 +412,52 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, relu_param_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, sigmoid_param_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::LayerParameter, fully_connected_param_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetParameter, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetParameter, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetParameter, input_shape_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetParameter, force_backward_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetParameter, state_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::NetParameter, layers_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, train_net_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, test_net_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, train_net_param_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, test_net_param_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, net_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, net_param_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, train_state_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, test_state_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, test_iter_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, test_interval_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, base_lr_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, display_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, max_iter_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, lc_policy_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, gamma_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, power_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, momentum_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, weight_decay_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, regularization_type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, stopsize_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, snapshot_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, snapshot_prefix_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, snapshot_diff_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, snapshot_format_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, solver_mode_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, device_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, random_seed_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, delta_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, layer_wise_reduce_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::SolverParameter, weights_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::caffe::ReLUParameter, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -369,11 +505,14 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 6, -1, sizeof(::caffe::TensorProto)},
   { 20, -1, sizeof(::caffe::TensorProtoList)},
   { 26, -1, sizeof(::caffe::FillerParameter)},
-  { 39, -1, sizeof(::caffe::LayerParameter)},
-  { 55, -1, sizeof(::caffe::ReLUParameter)},
-  { 62, -1, sizeof(::caffe::SigmoidParameter)},
-  { 68, -1, sizeof(::caffe::FullyConnectedParameter)},
-  { 79, -1, sizeof(::caffe::PoolingParameter)},
+  { 39, -1, sizeof(::caffe::NetState)},
+  { 47, -1, sizeof(::caffe::LayerParameter)},
+  { 63, -1, sizeof(::caffe::NetParameter)},
+  { 73, -1, sizeof(::caffe::SolverParameter)},
+  { 109, -1, sizeof(::caffe::ReLUParameter)},
+  { 116, -1, sizeof(::caffe::SigmoidParameter)},
+  { 122, -1, sizeof(::caffe::FullyConnectedParameter)},
+  { 133, -1, sizeof(::caffe::PoolingParameter)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -381,7 +520,10 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_TensorProto_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_TensorProtoList_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_FillerParameter_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_NetState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_LayerParameter_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_NetParameter_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_SolverParameter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_ReLUParameter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_SigmoidParameter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::caffe::_FullyConnectedParameter_default_instance_),
@@ -404,7 +546,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 9);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 12);
 }
 
 void AddDescriptorsImpl() {
@@ -423,40 +565,67 @@ void AddDescriptorsImpl() {
       "se\030\007 \001(\005\022:\n\rvariance_norm\030\010 \001(\0162#.caffe."
       "FillerParameter.VarianceNorm\"4\n\014Variance"
       "Norm\022\n\n\006FAN_IN\020\000\022\013\n\007FAN_OUT\020\001\022\013\n\007AVERAGE"
-      "\020\002\"\321\002\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004t"
-      "ype\030\002 \001(\t\022\016\n\006bottom\030\003 \001(\t\022\013\n\003top\030\004 \001(\t\022\023"
-      "\n\013loss_weight\030\005 \003(\002\022#\n\007weights\030\006 \003(\0132\022.c"
-      "affe.TensorProto\022\026\n\016propagate_down\030\007 \003(\010"
-      "\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase\022(\n\nrelu_pa"
-      "ram\030\020 \001(\0132\024.caffe.ReLUParameter\022.\n\rsigmo"
-      "id_param\030\021 \001(\0132\027.caffe.SigmoidParameter\022"
-      "=\n\025fully_connected_param\030\022 \001(\0132\036.caffe.F"
-      "ullyConnectedParameter\"\201\001\n\rReLUParameter"
-      "\022\026\n\016negative_slope\030\001 \001(\002\022+\n\006engine\030\002 \001(\016"
-      "2\033.caffe.ReLUParameter.Engine\"+\n\006Engine\022"
-      "\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"o\n\020Si"
-      "gmoidParameter\022.\n\006engine\030\001 \001(\0162\036.caffe.S"
-      "igmoidParameter.Engine\"+\n\006Engine\022\013\n\007DEFA"
-      "ULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"\275\001\n\027FullyCon"
-      "nectedParameter\022\022\n\nnum_output\030\001 \001(\r\022\021\n\tb"
-      "ias_term\030\002 \001(\010\022-\n\rweight_filler\030\003 \001(\0132\026."
-      "caffe.FillerParameter\022+\n\013bias_filler\030\004 \001"
-      "(\0132\026.caffe.FillerParameter\022\014\n\004axis\030\005 \001(\005"
-      "\022\021\n\ttranspose\030\006 \001(\010\"\205\003\n\020PoolingParameter"
-      "\0220\n\004pool\030\001 \001(\0162\".caffe.PoolingParameter."
-      "PoolMethod\022\023\n\013kernel_size\030\002 \001(\r\022\020\n\010kerne"
-      "l_h\030\005 \001(\r\022\020\n\010kernel_w\030\006 \001(\r\022\016\n\006stride\030\003 "
-      "\001(\r\022\020\n\010stride_h\030\007 \001(\r\022\020\n\010stride_w\030\010 \001(\r\022"
-      "\013\n\003pad\030\004 \001(\r\022\r\n\005pad_h\030\t \001(\r\022\r\n\005pad_w\030\n \001"
-      "(\r\022.\n\006engine\030\013 \001(\0162\036.caffe.PoolingParame"
-      "ter.Engine\022\026\n\016global_pooling\030\014 \001(\010\"2\n\nPo"
-      "olMethod\022\007\n\003MAX\020\000\022\013\n\007AVERAGE\020\001\022\016\n\nSTOCHA"
-      "STIC\020\002\"+\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001"
-      "\022\t\n\005CUDNN\020\002*\034\n\005Phase\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020"
-      "\001b\006proto3"
+      "\020\002\"E\n\010NetState\022\033\n\005phase\030\001 \001(\0162\014.caffe.Ph"
+      "ase\022\r\n\005level\030\002 \001(\005\022\r\n\005stage\030\003 \003(\t\"\321\002\n\016La"
+      "yerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\t"
+      "\022\016\n\006bottom\030\003 \001(\t\022\013\n\003top\030\004 \001(\t\022\023\n\013loss_we"
+      "ight\030\005 \003(\002\022#\n\007weights\030\006 \003(\0132\022.caffe.Tens"
+      "orProto\022\026\n\016propagate_down\030\007 \003(\010\022\033\n\005phase"
+      "\030\n \001(\0162\014.caffe.Phase\022(\n\nrelu_param\030\020 \001(\013"
+      "2\024.caffe.ReLUParameter\022.\n\rsigmoid_param\030"
+      "\021 \001(\0132\027.caffe.SigmoidParameter\022=\n\025fully_"
+      "connected_param\030\022 \001(\0132\036.caffe.FullyConne"
+      "ctedParameter\"\220\001\n\014NetParameter\022\014\n\004name\030\001"
+      " \001(\t\022\023\n\013input_shape\030\002 \003(\005\022\026\n\016force_backw"
+      "ard\030\003 \001(\010\022\036\n\005state\030\004 \001(\0132\017.caffe.NetStat"
+      "e\022%\n\006layers\030d \003(\0132\025.caffe.LayerParameter"
+      "\"\357\006\n\017SolverParameter\022\021\n\ttrain_net\030\001 \001(\t\022"
+      "\020\n\010test_net\030\002 \001(\t\022,\n\017train_net_param\030\025 \001"
+      "(\0132\023.caffe.NetParameter\022+\n\016test_net_para"
+      "m\030\026 \001(\0132\023.caffe.NetParameter\022\013\n\003net\030\030 \001("
+      "\t\022&\n\tnet_param\030\031 \001(\0132\023.caffe.NetParamete"
+      "r\022$\n\013train_state\030\032 \001(\0132\017.caffe.NetState\022"
+      "#\n\ntest_state\030\033 \001(\0132\017.caffe.NetState\022\021\n\t"
+      "test_iter\030\003 \003(\005\022\025\n\rtest_interval\030\004 \001(\005\022\017"
+      "\n\007base_lr\030\005 \001(\002\022\017\n\007display\030\006 \001(\005\022\020\n\010max_"
+      "iter\030\007 \001(\005\022\021\n\tlc_policy\030\010 \001(\t\022\r\n\005gamma\030\t"
+      " \001(\002\022\r\n\005power\030\n \001(\002\022\020\n\010momentum\030\013 \001(\002\022\024\n"
+      "\014weight_decay\030\014 \001(\002\022\033\n\023regularization_ty"
+      "pe\030\035 \001(\t\022\020\n\010stopsize\030\r \001(\005\022\020\n\010snapshot\030\016"
+      " \001(\005\022\027\n\017snapshot_prefix\030\017 \001(\t\022\025\n\rsnapsho"
+      "t_diff\030\020 \001(\010\022>\n\017snapshot_format\030% \001(\0162%."
+      "caffe.SolverParameter.SnapshotFormat\0226\n\013"
+      "solver_mode\030\021 \001(\0162!.caffe.SolverParamete"
+      "r.SolverMode\022\021\n\tdevice_id\030\022 \001(\005\022\023\n\013rando"
+      "m_seed\030\024 \001(\003\022\014\n\004type\030( \001(\t\022\r\n\005delta\030\037 \001("
+      "\002\022\031\n\021layer_wise_reduce\030) \001(\010\022\017\n\007weights\030"
+      "* \003(\t\"+\n\016SnapshotFormat\022\010\n\004HDF5\020\000\022\017\n\013BIN"
+      "ARYPROTO\020\001\"\036\n\nSolverMode\022\007\n\003CPU\020\000\022\007\n\003GPU"
+      "\020\001\"\201\001\n\rReLUParameter\022\026\n\016negative_slope\030\001"
+      " \001(\002\022+\n\006engine\030\002 \001(\0162\033.caffe.ReLUParamet"
+      "er.Engine\"+\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n\005CAFF"
+      "E\020\001\022\t\n\005CUDNN\020\002\"o\n\020SigmoidParameter\022.\n\006en"
+      "gine\030\001 \001(\0162\036.caffe.SigmoidParameter.Engi"
+      "ne\"+\n\006Engine\022\013\n\007DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005"
+      "CUDNN\020\002\"\275\001\n\027FullyConnectedParameter\022\022\n\nn"
+      "um_output\030\001 \001(\r\022\021\n\tbias_term\030\002 \001(\010\022-\n\rwe"
+      "ight_filler\030\003 \001(\0132\026.caffe.FillerParamete"
+      "r\022+\n\013bias_filler\030\004 \001(\0132\026.caffe.FillerPar"
+      "ameter\022\014\n\004axis\030\005 \001(\005\022\021\n\ttranspose\030\006 \001(\010\""
+      "\205\003\n\020PoolingParameter\0220\n\004pool\030\001 \001(\0162\".caf"
+      "fe.PoolingParameter.PoolMethod\022\023\n\013kernel"
+      "_size\030\002 \001(\r\022\020\n\010kernel_h\030\005 \001(\r\022\020\n\010kernel_"
+      "w\030\006 \001(\r\022\016\n\006stride\030\003 \001(\r\022\020\n\010stride_h\030\007 \001("
+      "\r\022\020\n\010stride_w\030\010 \001(\r\022\013\n\003pad\030\004 \001(\r\022\r\n\005pad_"
+      "h\030\t \001(\r\022\r\n\005pad_w\030\n \001(\r\022.\n\006engine\030\013 \001(\0162\036"
+      ".caffe.PoolingParameter.Engine\022\026\n\016global"
+      "_pooling\030\014 \001(\010\"2\n\nPoolMethod\022\007\n\003MAX\020\000\022\013\n"
+      "\007AVERAGE\020\001\022\016\n\nSTOCHASTIC\020\002\"+\n\006Engine\022\013\n\007"
+      "DEFAULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002*\034\n\005Phase"
+      "\022\t\n\005TRAIN\020\000\022\010\n\004TEST\020\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1729);
+      descriptor, 2829);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "caffe.proto", &protobuf_RegisterTypes);
 }
@@ -496,9 +665,51 @@ const FillerParameter_VarianceNorm FillerParameter::VarianceNorm_MIN;
 const FillerParameter_VarianceNorm FillerParameter::VarianceNorm_MAX;
 const int FillerParameter::VarianceNorm_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* ReLUParameter_Engine_descriptor() {
+const ::google::protobuf::EnumDescriptor* SolverParameter_SnapshotFormat_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_caffe_2eproto::file_level_enum_descriptors[1];
+}
+bool SolverParameter_SnapshotFormat_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const SolverParameter_SnapshotFormat SolverParameter::HDF5;
+const SolverParameter_SnapshotFormat SolverParameter::BINARYPROTO;
+const SolverParameter_SnapshotFormat SolverParameter::SnapshotFormat_MIN;
+const SolverParameter_SnapshotFormat SolverParameter::SnapshotFormat_MAX;
+const int SolverParameter::SnapshotFormat_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* SolverParameter_SolverMode_descriptor() {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[2];
+}
+bool SolverParameter_SolverMode_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const SolverParameter_SolverMode SolverParameter::CPU;
+const SolverParameter_SolverMode SolverParameter::GPU;
+const SolverParameter_SolverMode SolverParameter::SolverMode_MIN;
+const SolverParameter_SolverMode SolverParameter::SolverMode_MAX;
+const int SolverParameter::SolverMode_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* ReLUParameter_Engine_descriptor() {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[3];
 }
 bool ReLUParameter_Engine_IsValid(int value) {
   switch (value) {
@@ -521,7 +732,7 @@ const int ReLUParameter::Engine_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* SigmoidParameter_Engine_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_caffe_2eproto::file_level_enum_descriptors[2];
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[4];
 }
 bool SigmoidParameter_Engine_IsValid(int value) {
   switch (value) {
@@ -544,7 +755,7 @@ const int SigmoidParameter::Engine_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* PoolingParameter_PoolMethod_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_caffe_2eproto::file_level_enum_descriptors[3];
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[5];
 }
 bool PoolingParameter_PoolMethod_IsValid(int value) {
   switch (value) {
@@ -567,7 +778,7 @@ const int PoolingParameter::PoolMethod_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* PoolingParameter_Engine_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_caffe_2eproto::file_level_enum_descriptors[4];
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[6];
 }
 bool PoolingParameter_Engine_IsValid(int value) {
   switch (value) {
@@ -590,7 +801,7 @@ const int PoolingParameter::Engine_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* Phase_descriptor() {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_caffe_2eproto::file_level_enum_descriptors[5];
+  return protobuf_caffe_2eproto::file_level_enum_descriptors[7];
 }
 bool Phase_IsValid(int value) {
   switch (value) {
@@ -2267,6 +2478,338 @@ void FillerParameter::InternalSwap(FillerParameter* other) {
 
 // ===================================================================
 
+void NetState::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int NetState::kPhaseFieldNumber;
+const int NetState::kLevelFieldNumber;
+const int NetState::kStageFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+NetState::NetState()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_caffe_2eproto::InitDefaultsNetState();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.NetState)
+}
+NetState::NetState(const NetState& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      stage_(from.stage_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&phase_, &from.phase_,
+    static_cast<size_t>(reinterpret_cast<char*>(&level_) -
+    reinterpret_cast<char*>(&phase_)) + sizeof(level_));
+  // @@protoc_insertion_point(copy_constructor:caffe.NetState)
+}
+
+void NetState::SharedCtor() {
+  ::memset(&phase_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&level_) -
+      reinterpret_cast<char*>(&phase_)) + sizeof(level_));
+  _cached_size_ = 0;
+}
+
+NetState::~NetState() {
+  // @@protoc_insertion_point(destructor:caffe.NetState)
+  SharedDtor();
+}
+
+void NetState::SharedDtor() {
+}
+
+void NetState::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* NetState::descriptor() {
+  ::protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const NetState& NetState::default_instance() {
+  ::protobuf_caffe_2eproto::InitDefaultsNetState();
+  return *internal_default_instance();
+}
+
+NetState* NetState::New(::google::protobuf::Arena* arena) const {
+  NetState* n = new NetState;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void NetState::Clear() {
+// @@protoc_insertion_point(message_clear_start:caffe.NetState)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  stage_.Clear();
+  ::memset(&phase_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&level_) -
+      reinterpret_cast<char*>(&phase_)) + sizeof(level_));
+  _internal_metadata_.Clear();
+}
+
+bool NetState::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.NetState)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .caffe.Phase phase = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_phase(static_cast< ::caffe::Phase >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 level = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &level_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string stage = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_stage()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->stage(this->stage_size() - 1).data(),
+            static_cast<int>(this->stage(this->stage_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.NetState.stage"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.NetState)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.NetState)
+  return false;
+#undef DO_
+}
+
+void NetState::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.NetState)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .caffe.Phase phase = 1;
+  if (this->phase() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->phase(), output);
+  }
+
+  // int32 level = 2;
+  if (this->level() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->level(), output);
+  }
+
+  // repeated string stage = 3;
+  for (int i = 0, n = this->stage_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->stage(i).data(), static_cast<int>(this->stage(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.NetState.stage");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->stage(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.NetState)
+}
+
+::google::protobuf::uint8* NetState::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.NetState)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .caffe.Phase phase = 1;
+  if (this->phase() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->phase(), target);
+  }
+
+  // int32 level = 2;
+  if (this->level() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->level(), target);
+  }
+
+  // repeated string stage = 3;
+  for (int i = 0, n = this->stage_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->stage(i).data(), static_cast<int>(this->stage(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.NetState.stage");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->stage(i), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.NetState)
+  return target;
+}
+
+size_t NetState::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:caffe.NetState)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated string stage = 3;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->stage_size());
+  for (int i = 0, n = this->stage_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->stage(i));
+  }
+
+  // .caffe.Phase phase = 1;
+  if (this->phase() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->phase());
+  }
+
+  // int32 level = 2;
+  if (this->level() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->level());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void NetState::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:caffe.NetState)
+  GOOGLE_DCHECK_NE(&from, this);
+  const NetState* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const NetState>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:caffe.NetState)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:caffe.NetState)
+    MergeFrom(*source);
+  }
+}
+
+void NetState::MergeFrom(const NetState& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:caffe.NetState)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  stage_.MergeFrom(from.stage_);
+  if (from.phase() != 0) {
+    set_phase(from.phase());
+  }
+  if (from.level() != 0) {
+    set_level(from.level());
+  }
+}
+
+void NetState::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:caffe.NetState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void NetState::CopyFrom(const NetState& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:caffe.NetState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool NetState::IsInitialized() const {
+  return true;
+}
+
+void NetState::Swap(NetState* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void NetState::InternalSwap(NetState* other) {
+  using std::swap;
+  stage_.InternalSwap(&other->stage_);
+  swap(phase_, other->phase_);
+  swap(level_, other->level_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata NetState::GetMetadata() const {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void LayerParameter::InitAsDefaultInstance() {
   ::caffe::_LayerParameter_default_instance_._instance.get_mutable()->relu_param_ = const_cast< ::caffe::ReLUParameter*>(
       ::caffe::ReLUParameter::internal_default_instance());
@@ -3043,6 +3586,2022 @@ void LayerParameter::InternalSwap(LayerParameter* other) {
 }
 
 ::google::protobuf::Metadata LayerParameter::GetMetadata() const {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void NetParameter::InitAsDefaultInstance() {
+  ::caffe::_NetParameter_default_instance_._instance.get_mutable()->state_ = const_cast< ::caffe::NetState*>(
+      ::caffe::NetState::internal_default_instance());
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int NetParameter::kNameFieldNumber;
+const int NetParameter::kInputShapeFieldNumber;
+const int NetParameter::kForceBackwardFieldNumber;
+const int NetParameter::kStateFieldNumber;
+const int NetParameter::kLayersFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+NetParameter::NetParameter()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_caffe_2eproto::InitDefaultsNetParameter();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.NetParameter)
+}
+NetParameter::NetParameter(const NetParameter& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      input_shape_(from.input_shape_),
+      layers_(from.layers_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.has_state()) {
+    state_ = new ::caffe::NetState(*from.state_);
+  } else {
+    state_ = NULL;
+  }
+  force_backward_ = from.force_backward_;
+  // @@protoc_insertion_point(copy_constructor:caffe.NetParameter)
+}
+
+void NetParameter::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&state_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&force_backward_) -
+      reinterpret_cast<char*>(&state_)) + sizeof(force_backward_));
+  _cached_size_ = 0;
+}
+
+NetParameter::~NetParameter() {
+  // @@protoc_insertion_point(destructor:caffe.NetParameter)
+  SharedDtor();
+}
+
+void NetParameter::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete state_;
+}
+
+void NetParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* NetParameter::descriptor() {
+  ::protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const NetParameter& NetParameter::default_instance() {
+  ::protobuf_caffe_2eproto::InitDefaultsNetParameter();
+  return *internal_default_instance();
+}
+
+NetParameter* NetParameter::New(::google::protobuf::Arena* arena) const {
+  NetParameter* n = new NetParameter;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void NetParameter::Clear() {
+// @@protoc_insertion_point(message_clear_start:caffe.NetParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  input_shape_.Clear();
+  layers_.Clear();
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && state_ != NULL) {
+    delete state_;
+  }
+  state_ = NULL;
+  force_backward_ = false;
+  _internal_metadata_.Clear();
+}
+
+bool NetParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.NetParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.NetParameter.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 input_shape = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_input_shape())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 18u, input, this->mutable_input_shape())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool force_backward = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &force_backward_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.NetState state = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_state()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .caffe.LayerParameter layers = 100;
+      case 100: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 802 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_layers()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.NetParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.NetParameter)
+  return false;
+#undef DO_
+}
+
+void NetParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.NetParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.NetParameter.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // repeated int32 input_shape = 2;
+  if (this->input_shape_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(2, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _input_shape_cached_byte_size_));
+  }
+  for (int i = 0, n = this->input_shape_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32NoTag(
+      this->input_shape(i), output);
+  }
+
+  // bool force_backward = 3;
+  if (this->force_backward() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->force_backward(), output);
+  }
+
+  // .caffe.NetState state = 4;
+  if (this->has_state()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, *this->state_, output);
+  }
+
+  // repeated .caffe.LayerParameter layers = 100;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->layers_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      100, this->layers(static_cast<int>(i)), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.NetParameter)
+}
+
+::google::protobuf::uint8* NetParameter::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.NetParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.NetParameter.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // repeated int32 input_shape = 2;
+  if (this->input_shape_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      2,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::int32>(
+            _input_shape_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt32NoTagToArray(this->input_shape_, target);
+  }
+
+  // bool force_backward = 3;
+  if (this->force_backward() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->force_backward(), target);
+  }
+
+  // .caffe.NetState state = 4;
+  if (this->has_state()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, *this->state_, deterministic, target);
+  }
+
+  // repeated .caffe.LayerParameter layers = 100;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->layers_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        100, this->layers(static_cast<int>(i)), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.NetParameter)
+  return target;
+}
+
+size_t NetParameter::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:caffe.NetParameter)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated int32 input_shape = 2;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->input_shape_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _input_shape_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated .caffe.LayerParameter layers = 100;
+  {
+    unsigned int count = static_cast<unsigned int>(this->layers_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->layers(static_cast<int>(i)));
+    }
+  }
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  // .caffe.NetState state = 4;
+  if (this->has_state()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->state_);
+  }
+
+  // bool force_backward = 3;
+  if (this->force_backward() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void NetParameter::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:caffe.NetParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  const NetParameter* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const NetParameter>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:caffe.NetParameter)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:caffe.NetParameter)
+    MergeFrom(*source);
+  }
+}
+
+void NetParameter::MergeFrom(const NetParameter& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:caffe.NetParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  input_shape_.MergeFrom(from.input_shape_);
+  layers_.MergeFrom(from.layers_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.has_state()) {
+    mutable_state()->::caffe::NetState::MergeFrom(from.state());
+  }
+  if (from.force_backward() != 0) {
+    set_force_backward(from.force_backward());
+  }
+}
+
+void NetParameter::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:caffe.NetParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void NetParameter::CopyFrom(const NetParameter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:caffe.NetParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool NetParameter::IsInitialized() const {
+  return true;
+}
+
+void NetParameter::Swap(NetParameter* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void NetParameter::InternalSwap(NetParameter* other) {
+  using std::swap;
+  input_shape_.InternalSwap(&other->input_shape_);
+  layers_.InternalSwap(&other->layers_);
+  name_.Swap(&other->name_);
+  swap(state_, other->state_);
+  swap(force_backward_, other->force_backward_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata NetParameter::GetMetadata() const {
+  protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void SolverParameter::InitAsDefaultInstance() {
+  ::caffe::_SolverParameter_default_instance_._instance.get_mutable()->train_net_param_ = const_cast< ::caffe::NetParameter*>(
+      ::caffe::NetParameter::internal_default_instance());
+  ::caffe::_SolverParameter_default_instance_._instance.get_mutable()->test_net_param_ = const_cast< ::caffe::NetParameter*>(
+      ::caffe::NetParameter::internal_default_instance());
+  ::caffe::_SolverParameter_default_instance_._instance.get_mutable()->net_param_ = const_cast< ::caffe::NetParameter*>(
+      ::caffe::NetParameter::internal_default_instance());
+  ::caffe::_SolverParameter_default_instance_._instance.get_mutable()->train_state_ = const_cast< ::caffe::NetState*>(
+      ::caffe::NetState::internal_default_instance());
+  ::caffe::_SolverParameter_default_instance_._instance.get_mutable()->test_state_ = const_cast< ::caffe::NetState*>(
+      ::caffe::NetState::internal_default_instance());
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SolverParameter::kTrainNetFieldNumber;
+const int SolverParameter::kTestNetFieldNumber;
+const int SolverParameter::kTrainNetParamFieldNumber;
+const int SolverParameter::kTestNetParamFieldNumber;
+const int SolverParameter::kNetFieldNumber;
+const int SolverParameter::kNetParamFieldNumber;
+const int SolverParameter::kTrainStateFieldNumber;
+const int SolverParameter::kTestStateFieldNumber;
+const int SolverParameter::kTestIterFieldNumber;
+const int SolverParameter::kTestIntervalFieldNumber;
+const int SolverParameter::kBaseLrFieldNumber;
+const int SolverParameter::kDisplayFieldNumber;
+const int SolverParameter::kMaxIterFieldNumber;
+const int SolverParameter::kLcPolicyFieldNumber;
+const int SolverParameter::kGammaFieldNumber;
+const int SolverParameter::kPowerFieldNumber;
+const int SolverParameter::kMomentumFieldNumber;
+const int SolverParameter::kWeightDecayFieldNumber;
+const int SolverParameter::kRegularizationTypeFieldNumber;
+const int SolverParameter::kStopsizeFieldNumber;
+const int SolverParameter::kSnapshotFieldNumber;
+const int SolverParameter::kSnapshotPrefixFieldNumber;
+const int SolverParameter::kSnapshotDiffFieldNumber;
+const int SolverParameter::kSnapshotFormatFieldNumber;
+const int SolverParameter::kSolverModeFieldNumber;
+const int SolverParameter::kDeviceIdFieldNumber;
+const int SolverParameter::kRandomSeedFieldNumber;
+const int SolverParameter::kTypeFieldNumber;
+const int SolverParameter::kDeltaFieldNumber;
+const int SolverParameter::kLayerWiseReduceFieldNumber;
+const int SolverParameter::kWeightsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+SolverParameter::SolverParameter()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_caffe_2eproto::InitDefaultsSolverParameter();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SolverParameter)
+}
+SolverParameter::SolverParameter(const SolverParameter& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      test_iter_(from.test_iter_),
+      weights_(from.weights_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  train_net_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.train_net().size() > 0) {
+    train_net_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.train_net_);
+  }
+  test_net_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.test_net().size() > 0) {
+    test_net_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.test_net_);
+  }
+  lc_policy_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.lc_policy().size() > 0) {
+    lc_policy_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.lc_policy_);
+  }
+  snapshot_prefix_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.snapshot_prefix().size() > 0) {
+    snapshot_prefix_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.snapshot_prefix_);
+  }
+  net_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.net().size() > 0) {
+    net_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.net_);
+  }
+  regularization_type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.regularization_type().size() > 0) {
+    regularization_type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.regularization_type_);
+  }
+  type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.type().size() > 0) {
+    type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.type_);
+  }
+  if (from.has_train_net_param()) {
+    train_net_param_ = new ::caffe::NetParameter(*from.train_net_param_);
+  } else {
+    train_net_param_ = NULL;
+  }
+  if (from.has_test_net_param()) {
+    test_net_param_ = new ::caffe::NetParameter(*from.test_net_param_);
+  } else {
+    test_net_param_ = NULL;
+  }
+  if (from.has_net_param()) {
+    net_param_ = new ::caffe::NetParameter(*from.net_param_);
+  } else {
+    net_param_ = NULL;
+  }
+  if (from.has_train_state()) {
+    train_state_ = new ::caffe::NetState(*from.train_state_);
+  } else {
+    train_state_ = NULL;
+  }
+  if (from.has_test_state()) {
+    test_state_ = new ::caffe::NetState(*from.test_state_);
+  } else {
+    test_state_ = NULL;
+  }
+  ::memcpy(&test_interval_, &from.test_interval_,
+    static_cast<size_t>(reinterpret_cast<char*>(&snapshot_format_) -
+    reinterpret_cast<char*>(&test_interval_)) + sizeof(snapshot_format_));
+  // @@protoc_insertion_point(copy_constructor:caffe.SolverParameter)
+}
+
+void SolverParameter::SharedCtor() {
+  train_net_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  test_net_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  lc_policy_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  snapshot_prefix_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  net_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  regularization_type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&train_net_param_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&snapshot_format_) -
+      reinterpret_cast<char*>(&train_net_param_)) + sizeof(snapshot_format_));
+  _cached_size_ = 0;
+}
+
+SolverParameter::~SolverParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SolverParameter)
+  SharedDtor();
+}
+
+void SolverParameter::SharedDtor() {
+  train_net_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  test_net_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  lc_policy_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  snapshot_prefix_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  net_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  regularization_type_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete train_net_param_;
+  if (this != internal_default_instance()) delete test_net_param_;
+  if (this != internal_default_instance()) delete net_param_;
+  if (this != internal_default_instance()) delete train_state_;
+  if (this != internal_default_instance()) delete test_state_;
+}
+
+void SolverParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SolverParameter::descriptor() {
+  ::protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const SolverParameter& SolverParameter::default_instance() {
+  ::protobuf_caffe_2eproto::InitDefaultsSolverParameter();
+  return *internal_default_instance();
+}
+
+SolverParameter* SolverParameter::New(::google::protobuf::Arena* arena) const {
+  SolverParameter* n = new SolverParameter;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void SolverParameter::Clear() {
+// @@protoc_insertion_point(message_clear_start:caffe.SolverParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  test_iter_.Clear();
+  weights_.Clear();
+  train_net_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  test_net_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  lc_policy_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  snapshot_prefix_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  net_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  regularization_type_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && train_net_param_ != NULL) {
+    delete train_net_param_;
+  }
+  train_net_param_ = NULL;
+  if (GetArenaNoVirtual() == NULL && test_net_param_ != NULL) {
+    delete test_net_param_;
+  }
+  test_net_param_ = NULL;
+  if (GetArenaNoVirtual() == NULL && net_param_ != NULL) {
+    delete net_param_;
+  }
+  net_param_ = NULL;
+  if (GetArenaNoVirtual() == NULL && train_state_ != NULL) {
+    delete train_state_;
+  }
+  train_state_ = NULL;
+  if (GetArenaNoVirtual() == NULL && test_state_ != NULL) {
+    delete test_state_;
+  }
+  test_state_ = NULL;
+  ::memset(&test_interval_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&snapshot_format_) -
+      reinterpret_cast<char*>(&test_interval_)) + sizeof(snapshot_format_));
+  _internal_metadata_.Clear();
+}
+
+bool SolverParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SolverParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string train_net = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_train_net()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->train_net().data(), static_cast<int>(this->train_net().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.train_net"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string test_net = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_test_net()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->test_net().data(), static_cast<int>(this->test_net().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.test_net"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated int32 test_iter = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_test_iter())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 26u, input, this->mutable_test_iter())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 test_interval = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &test_interval_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float base_lr = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(45u /* 45 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &base_lr_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 display = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &display_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 max_iter = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &max_iter_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string lc_policy = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_lc_policy()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->lc_policy().data(), static_cast<int>(this->lc_policy().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.lc_policy"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float gamma = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(77u /* 77 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &gamma_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float power = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(85u /* 85 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &power_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float momentum = 11;
+      case 11: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(93u /* 93 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &momentum_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float weight_decay = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(101u /* 101 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &weight_decay_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 stopsize = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &stopsize_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 snapshot = 14;
+      case 14: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(112u /* 112 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &snapshot_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string snapshot_prefix = 15;
+      case 15: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(122u /* 122 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_snapshot_prefix()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->snapshot_prefix().data(), static_cast<int>(this->snapshot_prefix().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.snapshot_prefix"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool snapshot_diff = 16;
+      case 16: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(128u /* 128 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &snapshot_diff_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.SolverParameter.SolverMode solver_mode = 17;
+      case 17: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(136u /* 136 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_solver_mode(static_cast< ::caffe::SolverParameter_SolverMode >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 device_id = 18;
+      case 18: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(144u /* 144 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &device_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 random_seed = 20;
+      case 20: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(160u /* 160 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &random_seed_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.NetParameter train_net_param = 21;
+      case 21: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_train_net_param()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.NetParameter test_net_param = 22;
+      case 22: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_test_net_param()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string net = 24;
+      case 24: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(194u /* 194 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_net()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->net().data(), static_cast<int>(this->net().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.net"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.NetParameter net_param = 25;
+      case 25: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(202u /* 202 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_net_param()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.NetState train_state = 26;
+      case 26: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(210u /* 210 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_train_state()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.NetState test_state = 27;
+      case 27: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(218u /* 218 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_test_state()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string regularization_type = 29;
+      case 29: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(234u /* 234 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_regularization_type()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->regularization_type().data(), static_cast<int>(this->regularization_type().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.regularization_type"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float delta = 31;
+      case 31: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(253u /* 253 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &delta_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .caffe.SolverParameter.SnapshotFormat snapshot_format = 37;
+      case 37: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 296 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_snapshot_format(static_cast< ::caffe::SolverParameter_SnapshotFormat >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string type = 40;
+      case 40: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u /* 322 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_type()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->type().data(), static_cast<int>(this->type().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.type"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool layer_wise_reduce = 41;
+      case 41: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(72u /* 328 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &layer_wise_reduce_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string weights = 42;
+      case 42: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u /* 338 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_weights()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->weights(this->weights_size() - 1).data(),
+            static_cast<int>(this->weights(this->weights_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "caffe.SolverParameter.weights"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SolverParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SolverParameter)
+  return false;
+#undef DO_
+}
+
+void SolverParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SolverParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string train_net = 1;
+  if (this->train_net().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->train_net().data(), static_cast<int>(this->train_net().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.train_net");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->train_net(), output);
+  }
+
+  // string test_net = 2;
+  if (this->test_net().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->test_net().data(), static_cast<int>(this->test_net().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.test_net");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->test_net(), output);
+  }
+
+  // repeated int32 test_iter = 3;
+  if (this->test_iter_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(3, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _test_iter_cached_byte_size_));
+  }
+  for (int i = 0, n = this->test_iter_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32NoTag(
+      this->test_iter(i), output);
+  }
+
+  // int32 test_interval = 4;
+  if (this->test_interval() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->test_interval(), output);
+  }
+
+  // float base_lr = 5;
+  if (this->base_lr() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->base_lr(), output);
+  }
+
+  // int32 display = 6;
+  if (this->display() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->display(), output);
+  }
+
+  // int32 max_iter = 7;
+  if (this->max_iter() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->max_iter(), output);
+  }
+
+  // string lc_policy = 8;
+  if (this->lc_policy().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->lc_policy().data(), static_cast<int>(this->lc_policy().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.lc_policy");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      8, this->lc_policy(), output);
+  }
+
+  // float gamma = 9;
+  if (this->gamma() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->gamma(), output);
+  }
+
+  // float power = 10;
+  if (this->power() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->power(), output);
+  }
+
+  // float momentum = 11;
+  if (this->momentum() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(11, this->momentum(), output);
+  }
+
+  // float weight_decay = 12;
+  if (this->weight_decay() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->weight_decay(), output);
+  }
+
+  // int32 stopsize = 13;
+  if (this->stopsize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->stopsize(), output);
+  }
+
+  // int32 snapshot = 14;
+  if (this->snapshot() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->snapshot(), output);
+  }
+
+  // string snapshot_prefix = 15;
+  if (this->snapshot_prefix().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->snapshot_prefix().data(), static_cast<int>(this->snapshot_prefix().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.snapshot_prefix");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      15, this->snapshot_prefix(), output);
+  }
+
+  // bool snapshot_diff = 16;
+  if (this->snapshot_diff() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(16, this->snapshot_diff(), output);
+  }
+
+  // .caffe.SolverParameter.SolverMode solver_mode = 17;
+  if (this->solver_mode() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      17, this->solver_mode(), output);
+  }
+
+  // int32 device_id = 18;
+  if (this->device_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->device_id(), output);
+  }
+
+  // int64 random_seed = 20;
+  if (this->random_seed() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(20, this->random_seed(), output);
+  }
+
+  // .caffe.NetParameter train_net_param = 21;
+  if (this->has_train_net_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21, *this->train_net_param_, output);
+  }
+
+  // .caffe.NetParameter test_net_param = 22;
+  if (this->has_test_net_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22, *this->test_net_param_, output);
+  }
+
+  // string net = 24;
+  if (this->net().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->net().data(), static_cast<int>(this->net().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.net");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      24, this->net(), output);
+  }
+
+  // .caffe.NetParameter net_param = 25;
+  if (this->has_net_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25, *this->net_param_, output);
+  }
+
+  // .caffe.NetState train_state = 26;
+  if (this->has_train_state()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      26, *this->train_state_, output);
+  }
+
+  // .caffe.NetState test_state = 27;
+  if (this->has_test_state()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      27, *this->test_state_, output);
+  }
+
+  // string regularization_type = 29;
+  if (this->regularization_type().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->regularization_type().data(), static_cast<int>(this->regularization_type().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.regularization_type");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      29, this->regularization_type(), output);
+  }
+
+  // float delta = 31;
+  if (this->delta() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(31, this->delta(), output);
+  }
+
+  // .caffe.SolverParameter.SnapshotFormat snapshot_format = 37;
+  if (this->snapshot_format() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      37, this->snapshot_format(), output);
+  }
+
+  // string type = 40;
+  if (this->type().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->type().data(), static_cast<int>(this->type().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.type");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      40, this->type(), output);
+  }
+
+  // bool layer_wise_reduce = 41;
+  if (this->layer_wise_reduce() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(41, this->layer_wise_reduce(), output);
+  }
+
+  // repeated string weights = 42;
+  for (int i = 0, n = this->weights_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->weights(i).data(), static_cast<int>(this->weights(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.weights");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      42, this->weights(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SolverParameter)
+}
+
+::google::protobuf::uint8* SolverParameter::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SolverParameter)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string train_net = 1;
+  if (this->train_net().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->train_net().data(), static_cast<int>(this->train_net().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.train_net");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->train_net(), target);
+  }
+
+  // string test_net = 2;
+  if (this->test_net().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->test_net().data(), static_cast<int>(this->test_net().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.test_net");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->test_net(), target);
+  }
+
+  // repeated int32 test_iter = 3;
+  if (this->test_iter_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      3,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::int32>(
+            _test_iter_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt32NoTagToArray(this->test_iter_, target);
+  }
+
+  // int32 test_interval = 4;
+  if (this->test_interval() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->test_interval(), target);
+  }
+
+  // float base_lr = 5;
+  if (this->base_lr() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->base_lr(), target);
+  }
+
+  // int32 display = 6;
+  if (this->display() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->display(), target);
+  }
+
+  // int32 max_iter = 7;
+  if (this->max_iter() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->max_iter(), target);
+  }
+
+  // string lc_policy = 8;
+  if (this->lc_policy().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->lc_policy().data(), static_cast<int>(this->lc_policy().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.lc_policy");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->lc_policy(), target);
+  }
+
+  // float gamma = 9;
+  if (this->gamma() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->gamma(), target);
+  }
+
+  // float power = 10;
+  if (this->power() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->power(), target);
+  }
+
+  // float momentum = 11;
+  if (this->momentum() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(11, this->momentum(), target);
+  }
+
+  // float weight_decay = 12;
+  if (this->weight_decay() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->weight_decay(), target);
+  }
+
+  // int32 stopsize = 13;
+  if (this->stopsize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->stopsize(), target);
+  }
+
+  // int32 snapshot = 14;
+  if (this->snapshot() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->snapshot(), target);
+  }
+
+  // string snapshot_prefix = 15;
+  if (this->snapshot_prefix().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->snapshot_prefix().data(), static_cast<int>(this->snapshot_prefix().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.snapshot_prefix");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        15, this->snapshot_prefix(), target);
+  }
+
+  // bool snapshot_diff = 16;
+  if (this->snapshot_diff() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(16, this->snapshot_diff(), target);
+  }
+
+  // .caffe.SolverParameter.SolverMode solver_mode = 17;
+  if (this->solver_mode() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      17, this->solver_mode(), target);
+  }
+
+  // int32 device_id = 18;
+  if (this->device_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->device_id(), target);
+  }
+
+  // int64 random_seed = 20;
+  if (this->random_seed() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(20, this->random_seed(), target);
+  }
+
+  // .caffe.NetParameter train_net_param = 21;
+  if (this->has_train_net_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        21, *this->train_net_param_, deterministic, target);
+  }
+
+  // .caffe.NetParameter test_net_param = 22;
+  if (this->has_test_net_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        22, *this->test_net_param_, deterministic, target);
+  }
+
+  // string net = 24;
+  if (this->net().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->net().data(), static_cast<int>(this->net().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.net");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        24, this->net(), target);
+  }
+
+  // .caffe.NetParameter net_param = 25;
+  if (this->has_net_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        25, *this->net_param_, deterministic, target);
+  }
+
+  // .caffe.NetState train_state = 26;
+  if (this->has_train_state()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        26, *this->train_state_, deterministic, target);
+  }
+
+  // .caffe.NetState test_state = 27;
+  if (this->has_test_state()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        27, *this->test_state_, deterministic, target);
+  }
+
+  // string regularization_type = 29;
+  if (this->regularization_type().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->regularization_type().data(), static_cast<int>(this->regularization_type().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.regularization_type");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        29, this->regularization_type(), target);
+  }
+
+  // float delta = 31;
+  if (this->delta() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(31, this->delta(), target);
+  }
+
+  // .caffe.SolverParameter.SnapshotFormat snapshot_format = 37;
+  if (this->snapshot_format() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      37, this->snapshot_format(), target);
+  }
+
+  // string type = 40;
+  if (this->type().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->type().data(), static_cast<int>(this->type().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.type");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        40, this->type(), target);
+  }
+
+  // bool layer_wise_reduce = 41;
+  if (this->layer_wise_reduce() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(41, this->layer_wise_reduce(), target);
+  }
+
+  // repeated string weights = 42;
+  for (int i = 0, n = this->weights_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->weights(i).data(), static_cast<int>(this->weights(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "caffe.SolverParameter.weights");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(42, this->weights(i), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SolverParameter)
+  return target;
+}
+
+size_t SolverParameter::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:caffe.SolverParameter)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated int32 test_iter = 3;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      Int32Size(this->test_iter_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _test_iter_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated string weights = 42;
+  total_size += 2 *
+      ::google::protobuf::internal::FromIntSize(this->weights_size());
+  for (int i = 0, n = this->weights_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->weights(i));
+  }
+
+  // string train_net = 1;
+  if (this->train_net().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->train_net());
+  }
+
+  // string test_net = 2;
+  if (this->test_net().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->test_net());
+  }
+
+  // string lc_policy = 8;
+  if (this->lc_policy().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->lc_policy());
+  }
+
+  // string snapshot_prefix = 15;
+  if (this->snapshot_prefix().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->snapshot_prefix());
+  }
+
+  // string net = 24;
+  if (this->net().size() > 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->net());
+  }
+
+  // string regularization_type = 29;
+  if (this->regularization_type().size() > 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->regularization_type());
+  }
+
+  // string type = 40;
+  if (this->type().size() > 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->type());
+  }
+
+  // .caffe.NetParameter train_net_param = 21;
+  if (this->has_train_net_param()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->train_net_param_);
+  }
+
+  // .caffe.NetParameter test_net_param = 22;
+  if (this->has_test_net_param()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->test_net_param_);
+  }
+
+  // .caffe.NetParameter net_param = 25;
+  if (this->has_net_param()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->net_param_);
+  }
+
+  // .caffe.NetState train_state = 26;
+  if (this->has_train_state()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->train_state_);
+  }
+
+  // .caffe.NetState test_state = 27;
+  if (this->has_test_state()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->test_state_);
+  }
+
+  // int32 test_interval = 4;
+  if (this->test_interval() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->test_interval());
+  }
+
+  // float base_lr = 5;
+  if (this->base_lr() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // int32 display = 6;
+  if (this->display() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->display());
+  }
+
+  // int32 max_iter = 7;
+  if (this->max_iter() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->max_iter());
+  }
+
+  // float gamma = 9;
+  if (this->gamma() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // float power = 10;
+  if (this->power() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // float momentum = 11;
+  if (this->momentum() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // float weight_decay = 12;
+  if (this->weight_decay() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // int32 stopsize = 13;
+  if (this->stopsize() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->stopsize());
+  }
+
+  // int32 snapshot = 14;
+  if (this->snapshot() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->snapshot());
+  }
+
+  // .caffe.SolverParameter.SolverMode solver_mode = 17;
+  if (this->solver_mode() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->solver_mode());
+  }
+
+  // int32 device_id = 18;
+  if (this->device_id() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->device_id());
+  }
+
+  // int64 random_seed = 20;
+  if (this->random_seed() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->random_seed());
+  }
+
+  // bool snapshot_diff = 16;
+  if (this->snapshot_diff() != 0) {
+    total_size += 2 + 1;
+  }
+
+  // bool layer_wise_reduce = 41;
+  if (this->layer_wise_reduce() != 0) {
+    total_size += 2 + 1;
+  }
+
+  // float delta = 31;
+  if (this->delta() != 0) {
+    total_size += 2 + 4;
+  }
+
+  // .caffe.SolverParameter.SnapshotFormat snapshot_format = 37;
+  if (this->snapshot_format() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->snapshot_format());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SolverParameter::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:caffe.SolverParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  const SolverParameter* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const SolverParameter>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:caffe.SolverParameter)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:caffe.SolverParameter)
+    MergeFrom(*source);
+  }
+}
+
+void SolverParameter::MergeFrom(const SolverParameter& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:caffe.SolverParameter)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  test_iter_.MergeFrom(from.test_iter_);
+  weights_.MergeFrom(from.weights_);
+  if (from.train_net().size() > 0) {
+
+    train_net_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.train_net_);
+  }
+  if (from.test_net().size() > 0) {
+
+    test_net_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.test_net_);
+  }
+  if (from.lc_policy().size() > 0) {
+
+    lc_policy_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.lc_policy_);
+  }
+  if (from.snapshot_prefix().size() > 0) {
+
+    snapshot_prefix_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.snapshot_prefix_);
+  }
+  if (from.net().size() > 0) {
+
+    net_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.net_);
+  }
+  if (from.regularization_type().size() > 0) {
+
+    regularization_type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.regularization_type_);
+  }
+  if (from.type().size() > 0) {
+
+    type_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.type_);
+  }
+  if (from.has_train_net_param()) {
+    mutable_train_net_param()->::caffe::NetParameter::MergeFrom(from.train_net_param());
+  }
+  if (from.has_test_net_param()) {
+    mutable_test_net_param()->::caffe::NetParameter::MergeFrom(from.test_net_param());
+  }
+  if (from.has_net_param()) {
+    mutable_net_param()->::caffe::NetParameter::MergeFrom(from.net_param());
+  }
+  if (from.has_train_state()) {
+    mutable_train_state()->::caffe::NetState::MergeFrom(from.train_state());
+  }
+  if (from.has_test_state()) {
+    mutable_test_state()->::caffe::NetState::MergeFrom(from.test_state());
+  }
+  if (from.test_interval() != 0) {
+    set_test_interval(from.test_interval());
+  }
+  if (from.base_lr() != 0) {
+    set_base_lr(from.base_lr());
+  }
+  if (from.display() != 0) {
+    set_display(from.display());
+  }
+  if (from.max_iter() != 0) {
+    set_max_iter(from.max_iter());
+  }
+  if (from.gamma() != 0) {
+    set_gamma(from.gamma());
+  }
+  if (from.power() != 0) {
+    set_power(from.power());
+  }
+  if (from.momentum() != 0) {
+    set_momentum(from.momentum());
+  }
+  if (from.weight_decay() != 0) {
+    set_weight_decay(from.weight_decay());
+  }
+  if (from.stopsize() != 0) {
+    set_stopsize(from.stopsize());
+  }
+  if (from.snapshot() != 0) {
+    set_snapshot(from.snapshot());
+  }
+  if (from.solver_mode() != 0) {
+    set_solver_mode(from.solver_mode());
+  }
+  if (from.device_id() != 0) {
+    set_device_id(from.device_id());
+  }
+  if (from.random_seed() != 0) {
+    set_random_seed(from.random_seed());
+  }
+  if (from.snapshot_diff() != 0) {
+    set_snapshot_diff(from.snapshot_diff());
+  }
+  if (from.layer_wise_reduce() != 0) {
+    set_layer_wise_reduce(from.layer_wise_reduce());
+  }
+  if (from.delta() != 0) {
+    set_delta(from.delta());
+  }
+  if (from.snapshot_format() != 0) {
+    set_snapshot_format(from.snapshot_format());
+  }
+}
+
+void SolverParameter::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:caffe.SolverParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SolverParameter::CopyFrom(const SolverParameter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:caffe.SolverParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SolverParameter::IsInitialized() const {
+  return true;
+}
+
+void SolverParameter::Swap(SolverParameter* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void SolverParameter::InternalSwap(SolverParameter* other) {
+  using std::swap;
+  test_iter_.InternalSwap(&other->test_iter_);
+  weights_.InternalSwap(&other->weights_);
+  train_net_.Swap(&other->train_net_);
+  test_net_.Swap(&other->test_net_);
+  lc_policy_.Swap(&other->lc_policy_);
+  snapshot_prefix_.Swap(&other->snapshot_prefix_);
+  net_.Swap(&other->net_);
+  regularization_type_.Swap(&other->regularization_type_);
+  type_.Swap(&other->type_);
+  swap(train_net_param_, other->train_net_param_);
+  swap(test_net_param_, other->test_net_param_);
+  swap(net_param_, other->net_param_);
+  swap(train_state_, other->train_state_);
+  swap(test_state_, other->test_state_);
+  swap(test_interval_, other->test_interval_);
+  swap(base_lr_, other->base_lr_);
+  swap(display_, other->display_);
+  swap(max_iter_, other->max_iter_);
+  swap(gamma_, other->gamma_);
+  swap(power_, other->power_);
+  swap(momentum_, other->momentum_);
+  swap(weight_decay_, other->weight_decay_);
+  swap(stopsize_, other->stopsize_);
+  swap(snapshot_, other->snapshot_);
+  swap(solver_mode_, other->solver_mode_);
+  swap(device_id_, other->device_id_);
+  swap(random_seed_, other->random_seed_);
+  swap(snapshot_diff_, other->snapshot_diff_);
+  swap(layer_wise_reduce_, other->layer_wise_reduce_);
+  swap(delta_, other->delta_);
+  swap(snapshot_format_, other->snapshot_format_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata SolverParameter::GetMetadata() const {
   protobuf_caffe_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_caffe_2eproto::file_level_metadata[kIndexInFileMessages];
 }

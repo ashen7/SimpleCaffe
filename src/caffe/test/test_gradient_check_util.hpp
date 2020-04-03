@@ -4,8 +4,8 @@
 #ifndef SIMPLE_CAFFE_TEST_GRADIENT_CHECK_UTIL_HPP_
 #define SIMPLE_CAFFE_TEST_GRADIENT_CHECK_UTIL_HPP_
 
-#include <glog/logging.h>
 #include <gtest/gtest.h>
+#include <glog/logging.h>
 
 #include <cmath>
 #include <vector>
@@ -25,11 +25,24 @@ class GradientChecker {
 			: stepsize_(stepsize), threshold_(threshold), seed_(seed),
 			  kink_(kink), kink_range_(kink_range) {}
 
+	//检查梯度
+	void CheckGradient(LayerInterface<Dtype>* layer,
+										 const vector<Tensor<Dtype>*>& bottom,
+										 const vector<Tensor<Dtype>*>& top,
+										 int check_bottom = -1) {
+		//层初始化
+		layer->SetUp(bottom, top);
+		CheckGradientSingle(layer, bottom, top, check_bottom, -1, -1);
+	}
 	//彻底检查梯度
 	void CheckGradientExhaustive(LayerInterface<Dtype>* layer,
 															 const vector<Tensor<Dtype>*>& bottom,
 															 const vector<Tensor<Dtype>*>& top,
 															 int check_bottom = -1);
+
+	void CheckGradientElementWise(LayerInterface<Dtype>* layer,
+																const vector<Tensor<Dtype>*>& bottom,
+																const vector<Tensor<Dtype>*>& top);
 
 	/*
 	 * 检查单个输出的梯度
@@ -57,6 +70,23 @@ class GradientChecker {
 	Dtype kink_;
 	Dtype kink_range_;
 };
+
+template <typename Dtype>
+void GradientChecker<Dtype>::CheckGradientElementWise(LayerInterface<Dtype>* layer,
+                                                      const vector<Tensor<Dtype>*>& bottom,
+																										  const vector<Tensor<Dtype>*>& top) {
+	//层初始化 输出tensor分配空间
+	layer->SetUp(bottom, top);
+  CHECK_GT(top.size(), 0) << "ElementWise mode requires at least one top tensor";
+	const int check_bottom = -1;
+	const bool element_wise = true;
+	//遍历输出tensor每一个输出值 梯度检查
+	for (int i = 0; i < top.size(); ++i) {
+		for (int j = 0; j < top[i]->count(); ++j) {
+			CheckGradientSingle(layer, bottom, top, check_bottom, i, j, element_wise);
+		}
+	}
+}
 
 //彻底的梯度检查
 template <typename Dtype>
@@ -90,14 +120,14 @@ void GradientChecker<Dtype>::CheckGradientSingle(LayerInterface<Dtype>* layer,
 																								 int top_index,
 																								 int top_data_index,
 																								 bool element_wise) {
-	//对位相乘hadamark product
+	//激活函数层
 	if (element_wise) {
 		CHECK_EQ(layer->weights().size(), 0);
 		CHECK_LE(top_index, 0);
-		CHECK_LE(top_data_index, 0);
+		CHECK_GE(top_data_index, 0);
 		const int top_count = top[top_index]->count();
-		for (int tensor_index = 0; tensor_index < bottom.size(); ++tensor_index) {
-			CHECK_EQ(top_count, bottom[tensor_index]->count());
+		for (int i = 0; i < bottom.size(); ++i) {
+			CHECK_EQ(top_count, bottom[i]->count());
 		}
 	}
 
@@ -216,7 +246,7 @@ Dtype GradientChecker<Dtype>::GetObjAndGradient(const LayerInterface<Dtype>& lay
 			for (int j = 0; j < count; ++j) {
 				loss += top_tensor_data[j] * top_tensor_data[j];
 			}
-			//设置diff = data
+			//设置输出误差diff = 输出值data
 			caffe_copy(top_tensor->count(), top_tensor_data, top_tensor_diff);
 		}
 		loss /= 2.0;

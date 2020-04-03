@@ -37,7 +37,7 @@ namespace protobuf_caffe_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[9];
+  static const ::google::protobuf::internal::ParseTable schema[12];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -51,8 +51,14 @@ void InitDefaultsTensorProtoListImpl();
 void InitDefaultsTensorProtoList();
 void InitDefaultsFillerParameterImpl();
 void InitDefaultsFillerParameter();
+void InitDefaultsNetStateImpl();
+void InitDefaultsNetState();
 void InitDefaultsLayerParameterImpl();
 void InitDefaultsLayerParameter();
+void InitDefaultsNetParameterImpl();
+void InitDefaultsNetParameter();
+void InitDefaultsSolverParameterImpl();
+void InitDefaultsSolverParameter();
 void InitDefaultsReLUParameterImpl();
 void InitDefaultsReLUParameter();
 void InitDefaultsSigmoidParameterImpl();
@@ -66,7 +72,10 @@ inline void InitDefaults() {
   InitDefaultsTensorProto();
   InitDefaultsTensorProtoList();
   InitDefaultsFillerParameter();
+  InitDefaultsNetState();
   InitDefaultsLayerParameter();
+  InitDefaultsNetParameter();
+  InitDefaultsSolverParameter();
   InitDefaultsReLUParameter();
   InitDefaultsSigmoidParameter();
   InitDefaultsFullyConnectedParameter();
@@ -83,6 +92,12 @@ extern FullyConnectedParameterDefaultTypeInternal _FullyConnectedParameter_defau
 class LayerParameter;
 class LayerParameterDefaultTypeInternal;
 extern LayerParameterDefaultTypeInternal _LayerParameter_default_instance_;
+class NetParameter;
+class NetParameterDefaultTypeInternal;
+extern NetParameterDefaultTypeInternal _NetParameter_default_instance_;
+class NetState;
+class NetStateDefaultTypeInternal;
+extern NetStateDefaultTypeInternal _NetState_default_instance_;
 class PoolingParameter;
 class PoolingParameterDefaultTypeInternal;
 extern PoolingParameterDefaultTypeInternal _PoolingParameter_default_instance_;
@@ -92,6 +107,9 @@ extern ReLUParameterDefaultTypeInternal _ReLUParameter_default_instance_;
 class SigmoidParameter;
 class SigmoidParameterDefaultTypeInternal;
 extern SigmoidParameterDefaultTypeInternal _SigmoidParameter_default_instance_;
+class SolverParameter;
+class SolverParameterDefaultTypeInternal;
+extern SolverParameterDefaultTypeInternal _SolverParameter_default_instance_;
 class TensorProto;
 class TensorProtoDefaultTypeInternal;
 extern TensorProtoDefaultTypeInternal _TensorProto_default_instance_;
@@ -125,6 +143,48 @@ inline bool FillerParameter_VarianceNorm_Parse(
     const ::std::string& name, FillerParameter_VarianceNorm* value) {
   return ::google::protobuf::internal::ParseNamedEnum<FillerParameter_VarianceNorm>(
     FillerParameter_VarianceNorm_descriptor(), name, value);
+}
+enum SolverParameter_SnapshotFormat {
+  SolverParameter_SnapshotFormat_HDF5 = 0,
+  SolverParameter_SnapshotFormat_BINARYPROTO = 1,
+  SolverParameter_SnapshotFormat_SolverParameter_SnapshotFormat_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  SolverParameter_SnapshotFormat_SolverParameter_SnapshotFormat_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool SolverParameter_SnapshotFormat_IsValid(int value);
+const SolverParameter_SnapshotFormat SolverParameter_SnapshotFormat_SnapshotFormat_MIN = SolverParameter_SnapshotFormat_HDF5;
+const SolverParameter_SnapshotFormat SolverParameter_SnapshotFormat_SnapshotFormat_MAX = SolverParameter_SnapshotFormat_BINARYPROTO;
+const int SolverParameter_SnapshotFormat_SnapshotFormat_ARRAYSIZE = SolverParameter_SnapshotFormat_SnapshotFormat_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SolverParameter_SnapshotFormat_descriptor();
+inline const ::std::string& SolverParameter_SnapshotFormat_Name(SolverParameter_SnapshotFormat value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SolverParameter_SnapshotFormat_descriptor(), value);
+}
+inline bool SolverParameter_SnapshotFormat_Parse(
+    const ::std::string& name, SolverParameter_SnapshotFormat* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SolverParameter_SnapshotFormat>(
+    SolverParameter_SnapshotFormat_descriptor(), name, value);
+}
+enum SolverParameter_SolverMode {
+  SolverParameter_SolverMode_CPU = 0,
+  SolverParameter_SolverMode_GPU = 1,
+  SolverParameter_SolverMode_SolverParameter_SolverMode_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  SolverParameter_SolverMode_SolverParameter_SolverMode_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool SolverParameter_SolverMode_IsValid(int value);
+const SolverParameter_SolverMode SolverParameter_SolverMode_SolverMode_MIN = SolverParameter_SolverMode_CPU;
+const SolverParameter_SolverMode SolverParameter_SolverMode_SolverMode_MAX = SolverParameter_SolverMode_GPU;
+const int SolverParameter_SolverMode_SolverMode_ARRAYSIZE = SolverParameter_SolverMode_SolverMode_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SolverParameter_SolverMode_descriptor();
+inline const ::std::string& SolverParameter_SolverMode_Name(SolverParameter_SolverMode value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SolverParameter_SolverMode_descriptor(), value);
+}
+inline bool SolverParameter_SolverMode_Parse(
+    const ::std::string& name, SolverParameter_SolverMode* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SolverParameter_SolverMode>(
+    SolverParameter_SolverMode_descriptor(), name, value);
 }
 enum ReLUParameter_Engine {
   ReLUParameter_Engine_DEFAULT = 0,
@@ -818,6 +878,135 @@ class FillerParameter : public ::google::protobuf::Message /* @@protoc_insertion
 };
 // -------------------------------------------------------------------
 
+class NetState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.NetState) */ {
+ public:
+  NetState();
+  virtual ~NetState();
+
+  NetState(const NetState& from);
+
+  inline NetState& operator=(const NetState& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  NetState(NetState&& from) noexcept
+    : NetState() {
+    *this = ::std::move(from);
+  }
+
+  inline NetState& operator=(NetState&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NetState& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const NetState* internal_default_instance() {
+    return reinterpret_cast<const NetState*>(
+               &_NetState_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    4;
+
+  void Swap(NetState* other);
+  friend void swap(NetState& a, NetState& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline NetState* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  NetState* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const NetState& from);
+  void MergeFrom(const NetState& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(NetState* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated string stage = 3;
+  int stage_size() const;
+  void clear_stage();
+  static const int kStageFieldNumber = 3;
+  const ::std::string& stage(int index) const;
+  ::std::string* mutable_stage(int index);
+  void set_stage(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_stage(int index, ::std::string&& value);
+  #endif
+  void set_stage(int index, const char* value);
+  void set_stage(int index, const char* value, size_t size);
+  ::std::string* add_stage();
+  void add_stage(const ::std::string& value);
+  #if LANG_CXX11
+  void add_stage(::std::string&& value);
+  #endif
+  void add_stage(const char* value);
+  void add_stage(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& stage() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_stage();
+
+  // .caffe.Phase phase = 1;
+  void clear_phase();
+  static const int kPhaseFieldNumber = 1;
+  ::caffe::Phase phase() const;
+  void set_phase(::caffe::Phase value);
+
+  // int32 level = 2;
+  void clear_level();
+  static const int kLevelFieldNumber = 2;
+  ::google::protobuf::int32 level() const;
+  void set_level(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:caffe.NetState)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> stage_;
+  int phase_;
+  ::google::protobuf::int32 level_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsNetStateImpl();
+};
+// -------------------------------------------------------------------
+
 class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.LayerParameter) */ {
  public:
   LayerParameter();
@@ -853,7 +1042,7 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
                &_LayerParameter_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(LayerParameter* other);
   friend void swap(LayerParameter& a, LayerParameter& b) {
@@ -1048,6 +1237,612 @@ class LayerParameter : public ::google::protobuf::Message /* @@protoc_insertion_
 };
 // -------------------------------------------------------------------
 
+class NetParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.NetParameter) */ {
+ public:
+  NetParameter();
+  virtual ~NetParameter();
+
+  NetParameter(const NetParameter& from);
+
+  inline NetParameter& operator=(const NetParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  NetParameter(NetParameter&& from) noexcept
+    : NetParameter() {
+    *this = ::std::move(from);
+  }
+
+  inline NetParameter& operator=(NetParameter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NetParameter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const NetParameter* internal_default_instance() {
+    return reinterpret_cast<const NetParameter*>(
+               &_NetParameter_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    6;
+
+  void Swap(NetParameter* other);
+  friend void swap(NetParameter& a, NetParameter& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline NetParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  NetParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const NetParameter& from);
+  void MergeFrom(const NetParameter& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(NetParameter* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated int32 input_shape = 2;
+  int input_shape_size() const;
+  void clear_input_shape();
+  static const int kInputShapeFieldNumber = 2;
+  ::google::protobuf::int32 input_shape(int index) const;
+  void set_input_shape(int index, ::google::protobuf::int32 value);
+  void add_input_shape(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      input_shape() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_input_shape();
+
+  // repeated .caffe.LayerParameter layers = 100;
+  int layers_size() const;
+  void clear_layers();
+  static const int kLayersFieldNumber = 100;
+  const ::caffe::LayerParameter& layers(int index) const;
+  ::caffe::LayerParameter* mutable_layers(int index);
+  ::caffe::LayerParameter* add_layers();
+  ::google::protobuf::RepeatedPtrField< ::caffe::LayerParameter >*
+      mutable_layers();
+  const ::google::protobuf::RepeatedPtrField< ::caffe::LayerParameter >&
+      layers() const;
+
+  // string name = 1;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // .caffe.NetState state = 4;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 4;
+  const ::caffe::NetState& state() const;
+  ::caffe::NetState* release_state();
+  ::caffe::NetState* mutable_state();
+  void set_allocated_state(::caffe::NetState* state);
+
+  // bool force_backward = 3;
+  void clear_force_backward();
+  static const int kForceBackwardFieldNumber = 3;
+  bool force_backward() const;
+  void set_force_backward(bool value);
+
+  // @@protoc_insertion_point(class_scope:caffe.NetParameter)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > input_shape_;
+  mutable int _input_shape_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::caffe::LayerParameter > layers_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::caffe::NetState* state_;
+  bool force_backward_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsNetParameterImpl();
+};
+// -------------------------------------------------------------------
+
+class SolverParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.SolverParameter) */ {
+ public:
+  SolverParameter();
+  virtual ~SolverParameter();
+
+  SolverParameter(const SolverParameter& from);
+
+  inline SolverParameter& operator=(const SolverParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SolverParameter(SolverParameter&& from) noexcept
+    : SolverParameter() {
+    *this = ::std::move(from);
+  }
+
+  inline SolverParameter& operator=(SolverParameter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SolverParameter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SolverParameter* internal_default_instance() {
+    return reinterpret_cast<const SolverParameter*>(
+               &_SolverParameter_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    7;
+
+  void Swap(SolverParameter* other);
+  friend void swap(SolverParameter& a, SolverParameter& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SolverParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SolverParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SolverParameter& from);
+  void MergeFrom(const SolverParameter& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SolverParameter* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  typedef SolverParameter_SnapshotFormat SnapshotFormat;
+  static const SnapshotFormat HDF5 =
+    SolverParameter_SnapshotFormat_HDF5;
+  static const SnapshotFormat BINARYPROTO =
+    SolverParameter_SnapshotFormat_BINARYPROTO;
+  static inline bool SnapshotFormat_IsValid(int value) {
+    return SolverParameter_SnapshotFormat_IsValid(value);
+  }
+  static const SnapshotFormat SnapshotFormat_MIN =
+    SolverParameter_SnapshotFormat_SnapshotFormat_MIN;
+  static const SnapshotFormat SnapshotFormat_MAX =
+    SolverParameter_SnapshotFormat_SnapshotFormat_MAX;
+  static const int SnapshotFormat_ARRAYSIZE =
+    SolverParameter_SnapshotFormat_SnapshotFormat_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  SnapshotFormat_descriptor() {
+    return SolverParameter_SnapshotFormat_descriptor();
+  }
+  static inline const ::std::string& SnapshotFormat_Name(SnapshotFormat value) {
+    return SolverParameter_SnapshotFormat_Name(value);
+  }
+  static inline bool SnapshotFormat_Parse(const ::std::string& name,
+      SnapshotFormat* value) {
+    return SolverParameter_SnapshotFormat_Parse(name, value);
+  }
+
+  typedef SolverParameter_SolverMode SolverMode;
+  static const SolverMode CPU =
+    SolverParameter_SolverMode_CPU;
+  static const SolverMode GPU =
+    SolverParameter_SolverMode_GPU;
+  static inline bool SolverMode_IsValid(int value) {
+    return SolverParameter_SolverMode_IsValid(value);
+  }
+  static const SolverMode SolverMode_MIN =
+    SolverParameter_SolverMode_SolverMode_MIN;
+  static const SolverMode SolverMode_MAX =
+    SolverParameter_SolverMode_SolverMode_MAX;
+  static const int SolverMode_ARRAYSIZE =
+    SolverParameter_SolverMode_SolverMode_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  SolverMode_descriptor() {
+    return SolverParameter_SolverMode_descriptor();
+  }
+  static inline const ::std::string& SolverMode_Name(SolverMode value) {
+    return SolverParameter_SolverMode_Name(value);
+  }
+  static inline bool SolverMode_Parse(const ::std::string& name,
+      SolverMode* value) {
+    return SolverParameter_SolverMode_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated int32 test_iter = 3;
+  int test_iter_size() const;
+  void clear_test_iter();
+  static const int kTestIterFieldNumber = 3;
+  ::google::protobuf::int32 test_iter(int index) const;
+  void set_test_iter(int index, ::google::protobuf::int32 value);
+  void add_test_iter(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      test_iter() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_test_iter();
+
+  // repeated string weights = 42;
+  int weights_size() const;
+  void clear_weights();
+  static const int kWeightsFieldNumber = 42;
+  const ::std::string& weights(int index) const;
+  ::std::string* mutable_weights(int index);
+  void set_weights(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_weights(int index, ::std::string&& value);
+  #endif
+  void set_weights(int index, const char* value);
+  void set_weights(int index, const char* value, size_t size);
+  ::std::string* add_weights();
+  void add_weights(const ::std::string& value);
+  #if LANG_CXX11
+  void add_weights(::std::string&& value);
+  #endif
+  void add_weights(const char* value);
+  void add_weights(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& weights() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_weights();
+
+  // string train_net = 1;
+  void clear_train_net();
+  static const int kTrainNetFieldNumber = 1;
+  const ::std::string& train_net() const;
+  void set_train_net(const ::std::string& value);
+  #if LANG_CXX11
+  void set_train_net(::std::string&& value);
+  #endif
+  void set_train_net(const char* value);
+  void set_train_net(const char* value, size_t size);
+  ::std::string* mutable_train_net();
+  ::std::string* release_train_net();
+  void set_allocated_train_net(::std::string* train_net);
+
+  // string test_net = 2;
+  void clear_test_net();
+  static const int kTestNetFieldNumber = 2;
+  const ::std::string& test_net() const;
+  void set_test_net(const ::std::string& value);
+  #if LANG_CXX11
+  void set_test_net(::std::string&& value);
+  #endif
+  void set_test_net(const char* value);
+  void set_test_net(const char* value, size_t size);
+  ::std::string* mutable_test_net();
+  ::std::string* release_test_net();
+  void set_allocated_test_net(::std::string* test_net);
+
+  // string lc_policy = 8;
+  void clear_lc_policy();
+  static const int kLcPolicyFieldNumber = 8;
+  const ::std::string& lc_policy() const;
+  void set_lc_policy(const ::std::string& value);
+  #if LANG_CXX11
+  void set_lc_policy(::std::string&& value);
+  #endif
+  void set_lc_policy(const char* value);
+  void set_lc_policy(const char* value, size_t size);
+  ::std::string* mutable_lc_policy();
+  ::std::string* release_lc_policy();
+  void set_allocated_lc_policy(::std::string* lc_policy);
+
+  // string snapshot_prefix = 15;
+  void clear_snapshot_prefix();
+  static const int kSnapshotPrefixFieldNumber = 15;
+  const ::std::string& snapshot_prefix() const;
+  void set_snapshot_prefix(const ::std::string& value);
+  #if LANG_CXX11
+  void set_snapshot_prefix(::std::string&& value);
+  #endif
+  void set_snapshot_prefix(const char* value);
+  void set_snapshot_prefix(const char* value, size_t size);
+  ::std::string* mutable_snapshot_prefix();
+  ::std::string* release_snapshot_prefix();
+  void set_allocated_snapshot_prefix(::std::string* snapshot_prefix);
+
+  // string net = 24;
+  void clear_net();
+  static const int kNetFieldNumber = 24;
+  const ::std::string& net() const;
+  void set_net(const ::std::string& value);
+  #if LANG_CXX11
+  void set_net(::std::string&& value);
+  #endif
+  void set_net(const char* value);
+  void set_net(const char* value, size_t size);
+  ::std::string* mutable_net();
+  ::std::string* release_net();
+  void set_allocated_net(::std::string* net);
+
+  // string regularization_type = 29;
+  void clear_regularization_type();
+  static const int kRegularizationTypeFieldNumber = 29;
+  const ::std::string& regularization_type() const;
+  void set_regularization_type(const ::std::string& value);
+  #if LANG_CXX11
+  void set_regularization_type(::std::string&& value);
+  #endif
+  void set_regularization_type(const char* value);
+  void set_regularization_type(const char* value, size_t size);
+  ::std::string* mutable_regularization_type();
+  ::std::string* release_regularization_type();
+  void set_allocated_regularization_type(::std::string* regularization_type);
+
+  // string type = 40;
+  void clear_type();
+  static const int kTypeFieldNumber = 40;
+  const ::std::string& type() const;
+  void set_type(const ::std::string& value);
+  #if LANG_CXX11
+  void set_type(::std::string&& value);
+  #endif
+  void set_type(const char* value);
+  void set_type(const char* value, size_t size);
+  ::std::string* mutable_type();
+  ::std::string* release_type();
+  void set_allocated_type(::std::string* type);
+
+  // .caffe.NetParameter train_net_param = 21;
+  bool has_train_net_param() const;
+  void clear_train_net_param();
+  static const int kTrainNetParamFieldNumber = 21;
+  const ::caffe::NetParameter& train_net_param() const;
+  ::caffe::NetParameter* release_train_net_param();
+  ::caffe::NetParameter* mutable_train_net_param();
+  void set_allocated_train_net_param(::caffe::NetParameter* train_net_param);
+
+  // .caffe.NetParameter test_net_param = 22;
+  bool has_test_net_param() const;
+  void clear_test_net_param();
+  static const int kTestNetParamFieldNumber = 22;
+  const ::caffe::NetParameter& test_net_param() const;
+  ::caffe::NetParameter* release_test_net_param();
+  ::caffe::NetParameter* mutable_test_net_param();
+  void set_allocated_test_net_param(::caffe::NetParameter* test_net_param);
+
+  // .caffe.NetParameter net_param = 25;
+  bool has_net_param() const;
+  void clear_net_param();
+  static const int kNetParamFieldNumber = 25;
+  const ::caffe::NetParameter& net_param() const;
+  ::caffe::NetParameter* release_net_param();
+  ::caffe::NetParameter* mutable_net_param();
+  void set_allocated_net_param(::caffe::NetParameter* net_param);
+
+  // .caffe.NetState train_state = 26;
+  bool has_train_state() const;
+  void clear_train_state();
+  static const int kTrainStateFieldNumber = 26;
+  const ::caffe::NetState& train_state() const;
+  ::caffe::NetState* release_train_state();
+  ::caffe::NetState* mutable_train_state();
+  void set_allocated_train_state(::caffe::NetState* train_state);
+
+  // .caffe.NetState test_state = 27;
+  bool has_test_state() const;
+  void clear_test_state();
+  static const int kTestStateFieldNumber = 27;
+  const ::caffe::NetState& test_state() const;
+  ::caffe::NetState* release_test_state();
+  ::caffe::NetState* mutable_test_state();
+  void set_allocated_test_state(::caffe::NetState* test_state);
+
+  // int32 test_interval = 4;
+  void clear_test_interval();
+  static const int kTestIntervalFieldNumber = 4;
+  ::google::protobuf::int32 test_interval() const;
+  void set_test_interval(::google::protobuf::int32 value);
+
+  // float base_lr = 5;
+  void clear_base_lr();
+  static const int kBaseLrFieldNumber = 5;
+  float base_lr() const;
+  void set_base_lr(float value);
+
+  // int32 display = 6;
+  void clear_display();
+  static const int kDisplayFieldNumber = 6;
+  ::google::protobuf::int32 display() const;
+  void set_display(::google::protobuf::int32 value);
+
+  // int32 max_iter = 7;
+  void clear_max_iter();
+  static const int kMaxIterFieldNumber = 7;
+  ::google::protobuf::int32 max_iter() const;
+  void set_max_iter(::google::protobuf::int32 value);
+
+  // float gamma = 9;
+  void clear_gamma();
+  static const int kGammaFieldNumber = 9;
+  float gamma() const;
+  void set_gamma(float value);
+
+  // float power = 10;
+  void clear_power();
+  static const int kPowerFieldNumber = 10;
+  float power() const;
+  void set_power(float value);
+
+  // float momentum = 11;
+  void clear_momentum();
+  static const int kMomentumFieldNumber = 11;
+  float momentum() const;
+  void set_momentum(float value);
+
+  // float weight_decay = 12;
+  void clear_weight_decay();
+  static const int kWeightDecayFieldNumber = 12;
+  float weight_decay() const;
+  void set_weight_decay(float value);
+
+  // int32 stopsize = 13;
+  void clear_stopsize();
+  static const int kStopsizeFieldNumber = 13;
+  ::google::protobuf::int32 stopsize() const;
+  void set_stopsize(::google::protobuf::int32 value);
+
+  // int32 snapshot = 14;
+  void clear_snapshot();
+  static const int kSnapshotFieldNumber = 14;
+  ::google::protobuf::int32 snapshot() const;
+  void set_snapshot(::google::protobuf::int32 value);
+
+  // .caffe.SolverParameter.SolverMode solver_mode = 17;
+  void clear_solver_mode();
+  static const int kSolverModeFieldNumber = 17;
+  ::caffe::SolverParameter_SolverMode solver_mode() const;
+  void set_solver_mode(::caffe::SolverParameter_SolverMode value);
+
+  // int32 device_id = 18;
+  void clear_device_id();
+  static const int kDeviceIdFieldNumber = 18;
+  ::google::protobuf::int32 device_id() const;
+  void set_device_id(::google::protobuf::int32 value);
+
+  // int64 random_seed = 20;
+  void clear_random_seed();
+  static const int kRandomSeedFieldNumber = 20;
+  ::google::protobuf::int64 random_seed() const;
+  void set_random_seed(::google::protobuf::int64 value);
+
+  // bool snapshot_diff = 16;
+  void clear_snapshot_diff();
+  static const int kSnapshotDiffFieldNumber = 16;
+  bool snapshot_diff() const;
+  void set_snapshot_diff(bool value);
+
+  // bool layer_wise_reduce = 41;
+  void clear_layer_wise_reduce();
+  static const int kLayerWiseReduceFieldNumber = 41;
+  bool layer_wise_reduce() const;
+  void set_layer_wise_reduce(bool value);
+
+  // float delta = 31;
+  void clear_delta();
+  static const int kDeltaFieldNumber = 31;
+  float delta() const;
+  void set_delta(float value);
+
+  // .caffe.SolverParameter.SnapshotFormat snapshot_format = 37;
+  void clear_snapshot_format();
+  static const int kSnapshotFormatFieldNumber = 37;
+  ::caffe::SolverParameter_SnapshotFormat snapshot_format() const;
+  void set_snapshot_format(::caffe::SolverParameter_SnapshotFormat value);
+
+  // @@protoc_insertion_point(class_scope:caffe.SolverParameter)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > test_iter_;
+  mutable int _test_iter_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> weights_;
+  ::google::protobuf::internal::ArenaStringPtr train_net_;
+  ::google::protobuf::internal::ArenaStringPtr test_net_;
+  ::google::protobuf::internal::ArenaStringPtr lc_policy_;
+  ::google::protobuf::internal::ArenaStringPtr snapshot_prefix_;
+  ::google::protobuf::internal::ArenaStringPtr net_;
+  ::google::protobuf::internal::ArenaStringPtr regularization_type_;
+  ::google::protobuf::internal::ArenaStringPtr type_;
+  ::caffe::NetParameter* train_net_param_;
+  ::caffe::NetParameter* test_net_param_;
+  ::caffe::NetParameter* net_param_;
+  ::caffe::NetState* train_state_;
+  ::caffe::NetState* test_state_;
+  ::google::protobuf::int32 test_interval_;
+  float base_lr_;
+  ::google::protobuf::int32 display_;
+  ::google::protobuf::int32 max_iter_;
+  float gamma_;
+  float power_;
+  float momentum_;
+  float weight_decay_;
+  ::google::protobuf::int32 stopsize_;
+  ::google::protobuf::int32 snapshot_;
+  int solver_mode_;
+  ::google::protobuf::int32 device_id_;
+  ::google::protobuf::int64 random_seed_;
+  bool snapshot_diff_;
+  bool layer_wise_reduce_;
+  float delta_;
+  int snapshot_format_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_caffe_2eproto::TableStruct;
+  friend void ::protobuf_caffe_2eproto::InitDefaultsSolverParameterImpl();
+};
+// -------------------------------------------------------------------
+
 class ReLUParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:caffe.ReLUParameter) */ {
  public:
   ReLUParameter();
@@ -1083,7 +1878,7 @@ class ReLUParameter : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_ReLUParameter_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    8;
 
   void Swap(ReLUParameter* other);
   friend void swap(ReLUParameter& a, ReLUParameter& b) {
@@ -1217,7 +2012,7 @@ class SigmoidParameter : public ::google::protobuf::Message /* @@protoc_insertio
                &_SigmoidParameter_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+    9;
 
   void Swap(SigmoidParameter* other);
   friend void swap(SigmoidParameter& a, SigmoidParameter& b) {
@@ -1344,7 +2139,7 @@ class FullyConnectedParameter : public ::google::protobuf::Message /* @@protoc_i
                &_FullyConnectedParameter_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+    10;
 
   void Swap(FullyConnectedParameter* other);
   friend void swap(FullyConnectedParameter& a, FullyConnectedParameter& b) {
@@ -1484,7 +2279,7 @@ class PoolingParameter : public ::google::protobuf::Message /* @@protoc_insertio
                &_PoolingParameter_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+    11;
 
   void Swap(PoolingParameter* other);
   friend void swap(PoolingParameter& a, PoolingParameter& b) {
@@ -2141,6 +2936,107 @@ inline void FillerParameter::set_variance_norm(::caffe::FillerParameter_Variance
 
 // -------------------------------------------------------------------
 
+// NetState
+
+// .caffe.Phase phase = 1;
+inline void NetState::clear_phase() {
+  phase_ = 0;
+}
+inline ::caffe::Phase NetState::phase() const {
+  // @@protoc_insertion_point(field_get:caffe.NetState.phase)
+  return static_cast< ::caffe::Phase >(phase_);
+}
+inline void NetState::set_phase(::caffe::Phase value) {
+  
+  phase_ = value;
+  // @@protoc_insertion_point(field_set:caffe.NetState.phase)
+}
+
+// int32 level = 2;
+inline void NetState::clear_level() {
+  level_ = 0;
+}
+inline ::google::protobuf::int32 NetState::level() const {
+  // @@protoc_insertion_point(field_get:caffe.NetState.level)
+  return level_;
+}
+inline void NetState::set_level(::google::protobuf::int32 value) {
+  
+  level_ = value;
+  // @@protoc_insertion_point(field_set:caffe.NetState.level)
+}
+
+// repeated string stage = 3;
+inline int NetState::stage_size() const {
+  return stage_.size();
+}
+inline void NetState::clear_stage() {
+  stage_.Clear();
+}
+inline const ::std::string& NetState::stage(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.NetState.stage)
+  return stage_.Get(index);
+}
+inline ::std::string* NetState::mutable_stage(int index) {
+  // @@protoc_insertion_point(field_mutable:caffe.NetState.stage)
+  return stage_.Mutable(index);
+}
+inline void NetState::set_stage(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:caffe.NetState.stage)
+  stage_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void NetState::set_stage(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:caffe.NetState.stage)
+  stage_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void NetState::set_stage(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  stage_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:caffe.NetState.stage)
+}
+inline void NetState::set_stage(int index, const char* value, size_t size) {
+  stage_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:caffe.NetState.stage)
+}
+inline ::std::string* NetState::add_stage() {
+  // @@protoc_insertion_point(field_add_mutable:caffe.NetState.stage)
+  return stage_.Add();
+}
+inline void NetState::add_stage(const ::std::string& value) {
+  stage_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:caffe.NetState.stage)
+}
+#if LANG_CXX11
+inline void NetState::add_stage(::std::string&& value) {
+  stage_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:caffe.NetState.stage)
+}
+#endif
+inline void NetState::add_stage(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  stage_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:caffe.NetState.stage)
+}
+inline void NetState::add_stage(const char* value, size_t size) {
+  stage_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:caffe.NetState.stage)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+NetState::stage() const {
+  // @@protoc_insertion_point(field_list:caffe.NetState.stage)
+  return stage_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+NetState::mutable_stage() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.NetState.stage)
+  return &stage_;
+}
+
+// -------------------------------------------------------------------
+
 // LayerParameter
 
 // string name = 1;
@@ -2611,6 +3507,1149 @@ inline void LayerParameter::set_allocated_fully_connected_param(::caffe::FullyCo
 
 // -------------------------------------------------------------------
 
+// NetParameter
+
+// string name = 1;
+inline void NetParameter::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NetParameter::name() const {
+  // @@protoc_insertion_point(field_get:caffe.NetParameter.name)
+  return name_.GetNoArena();
+}
+inline void NetParameter::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.NetParameter.name)
+}
+#if LANG_CXX11
+inline void NetParameter::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.NetParameter.name)
+}
+#endif
+inline void NetParameter::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.NetParameter.name)
+}
+inline void NetParameter::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.NetParameter.name)
+}
+inline ::std::string* NetParameter::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.NetParameter.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NetParameter::release_name() {
+  // @@protoc_insertion_point(field_release:caffe.NetParameter.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NetParameter::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:caffe.NetParameter.name)
+}
+
+// repeated int32 input_shape = 2;
+inline int NetParameter::input_shape_size() const {
+  return input_shape_.size();
+}
+inline void NetParameter::clear_input_shape() {
+  input_shape_.Clear();
+}
+inline ::google::protobuf::int32 NetParameter::input_shape(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.NetParameter.input_shape)
+  return input_shape_.Get(index);
+}
+inline void NetParameter::set_input_shape(int index, ::google::protobuf::int32 value) {
+  input_shape_.Set(index, value);
+  // @@protoc_insertion_point(field_set:caffe.NetParameter.input_shape)
+}
+inline void NetParameter::add_input_shape(::google::protobuf::int32 value) {
+  input_shape_.Add(value);
+  // @@protoc_insertion_point(field_add:caffe.NetParameter.input_shape)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+NetParameter::input_shape() const {
+  // @@protoc_insertion_point(field_list:caffe.NetParameter.input_shape)
+  return input_shape_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+NetParameter::mutable_input_shape() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.NetParameter.input_shape)
+  return &input_shape_;
+}
+
+// bool force_backward = 3;
+inline void NetParameter::clear_force_backward() {
+  force_backward_ = false;
+}
+inline bool NetParameter::force_backward() const {
+  // @@protoc_insertion_point(field_get:caffe.NetParameter.force_backward)
+  return force_backward_;
+}
+inline void NetParameter::set_force_backward(bool value) {
+  
+  force_backward_ = value;
+  // @@protoc_insertion_point(field_set:caffe.NetParameter.force_backward)
+}
+
+// .caffe.NetState state = 4;
+inline bool NetParameter::has_state() const {
+  return this != internal_default_instance() && state_ != NULL;
+}
+inline void NetParameter::clear_state() {
+  if (GetArenaNoVirtual() == NULL && state_ != NULL) {
+    delete state_;
+  }
+  state_ = NULL;
+}
+inline const ::caffe::NetState& NetParameter::state() const {
+  const ::caffe::NetState* p = state_;
+  // @@protoc_insertion_point(field_get:caffe.NetParameter.state)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::NetState*>(
+      &::caffe::_NetState_default_instance_);
+}
+inline ::caffe::NetState* NetParameter::release_state() {
+  // @@protoc_insertion_point(field_release:caffe.NetParameter.state)
+  
+  ::caffe::NetState* temp = state_;
+  state_ = NULL;
+  return temp;
+}
+inline ::caffe::NetState* NetParameter::mutable_state() {
+  
+  if (state_ == NULL) {
+    state_ = new ::caffe::NetState;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.NetParameter.state)
+  return state_;
+}
+inline void NetParameter::set_allocated_state(::caffe::NetState* state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete state_;
+  }
+  if (state) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  state_ = state;
+  // @@protoc_insertion_point(field_set_allocated:caffe.NetParameter.state)
+}
+
+// repeated .caffe.LayerParameter layers = 100;
+inline int NetParameter::layers_size() const {
+  return layers_.size();
+}
+inline void NetParameter::clear_layers() {
+  layers_.Clear();
+}
+inline const ::caffe::LayerParameter& NetParameter::layers(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.NetParameter.layers)
+  return layers_.Get(index);
+}
+inline ::caffe::LayerParameter* NetParameter::mutable_layers(int index) {
+  // @@protoc_insertion_point(field_mutable:caffe.NetParameter.layers)
+  return layers_.Mutable(index);
+}
+inline ::caffe::LayerParameter* NetParameter::add_layers() {
+  // @@protoc_insertion_point(field_add:caffe.NetParameter.layers)
+  return layers_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::caffe::LayerParameter >*
+NetParameter::mutable_layers() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.NetParameter.layers)
+  return &layers_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::caffe::LayerParameter >&
+NetParameter::layers() const {
+  // @@protoc_insertion_point(field_list:caffe.NetParameter.layers)
+  return layers_;
+}
+
+// -------------------------------------------------------------------
+
+// SolverParameter
+
+// string train_net = 1;
+inline void SolverParameter::clear_train_net() {
+  train_net_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::train_net() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.train_net)
+  return train_net_.GetNoArena();
+}
+inline void SolverParameter::set_train_net(const ::std::string& value) {
+  
+  train_net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.train_net)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_train_net(::std::string&& value) {
+  
+  train_net_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.train_net)
+}
+#endif
+inline void SolverParameter::set_train_net(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  train_net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.train_net)
+}
+inline void SolverParameter::set_train_net(const char* value, size_t size) {
+  
+  train_net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.train_net)
+}
+inline ::std::string* SolverParameter::mutable_train_net() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.train_net)
+  return train_net_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_train_net() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.train_net)
+  
+  return train_net_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_train_net(::std::string* train_net) {
+  if (train_net != NULL) {
+    
+  } else {
+    
+  }
+  train_net_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), train_net);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.train_net)
+}
+
+// string test_net = 2;
+inline void SolverParameter::clear_test_net() {
+  test_net_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::test_net() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.test_net)
+  return test_net_.GetNoArena();
+}
+inline void SolverParameter::set_test_net(const ::std::string& value) {
+  
+  test_net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.test_net)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_test_net(::std::string&& value) {
+  
+  test_net_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.test_net)
+}
+#endif
+inline void SolverParameter::set_test_net(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  test_net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.test_net)
+}
+inline void SolverParameter::set_test_net(const char* value, size_t size) {
+  
+  test_net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.test_net)
+}
+inline ::std::string* SolverParameter::mutable_test_net() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.test_net)
+  return test_net_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_test_net() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.test_net)
+  
+  return test_net_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_test_net(::std::string* test_net) {
+  if (test_net != NULL) {
+    
+  } else {
+    
+  }
+  test_net_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), test_net);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.test_net)
+}
+
+// .caffe.NetParameter train_net_param = 21;
+inline bool SolverParameter::has_train_net_param() const {
+  return this != internal_default_instance() && train_net_param_ != NULL;
+}
+inline void SolverParameter::clear_train_net_param() {
+  if (GetArenaNoVirtual() == NULL && train_net_param_ != NULL) {
+    delete train_net_param_;
+  }
+  train_net_param_ = NULL;
+}
+inline const ::caffe::NetParameter& SolverParameter::train_net_param() const {
+  const ::caffe::NetParameter* p = train_net_param_;
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.train_net_param)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::NetParameter*>(
+      &::caffe::_NetParameter_default_instance_);
+}
+inline ::caffe::NetParameter* SolverParameter::release_train_net_param() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.train_net_param)
+  
+  ::caffe::NetParameter* temp = train_net_param_;
+  train_net_param_ = NULL;
+  return temp;
+}
+inline ::caffe::NetParameter* SolverParameter::mutable_train_net_param() {
+  
+  if (train_net_param_ == NULL) {
+    train_net_param_ = new ::caffe::NetParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.train_net_param)
+  return train_net_param_;
+}
+inline void SolverParameter::set_allocated_train_net_param(::caffe::NetParameter* train_net_param) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete train_net_param_;
+  }
+  if (train_net_param) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      train_net_param = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, train_net_param, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  train_net_param_ = train_net_param;
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.train_net_param)
+}
+
+// .caffe.NetParameter test_net_param = 22;
+inline bool SolverParameter::has_test_net_param() const {
+  return this != internal_default_instance() && test_net_param_ != NULL;
+}
+inline void SolverParameter::clear_test_net_param() {
+  if (GetArenaNoVirtual() == NULL && test_net_param_ != NULL) {
+    delete test_net_param_;
+  }
+  test_net_param_ = NULL;
+}
+inline const ::caffe::NetParameter& SolverParameter::test_net_param() const {
+  const ::caffe::NetParameter* p = test_net_param_;
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.test_net_param)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::NetParameter*>(
+      &::caffe::_NetParameter_default_instance_);
+}
+inline ::caffe::NetParameter* SolverParameter::release_test_net_param() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.test_net_param)
+  
+  ::caffe::NetParameter* temp = test_net_param_;
+  test_net_param_ = NULL;
+  return temp;
+}
+inline ::caffe::NetParameter* SolverParameter::mutable_test_net_param() {
+  
+  if (test_net_param_ == NULL) {
+    test_net_param_ = new ::caffe::NetParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.test_net_param)
+  return test_net_param_;
+}
+inline void SolverParameter::set_allocated_test_net_param(::caffe::NetParameter* test_net_param) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete test_net_param_;
+  }
+  if (test_net_param) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      test_net_param = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, test_net_param, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  test_net_param_ = test_net_param;
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.test_net_param)
+}
+
+// string net = 24;
+inline void SolverParameter::clear_net() {
+  net_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::net() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.net)
+  return net_.GetNoArena();
+}
+inline void SolverParameter::set_net(const ::std::string& value) {
+  
+  net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.net)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_net(::std::string&& value) {
+  
+  net_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.net)
+}
+#endif
+inline void SolverParameter::set_net(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.net)
+}
+inline void SolverParameter::set_net(const char* value, size_t size) {
+  
+  net_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.net)
+}
+inline ::std::string* SolverParameter::mutable_net() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.net)
+  return net_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_net() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.net)
+  
+  return net_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_net(::std::string* net) {
+  if (net != NULL) {
+    
+  } else {
+    
+  }
+  net_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), net);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.net)
+}
+
+// .caffe.NetParameter net_param = 25;
+inline bool SolverParameter::has_net_param() const {
+  return this != internal_default_instance() && net_param_ != NULL;
+}
+inline void SolverParameter::clear_net_param() {
+  if (GetArenaNoVirtual() == NULL && net_param_ != NULL) {
+    delete net_param_;
+  }
+  net_param_ = NULL;
+}
+inline const ::caffe::NetParameter& SolverParameter::net_param() const {
+  const ::caffe::NetParameter* p = net_param_;
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.net_param)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::NetParameter*>(
+      &::caffe::_NetParameter_default_instance_);
+}
+inline ::caffe::NetParameter* SolverParameter::release_net_param() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.net_param)
+  
+  ::caffe::NetParameter* temp = net_param_;
+  net_param_ = NULL;
+  return temp;
+}
+inline ::caffe::NetParameter* SolverParameter::mutable_net_param() {
+  
+  if (net_param_ == NULL) {
+    net_param_ = new ::caffe::NetParameter;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.net_param)
+  return net_param_;
+}
+inline void SolverParameter::set_allocated_net_param(::caffe::NetParameter* net_param) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete net_param_;
+  }
+  if (net_param) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      net_param = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, net_param, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  net_param_ = net_param;
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.net_param)
+}
+
+// .caffe.NetState train_state = 26;
+inline bool SolverParameter::has_train_state() const {
+  return this != internal_default_instance() && train_state_ != NULL;
+}
+inline void SolverParameter::clear_train_state() {
+  if (GetArenaNoVirtual() == NULL && train_state_ != NULL) {
+    delete train_state_;
+  }
+  train_state_ = NULL;
+}
+inline const ::caffe::NetState& SolverParameter::train_state() const {
+  const ::caffe::NetState* p = train_state_;
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.train_state)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::NetState*>(
+      &::caffe::_NetState_default_instance_);
+}
+inline ::caffe::NetState* SolverParameter::release_train_state() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.train_state)
+  
+  ::caffe::NetState* temp = train_state_;
+  train_state_ = NULL;
+  return temp;
+}
+inline ::caffe::NetState* SolverParameter::mutable_train_state() {
+  
+  if (train_state_ == NULL) {
+    train_state_ = new ::caffe::NetState;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.train_state)
+  return train_state_;
+}
+inline void SolverParameter::set_allocated_train_state(::caffe::NetState* train_state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete train_state_;
+  }
+  if (train_state) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      train_state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, train_state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  train_state_ = train_state;
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.train_state)
+}
+
+// .caffe.NetState test_state = 27;
+inline bool SolverParameter::has_test_state() const {
+  return this != internal_default_instance() && test_state_ != NULL;
+}
+inline void SolverParameter::clear_test_state() {
+  if (GetArenaNoVirtual() == NULL && test_state_ != NULL) {
+    delete test_state_;
+  }
+  test_state_ = NULL;
+}
+inline const ::caffe::NetState& SolverParameter::test_state() const {
+  const ::caffe::NetState* p = test_state_;
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.test_state)
+  return p != NULL ? *p : *reinterpret_cast<const ::caffe::NetState*>(
+      &::caffe::_NetState_default_instance_);
+}
+inline ::caffe::NetState* SolverParameter::release_test_state() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.test_state)
+  
+  ::caffe::NetState* temp = test_state_;
+  test_state_ = NULL;
+  return temp;
+}
+inline ::caffe::NetState* SolverParameter::mutable_test_state() {
+  
+  if (test_state_ == NULL) {
+    test_state_ = new ::caffe::NetState;
+  }
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.test_state)
+  return test_state_;
+}
+inline void SolverParameter::set_allocated_test_state(::caffe::NetState* test_state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete test_state_;
+  }
+  if (test_state) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      test_state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, test_state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  test_state_ = test_state;
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.test_state)
+}
+
+// repeated int32 test_iter = 3;
+inline int SolverParameter::test_iter_size() const {
+  return test_iter_.size();
+}
+inline void SolverParameter::clear_test_iter() {
+  test_iter_.Clear();
+}
+inline ::google::protobuf::int32 SolverParameter::test_iter(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.test_iter)
+  return test_iter_.Get(index);
+}
+inline void SolverParameter::set_test_iter(int index, ::google::protobuf::int32 value) {
+  test_iter_.Set(index, value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.test_iter)
+}
+inline void SolverParameter::add_test_iter(::google::protobuf::int32 value) {
+  test_iter_.Add(value);
+  // @@protoc_insertion_point(field_add:caffe.SolverParameter.test_iter)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+SolverParameter::test_iter() const {
+  // @@protoc_insertion_point(field_list:caffe.SolverParameter.test_iter)
+  return test_iter_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+SolverParameter::mutable_test_iter() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.SolverParameter.test_iter)
+  return &test_iter_;
+}
+
+// int32 test_interval = 4;
+inline void SolverParameter::clear_test_interval() {
+  test_interval_ = 0;
+}
+inline ::google::protobuf::int32 SolverParameter::test_interval() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.test_interval)
+  return test_interval_;
+}
+inline void SolverParameter::set_test_interval(::google::protobuf::int32 value) {
+  
+  test_interval_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.test_interval)
+}
+
+// float base_lr = 5;
+inline void SolverParameter::clear_base_lr() {
+  base_lr_ = 0;
+}
+inline float SolverParameter::base_lr() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.base_lr)
+  return base_lr_;
+}
+inline void SolverParameter::set_base_lr(float value) {
+  
+  base_lr_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.base_lr)
+}
+
+// int32 display = 6;
+inline void SolverParameter::clear_display() {
+  display_ = 0;
+}
+inline ::google::protobuf::int32 SolverParameter::display() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.display)
+  return display_;
+}
+inline void SolverParameter::set_display(::google::protobuf::int32 value) {
+  
+  display_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.display)
+}
+
+// int32 max_iter = 7;
+inline void SolverParameter::clear_max_iter() {
+  max_iter_ = 0;
+}
+inline ::google::protobuf::int32 SolverParameter::max_iter() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.max_iter)
+  return max_iter_;
+}
+inline void SolverParameter::set_max_iter(::google::protobuf::int32 value) {
+  
+  max_iter_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.max_iter)
+}
+
+// string lc_policy = 8;
+inline void SolverParameter::clear_lc_policy() {
+  lc_policy_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::lc_policy() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.lc_policy)
+  return lc_policy_.GetNoArena();
+}
+inline void SolverParameter::set_lc_policy(const ::std::string& value) {
+  
+  lc_policy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.lc_policy)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_lc_policy(::std::string&& value) {
+  
+  lc_policy_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.lc_policy)
+}
+#endif
+inline void SolverParameter::set_lc_policy(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  lc_policy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.lc_policy)
+}
+inline void SolverParameter::set_lc_policy(const char* value, size_t size) {
+  
+  lc_policy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.lc_policy)
+}
+inline ::std::string* SolverParameter::mutable_lc_policy() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.lc_policy)
+  return lc_policy_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_lc_policy() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.lc_policy)
+  
+  return lc_policy_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_lc_policy(::std::string* lc_policy) {
+  if (lc_policy != NULL) {
+    
+  } else {
+    
+  }
+  lc_policy_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), lc_policy);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.lc_policy)
+}
+
+// float gamma = 9;
+inline void SolverParameter::clear_gamma() {
+  gamma_ = 0;
+}
+inline float SolverParameter::gamma() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.gamma)
+  return gamma_;
+}
+inline void SolverParameter::set_gamma(float value) {
+  
+  gamma_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.gamma)
+}
+
+// float power = 10;
+inline void SolverParameter::clear_power() {
+  power_ = 0;
+}
+inline float SolverParameter::power() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.power)
+  return power_;
+}
+inline void SolverParameter::set_power(float value) {
+  
+  power_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.power)
+}
+
+// float momentum = 11;
+inline void SolverParameter::clear_momentum() {
+  momentum_ = 0;
+}
+inline float SolverParameter::momentum() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.momentum)
+  return momentum_;
+}
+inline void SolverParameter::set_momentum(float value) {
+  
+  momentum_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.momentum)
+}
+
+// float weight_decay = 12;
+inline void SolverParameter::clear_weight_decay() {
+  weight_decay_ = 0;
+}
+inline float SolverParameter::weight_decay() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.weight_decay)
+  return weight_decay_;
+}
+inline void SolverParameter::set_weight_decay(float value) {
+  
+  weight_decay_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.weight_decay)
+}
+
+// string regularization_type = 29;
+inline void SolverParameter::clear_regularization_type() {
+  regularization_type_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::regularization_type() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.regularization_type)
+  return regularization_type_.GetNoArena();
+}
+inline void SolverParameter::set_regularization_type(const ::std::string& value) {
+  
+  regularization_type_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.regularization_type)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_regularization_type(::std::string&& value) {
+  
+  regularization_type_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.regularization_type)
+}
+#endif
+inline void SolverParameter::set_regularization_type(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  regularization_type_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.regularization_type)
+}
+inline void SolverParameter::set_regularization_type(const char* value, size_t size) {
+  
+  regularization_type_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.regularization_type)
+}
+inline ::std::string* SolverParameter::mutable_regularization_type() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.regularization_type)
+  return regularization_type_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_regularization_type() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.regularization_type)
+  
+  return regularization_type_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_regularization_type(::std::string* regularization_type) {
+  if (regularization_type != NULL) {
+    
+  } else {
+    
+  }
+  regularization_type_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), regularization_type);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.regularization_type)
+}
+
+// int32 stopsize = 13;
+inline void SolverParameter::clear_stopsize() {
+  stopsize_ = 0;
+}
+inline ::google::protobuf::int32 SolverParameter::stopsize() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.stopsize)
+  return stopsize_;
+}
+inline void SolverParameter::set_stopsize(::google::protobuf::int32 value) {
+  
+  stopsize_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.stopsize)
+}
+
+// int32 snapshot = 14;
+inline void SolverParameter::clear_snapshot() {
+  snapshot_ = 0;
+}
+inline ::google::protobuf::int32 SolverParameter::snapshot() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.snapshot)
+  return snapshot_;
+}
+inline void SolverParameter::set_snapshot(::google::protobuf::int32 value) {
+  
+  snapshot_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.snapshot)
+}
+
+// string snapshot_prefix = 15;
+inline void SolverParameter::clear_snapshot_prefix() {
+  snapshot_prefix_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::snapshot_prefix() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.snapshot_prefix)
+  return snapshot_prefix_.GetNoArena();
+}
+inline void SolverParameter::set_snapshot_prefix(const ::std::string& value) {
+  
+  snapshot_prefix_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.snapshot_prefix)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_snapshot_prefix(::std::string&& value) {
+  
+  snapshot_prefix_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.snapshot_prefix)
+}
+#endif
+inline void SolverParameter::set_snapshot_prefix(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  snapshot_prefix_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.snapshot_prefix)
+}
+inline void SolverParameter::set_snapshot_prefix(const char* value, size_t size) {
+  
+  snapshot_prefix_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.snapshot_prefix)
+}
+inline ::std::string* SolverParameter::mutable_snapshot_prefix() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.snapshot_prefix)
+  return snapshot_prefix_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_snapshot_prefix() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.snapshot_prefix)
+  
+  return snapshot_prefix_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_snapshot_prefix(::std::string* snapshot_prefix) {
+  if (snapshot_prefix != NULL) {
+    
+  } else {
+    
+  }
+  snapshot_prefix_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), snapshot_prefix);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.snapshot_prefix)
+}
+
+// bool snapshot_diff = 16;
+inline void SolverParameter::clear_snapshot_diff() {
+  snapshot_diff_ = false;
+}
+inline bool SolverParameter::snapshot_diff() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.snapshot_diff)
+  return snapshot_diff_;
+}
+inline void SolverParameter::set_snapshot_diff(bool value) {
+  
+  snapshot_diff_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.snapshot_diff)
+}
+
+// .caffe.SolverParameter.SnapshotFormat snapshot_format = 37;
+inline void SolverParameter::clear_snapshot_format() {
+  snapshot_format_ = 0;
+}
+inline ::caffe::SolverParameter_SnapshotFormat SolverParameter::snapshot_format() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.snapshot_format)
+  return static_cast< ::caffe::SolverParameter_SnapshotFormat >(snapshot_format_);
+}
+inline void SolverParameter::set_snapshot_format(::caffe::SolverParameter_SnapshotFormat value) {
+  
+  snapshot_format_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.snapshot_format)
+}
+
+// .caffe.SolverParameter.SolverMode solver_mode = 17;
+inline void SolverParameter::clear_solver_mode() {
+  solver_mode_ = 0;
+}
+inline ::caffe::SolverParameter_SolverMode SolverParameter::solver_mode() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.solver_mode)
+  return static_cast< ::caffe::SolverParameter_SolverMode >(solver_mode_);
+}
+inline void SolverParameter::set_solver_mode(::caffe::SolverParameter_SolverMode value) {
+  
+  solver_mode_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.solver_mode)
+}
+
+// int32 device_id = 18;
+inline void SolverParameter::clear_device_id() {
+  device_id_ = 0;
+}
+inline ::google::protobuf::int32 SolverParameter::device_id() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.device_id)
+  return device_id_;
+}
+inline void SolverParameter::set_device_id(::google::protobuf::int32 value) {
+  
+  device_id_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.device_id)
+}
+
+// int64 random_seed = 20;
+inline void SolverParameter::clear_random_seed() {
+  random_seed_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SolverParameter::random_seed() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.random_seed)
+  return random_seed_;
+}
+inline void SolverParameter::set_random_seed(::google::protobuf::int64 value) {
+  
+  random_seed_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.random_seed)
+}
+
+// string type = 40;
+inline void SolverParameter::clear_type() {
+  type_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& SolverParameter::type() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.type)
+  return type_.GetNoArena();
+}
+inline void SolverParameter::set_type(const ::std::string& value) {
+  
+  type_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.type)
+}
+#if LANG_CXX11
+inline void SolverParameter::set_type(::std::string&& value) {
+  
+  type_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:caffe.SolverParameter.type)
+}
+#endif
+inline void SolverParameter::set_type(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  type_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.type)
+}
+inline void SolverParameter::set_type(const char* value, size_t size) {
+  
+  type_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.type)
+}
+inline ::std::string* SolverParameter::mutable_type() {
+  
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.type)
+  return type_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SolverParameter::release_type() {
+  // @@protoc_insertion_point(field_release:caffe.SolverParameter.type)
+  
+  return type_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SolverParameter::set_allocated_type(::std::string* type) {
+  if (type != NULL) {
+    
+  } else {
+    
+  }
+  type_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), type);
+  // @@protoc_insertion_point(field_set_allocated:caffe.SolverParameter.type)
+}
+
+// float delta = 31;
+inline void SolverParameter::clear_delta() {
+  delta_ = 0;
+}
+inline float SolverParameter::delta() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.delta)
+  return delta_;
+}
+inline void SolverParameter::set_delta(float value) {
+  
+  delta_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.delta)
+}
+
+// bool layer_wise_reduce = 41;
+inline void SolverParameter::clear_layer_wise_reduce() {
+  layer_wise_reduce_ = false;
+}
+inline bool SolverParameter::layer_wise_reduce() const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.layer_wise_reduce)
+  return layer_wise_reduce_;
+}
+inline void SolverParameter::set_layer_wise_reduce(bool value) {
+  
+  layer_wise_reduce_ = value;
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.layer_wise_reduce)
+}
+
+// repeated string weights = 42;
+inline int SolverParameter::weights_size() const {
+  return weights_.size();
+}
+inline void SolverParameter::clear_weights() {
+  weights_.Clear();
+}
+inline const ::std::string& SolverParameter::weights(int index) const {
+  // @@protoc_insertion_point(field_get:caffe.SolverParameter.weights)
+  return weights_.Get(index);
+}
+inline ::std::string* SolverParameter::mutable_weights(int index) {
+  // @@protoc_insertion_point(field_mutable:caffe.SolverParameter.weights)
+  return weights_.Mutable(index);
+}
+inline void SolverParameter::set_weights(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.weights)
+  weights_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void SolverParameter::set_weights(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:caffe.SolverParameter.weights)
+  weights_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void SolverParameter::set_weights(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  weights_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:caffe.SolverParameter.weights)
+}
+inline void SolverParameter::set_weights(int index, const char* value, size_t size) {
+  weights_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:caffe.SolverParameter.weights)
+}
+inline ::std::string* SolverParameter::add_weights() {
+  // @@protoc_insertion_point(field_add_mutable:caffe.SolverParameter.weights)
+  return weights_.Add();
+}
+inline void SolverParameter::add_weights(const ::std::string& value) {
+  weights_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:caffe.SolverParameter.weights)
+}
+#if LANG_CXX11
+inline void SolverParameter::add_weights(::std::string&& value) {
+  weights_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:caffe.SolverParameter.weights)
+}
+#endif
+inline void SolverParameter::add_weights(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  weights_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:caffe.SolverParameter.weights)
+}
+inline void SolverParameter::add_weights(const char* value, size_t size) {
+  weights_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:caffe.SolverParameter.weights)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+SolverParameter::weights() const {
+  // @@protoc_insertion_point(field_list:caffe.SolverParameter.weights)
+  return weights_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+SolverParameter::mutable_weights() {
+  // @@protoc_insertion_point(field_mutable_list:caffe.SolverParameter.weights)
+  return &weights_;
+}
+
+// -------------------------------------------------------------------
+
 // ReLUParameter
 
 // float negative_slope = 1;
@@ -3010,6 +5049,12 @@ inline void PoolingParameter::set_global_pooling(bool value) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -3022,6 +5067,16 @@ template <> struct is_proto_enum< ::caffe::FillerParameter_VarianceNorm> : ::goo
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::caffe::FillerParameter_VarianceNorm>() {
   return ::caffe::FillerParameter_VarianceNorm_descriptor();
+}
+template <> struct is_proto_enum< ::caffe::SolverParameter_SnapshotFormat> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::caffe::SolverParameter_SnapshotFormat>() {
+  return ::caffe::SolverParameter_SnapshotFormat_descriptor();
+}
+template <> struct is_proto_enum< ::caffe::SolverParameter_SolverMode> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::caffe::SolverParameter_SolverMode>() {
+  return ::caffe::SolverParameter_SolverMode_descriptor();
 }
 template <> struct is_proto_enum< ::caffe::ReLUParameter_Engine> : ::google::protobuf::internal::true_type {};
 template <>

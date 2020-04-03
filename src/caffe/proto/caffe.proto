@@ -46,10 +46,17 @@ message FillerParameter {
     VarianceNorm variance_norm = 8;
 }
 
-//全局枚举
+//全局枚举 阶段
 enum Phase {
     TRAIN = 0;
     TEST = 1;
+}
+
+//网络状态
+message NetState {
+    Phase phase = 1;  //阶段
+    int32 level = 2;  //
+    repeated string stage = 3; //
 }
 
 //layer层参数
@@ -73,6 +80,65 @@ message LayerParameter {
     SigmoidParameter sigmoid_param = 17;                //sigmoid层参数
     FullyConnectedParameter fully_connected_param = 18; //全连接层参数
 
+}
+
+//net参数
+message NetParameter {
+    string name = 1;                      //net的名字
+    repeated int32 input_shape = 2;       //输入维度
+    bool force_backward = 3;              //强制反向计算
+    NetState state = 4;                   //层的状态
+
+    repeated LayerParameter layers = 100; //ID 100所以层最后打印
+
+}
+
+// solver 训练/测试的参数
+message SolverParameter {
+    string train_net = 1;  //训练网络的proto文件
+    string test_net = 2;   //测试网络的proto文件
+    NetParameter train_net_param = 21; //训练网络的参数
+    NetParameter test_net_param = 22;  //测试网络的参数
+    string net = 24;
+    NetParameter net_param = 25;
+
+    NetState train_state = 26;
+    NetState test_state = 27;
+
+    repeated int32 test_iter = 3;
+    int32 test_interval = 4;
+    float base_lr = 5;
+    int32 display = 6;
+    int32 max_iter = 7;
+    string lc_policy = 8;
+    float gamma = 9;
+    float power = 10;
+    float momentum = 11;
+    float weight_decay = 12;
+
+    string regularization_type = 29;
+    int32 stopsize = 13;
+    int32 snapshot = 14;
+    string snapshot_prefix = 15;
+    bool snapshot_diff = 16;
+
+    enum SnapshotFormat {
+        HDF5 = 0;
+        BINARYPROTO = 1;
+    }
+    SnapshotFormat snapshot_format = 37;
+    enum SolverMode {
+        CPU = 0;
+        GPU = 1;
+    }
+    SolverMode solver_mode = 17;
+    int32 device_id = 18;
+    int64 random_seed = 20;
+
+    string type = 40;
+    float delta = 31;
+    bool layer_wise_reduce = 41;
+    repeated string weights = 42;
 
 }
 

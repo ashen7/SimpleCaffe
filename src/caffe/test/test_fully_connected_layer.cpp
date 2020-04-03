@@ -28,7 +28,7 @@ class FullyConnectedLayerTest : public MultiDeviceTest<TypeParam> {
 			: bottom_tensor_(new Tensor<Dtype>(2, 3, 4, 5)),
 			  bottom_nobatch_tensor_(new Tensor<Dtype>(1, 2, 3, 4)),
 			  top_tensor_(new Tensor<Dtype>()) {
-		//填充值
+		//填充输入
 		FillerParameter filler_param;
 		filler_param.set_min(Dtype(0));
 		filler_param.set_max(Dtype(1));
